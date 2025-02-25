@@ -1,6 +1,22 @@
-version: '3.8'
-
+#version: '3.8'
+networks:
+  bd2_network:
+    driver: bridge
+    
 services:
+  zookeeper:
+    image: zookeeper:latest
+    container_name: zookeeper
+    networks:
+      - bd2_network
+    ports:
+      - "2181:2181"
+    environment:
+      ZOO_MY_ID: 1
+      ZOO_SERVERS: server.1=zookeeper:2888:3888
+    volumes:
+      - ./hbase-config/zoo.cfg:/conf/zoo.cfg
+      
   postgres:
     image: postgres:latest
     container_name: postgres-db
@@ -15,6 +31,8 @@ services:
   oracle:
     image: container-registry.oracle.com/database/express:latest
     container_name: oracle-xe
+    networks:
+      - bd2_network
     environment:
       ORACLE_PWD: oracle123
     ports:
@@ -36,11 +54,24 @@ services:
   hbase:
     image: dajobe/hbase
     container_name: hbase-db
+    networks:
+      - bd2_network
+    environment:
+      JAVA_HOME: /usr/lib/jvm/java-8-openjdk-amd64
+    depends_on:
+      - zookeeper
     ports:
-      - "16010:16010"
-      - "9090:9090"
+      - "16010:16010" 
+      - "8080:8080"   
+      - "16201:16201"  
     volumes:
       - hbase_data:/opt/hbase-data
+      - ./hbase-config:/opt/hbase/conf
+      - /etc/krb5.conf:/etc/krb5.conf
+    command: >
+      sh -c "/opt/hbase/bin/start-hbase.sh &&
+             /opt/hbase/bin/hbase-daemon.sh start regionserver &&
+             tail -f /dev/null"
 
   db2:
     image: ibmcom/db2
