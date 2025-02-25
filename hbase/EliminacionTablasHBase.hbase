@@ -1,0 +1,3 @@
+drop 'medicos'
+drop 'pacientes'
+drop 'pruebas'
