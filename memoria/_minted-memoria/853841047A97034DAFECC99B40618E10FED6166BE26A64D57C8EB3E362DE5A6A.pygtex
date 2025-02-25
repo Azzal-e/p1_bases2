@@ -1,0 +1,36 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+    \PYGZsh{}!/bin/bash
+
+    \PYGZsh{} Función para obtener la lista de tablas
+    get\PYGZus{}tables() \PYGZob{}
+      docker exec \PYGZhy{}i hbase\PYGZhy{}db hbase shell \PYGZdq{}list\PYGZdq{}
+    \PYGZcb{}
+
+    tables=\PYGZdl{}(get\PYGZus{}tables)
+
+    \PYGZsh{} Verificar si las tablas \PYGZsq{}medicos\PYGZsq{}, \PYGZsq{}pacientes\PYGZsq{}, y \PYGZsq{}pruebas\PYGZsq{} existen antes de insertar
+    if [[ \PYGZdq{}\PYGZdl{}tables\PYGZdq{} == *\PYGZdq{}medicos\PYGZdq{}* ]]; then
+      echo \PYGZdq{}La tabla \PYGZsq{}medicos\PYGZsq{} ya existe, insertando datos...\PYGZdq{}
+      docker exec \PYGZhy{}i hbase\PYGZhy{}db hbase shell \PYGZdq{}put \PYGZsq{}medicos\PYGZsq{}, \PYGZsq{}12345678A\PYGZsq{}, \PYGZsq{}info:numLicencia\PYGZsq{}, \PYGZsq{}98765\PYGZsq{}\PYGZdq{}
+      docker exec \PYGZhy{}i hbase\PYGZhy{}db hbase shell \PYGZdq{}put \PYGZsq{}medicos\PYGZsq{}, \PYGZsq{}12345678A\PYGZsq{}, \PYGZsq{}info:nombre\PYGZsq{}, \PYGZsq{}Dr. Juan Pérez\PYGZsq{}\PYGZdq{}
+      docker exec \PYGZhy{}i hbase\PYGZhy{}db hbase shell \PYGZdq{}put \PYGZsq{}medicos\PYGZsq{}, \PYGZsq{}12345678A\PYGZsq{}, \PYGZsq{}info:especialidad\PYGZsq{}, \PYGZsq{}Cardiología\PYGZsq{}\PYGZdq{}
+      docker exec \PYGZhy{}i hbase\PYGZhy{}db hbase shell \PYGZdq{}put \PYGZsq{}medicos\PYGZsq{}, \PYGZsq{}12345678A\PYGZsq{}, \PYGZsq{}info:telefono\PYGZsq{}, \PYGZsq{}600123456\PYGZsq{}\PYGZdq{}
+    else
+      echo \PYGZdq{}La tabla \PYGZsq{}medicos\PYGZsq{} no existe, no se insertarán datos.\PYGZdq{}
+    fi
+
+    \PYGZsh{} Verificar lo mismo para \PYGZsq{}pacientes\PYGZsq{} y \PYGZsq{}pruebas\PYGZsq{}
+    if [[ \PYGZdq{}\PYGZdl{}tables\PYGZdq{} == *\PYGZdq{}pacientes\PYGZdq{}* ]]; then
+      echo \PYGZdq{}La tabla \PYGZsq{}pacientes\PYGZsq{} ya existe, insertando datos...\PYGZdq{}
+      docker exec \PYGZhy{}i hbase\PYGZhy{}db hbase shell \PYGZdq{}put \PYGZsq{}pacientes\PYGZsq{}, \PYGZsq{}11111111A\PYGZsq{}, \PYGZsq{}info:nss\PYGZsq{}, \PYGZsq{}1000001\PYGZsq{}\PYGZdq{}
+    else
+      echo \PYGZdq{}La tabla \PYGZsq{}pacientes\PYGZsq{} no existe, no se insertarán datos.\PYGZdq{}
+    fi
+
+    if [[ \PYGZdq{}\PYGZdl{}tables\PYGZdq{} == *\PYGZdq{}pruebas\PYGZdq{}* ]]; then
+      echo \PYGZdq{}La tabla \PYGZsq{}pruebas\PYGZsq{} ya existe, insertando datos...\PYGZdq{}
+      docker exec \PYGZhy{}i hbase\PYGZhy{}db hbase shell \PYGZdq{}put \PYGZsq{}pruebas\PYGZsq{}, \PYGZsq{}1\PYGZsq{}, \PYGZsq{}info:dni\PYGZus{}medico\PYGZsq{}, \PYGZsq{}12345678A\PYGZsq{}\PYGZdq{}
+    else
+      echo \PYGZdq{}La tabla \PYGZsq{}pruebas\PYGZsq{} no existe, no se insertarán datos.\PYGZdq{}
+    fi
+\end{Verbatim}

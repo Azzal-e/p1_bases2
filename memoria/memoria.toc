@@ -1,0 +1,39 @@
+\contentsline {section}{\numberline {1}Introduction}{2}{section.1}%
+\contentsline {subsection}{\numberline {1.1}IBM DB2}{3}{subsection.1.1}%
+\contentsline {subsubsection}{\numberline {1.1.1}Creación de un superusuario, con credenciales seguras, y verificación de que podemos conectarnos con dicho usuario.}{3}{subsubsection.1.1.1}%
+\contentsline {subsubsection}{\numberline {1.1.2}Creación de la estructura básica del espacio de datos}{4}{subsubsection.1.1.2}%
+\contentsline {subsubsection}{\numberline {1.1.3}Creación de usuarios y roles con distinto acceso sobre los elementos del espacio de datos}{7}{subsubsection.1.1.3}%
+\contentsline {subsection}{\numberline {1.2}Oracle}{8}{subsection.1.2}%
+\contentsline {subsubsection}{\numberline {1.2.1}Preparación del Entorno Oracle en Docker}{8}{subsubsection.1.2.1}%
+\contentsline {subsubsection}{\numberline {1.2.2}Configuración del Cliente Oracle Instant en la Máquina Local}{8}{subsubsection.1.2.2}%
+\contentsline {subsubsection}{\numberline {1.2.3}Configurar las variables de entorno}{9}{subsubsection.1.2.3}%
+\contentsline {subsubsection}{\numberline {1.2.4}Descargar y Configurar SQL*Plus}{9}{subsubsection.1.2.4}%
+\contentsline {subsubsection}{\numberline {1.2.5}Conectar a Oracle Usando SQL*Plus}{9}{subsubsection.1.2.5}%
+\contentsline {subsubsection}{\numberline {1.2.6}}{9}{subsubsection.1.2.6}%
+\contentsline {subsubsection}{\numberline {1.2.7}La contraseña/password, debe ser la misma que hemos introducido en el \texttt {docker-file.yml}.}{9}{subsubsection.1.2.7}%
+\contentsline {subsubsection}{\numberline {1.2.8}Operaciones Básicas en Oracle}{9}{subsubsection.1.2.8}%
+\contentsline {subsubsection}{\numberline {1.2.9}Creación de superusuarios:}{9}{subsubsection.1.2.9}%
+\contentsline {subsubsection}{\numberline {1.2.10}Creación de tablespaces}{10}{subsubsection.1.2.10}%
+\contentsline {subsubsection}{\numberline {1.2.11}Creación de usuarios de escritura y lectura:}{10}{subsubsection.1.2.11}%
+\contentsline {subsubsection}{\numberline {1.2.12}Creación e inserción de tablas}{11}{subsubsection.1.2.12}%
+\contentsline {subsubsection}{\numberline {1.2.13}Consultas}{15}{subsubsection.1.2.13}%
+\contentsline {subsubsection}{\numberline {1.2.14}Redirección de puertos}{17}{subsubsection.1.2.14}%
+\contentsline {subsection}{\numberline {1.3}HBase}{19}{subsection.1.3}%
+\contentsline {subsubsection}{\numberline {1.3.1}Introducción}{19}{subsubsection.1.3.1}%
+\contentsline {subsubsection}{\numberline {1.3.2}Intento de Integración con Kerberos}{19}{subsubsection.1.3.2}%
+\contentsline {subsubsection}{\numberline {1.3.3}Configuración Inicial de Kerberos}{19}{subsubsection.1.3.3}%
+\contentsline {subsubsection}{\numberline {1.3.4}}{20}{subsubsection.1.3.4}%
+\contentsline {subsubsection}{\numberline {1.3.5}Problema con los Keytabs}{20}{subsubsection.1.3.5}%
+\contentsline {subsubsection}{\numberline {1.3.6}Errores en la Autenticación de HBase}{20}{subsubsection.1.3.6}%
+\contentsline {subsubsection}{\numberline {1.3.7}Desestimación de Kerberos}{20}{subsubsection.1.3.7}%
+\contentsline {subsubsection}{\numberline {1.3.8}1. Eliminación de Kerberos}{20}{subsubsection.1.3.8}%
+\contentsline {subsubsection}{\numberline {1.3.9}2. Modificación de la configuración de HBase}{21}{subsubsection.1.3.9}%
+\contentsline {subsubsection}{\numberline {1.3.10}3. Reinicio de Servicios}{21}{subsubsection.1.3.10}%
+\contentsline {subsubsection}{\numberline {1.3.11}4. Verificación de la Configuración}{21}{subsubsection.1.3.11}%
+\contentsline {subsubsection}{\numberline {1.3.12}Operaciones Básicas en Oracle}{21}{subsubsection.1.3.12}%
+\contentsline {subsubsection}{\numberline {1.3.13}Creación superusuarios:}{22}{subsubsection.1.3.13}%
+\contentsline {subsubsection}{\numberline {1.3.14}Creación de tablespaces}{22}{subsubsection.1.3.14}%
+\contentsline {subsubsection}{\numberline {1.3.15}Creación de usuarios de escritura y lectura}{22}{subsubsection.1.3.15}%
+\contentsline {subsubsection}{\numberline {1.3.16}Creación e inserción de tablas}{23}{subsubsection.1.3.16}%
+\contentsline {subsubsection}{\numberline {1.3.17}Consultas}{24}{subsubsection.1.3.17}%
+\contentsline {subsubsection}{\numberline {1.3.18}Conclusión}{25}{subsubsection.1.3.18}%

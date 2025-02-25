@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+hbase.security.authentication
+simple
+
+hbase.security.authorization
+false
+\end{Verbatim}

@@ -1,0 +1,50 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYGZhy{}\PYGZhy{} Crear la Base de Datos
+CREATE DATABASE GESTION;
+CONNECT TO GESTION;
+
+\PYGZhy{}\PYGZhy{} Crear el Esquema
+CREATE SCHEMA MEDICA;
+SET CURRENT SCHEMA MEDICA;
+
+\PYGZhy{}\PYGZhy{} Crear tabla de médicos
+CREATE TABLE MEDICA.MEDICOS (
+    dni VARCHAR(9) NOT NULL PRIMARY KEY,
+    numLicencia INTEGER NOT NULL UNIQUE,
+    nombre VARCHAR(100) NOT NULL,
+    especialidad VARCHAR(100) NOT NULL,
+    telefono VARCHAR(15)
+);
+
+\PYGZhy{}\PYGZhy{} Crear tabla de pacientes
+CREATE TABLE MEDICA.PACIENTES (
+    dni VARCHAR(9) NOT NULL PRIMARY KEY,
+    nss INTEGER NOT NULL UNIQUE,
+    nombre VARCHAR(100),
+    telefono VARCHAR(15)
+);
+
+\PYGZhy{}\PYGZhy{} Crear tabla de pruebas médicas
+CREATE TABLE MEDICA.PRUEBAS (
+    id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    dni\PYGZus{}medico VARCHAR(9) NOT NULL,
+    dni\PYGZus{}paciente VARCHAR(9) NOT NULL,
+    tipo\PYGZus{}prueba VARCHAR(100),
+    fecha DATE,
+    resultado VARCHAR(200),
+    FOREIGN KEY (dni\PYGZus{}medico) REFERENCES MEDICA.MEDICOS(dni),
+    FOREIGN KEY (dni\PYGZus{}paciente) REFERENCES MEDICA.PACIENTES(dni)
+);
+
+\PYGZhy{}\PYGZhy{} Verificar las tablas creadas
+LIST TABLES FOR SCHEMA MEDICA;
+
+\PYGZhy{}\PYGZhy{} Confir estructura de las tablas
+DESCRIBE TABLE MEDICA.MEDICOS;
+DESCRIBE TABLE MEDICA.PACIENTES;
+DESCRIBE TABLE MEDICA.PRUEBAS;
+
+\PYGZhy{}\PYGZhy{} Desconectar de la base de datos
+CONNECT RESET;
+
+\end{Verbatim}

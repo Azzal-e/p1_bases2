@@ -1,0 +1,3 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+ERROR: No valid credentials provided (Mechanism level: Failed to find any Kerberos tgt)
+\end{Verbatim}
