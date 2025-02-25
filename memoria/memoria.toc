@@ -1,39 +1,65 @@
-\contentsline {section}{\numberline {1}Introduction}{2}{section.1}%
-\contentsline {subsection}{\numberline {1.1}IBM DB2}{3}{subsection.1.1}%
-\contentsline {subsubsection}{\numberline {1.1.1}Creación de un superusuario, con credenciales seguras, y verificación de que podemos conectarnos con dicho usuario.}{3}{subsubsection.1.1.1}%
-\contentsline {subsubsection}{\numberline {1.1.2}Creación de la estructura básica del espacio de datos}{4}{subsubsection.1.1.2}%
-\contentsline {subsubsection}{\numberline {1.1.3}Creación de usuarios y roles con distinto acceso sobre los elementos del espacio de datos}{7}{subsubsection.1.1.3}%
-\contentsline {subsection}{\numberline {1.2}Oracle}{8}{subsection.1.2}%
-\contentsline {subsubsection}{\numberline {1.2.1}Preparación del Entorno Oracle en Docker}{8}{subsubsection.1.2.1}%
-\contentsline {subsubsection}{\numberline {1.2.2}Configuración del Cliente Oracle Instant en la Máquina Local}{8}{subsubsection.1.2.2}%
-\contentsline {subsubsection}{\numberline {1.2.3}Configurar las variables de entorno}{9}{subsubsection.1.2.3}%
-\contentsline {subsubsection}{\numberline {1.2.4}Descargar y Configurar SQL*Plus}{9}{subsubsection.1.2.4}%
-\contentsline {subsubsection}{\numberline {1.2.5}Conectar a Oracle Usando SQL*Plus}{9}{subsubsection.1.2.5}%
-\contentsline {subsubsection}{\numberline {1.2.6}}{9}{subsubsection.1.2.6}%
-\contentsline {subsubsection}{\numberline {1.2.7}La contraseña/password, debe ser la misma que hemos introducido en el \texttt {docker-file.yml}.}{9}{subsubsection.1.2.7}%
-\contentsline {subsubsection}{\numberline {1.2.8}Operaciones Básicas en Oracle}{9}{subsubsection.1.2.8}%
-\contentsline {subsubsection}{\numberline {1.2.9}Creación de superusuarios:}{9}{subsubsection.1.2.9}%
-\contentsline {subsubsection}{\numberline {1.2.10}Creación de tablespaces}{10}{subsubsection.1.2.10}%
-\contentsline {subsubsection}{\numberline {1.2.11}Creación de usuarios de escritura y lectura:}{10}{subsubsection.1.2.11}%
-\contentsline {subsubsection}{\numberline {1.2.12}Creación e inserción de tablas}{11}{subsubsection.1.2.12}%
-\contentsline {subsubsection}{\numberline {1.2.13}Consultas}{15}{subsubsection.1.2.13}%
-\contentsline {subsubsection}{\numberline {1.2.14}Redirección de puertos}{17}{subsubsection.1.2.14}%
-\contentsline {subsection}{\numberline {1.3}HBase}{19}{subsection.1.3}%
-\contentsline {subsubsection}{\numberline {1.3.1}Introducción}{19}{subsubsection.1.3.1}%
-\contentsline {subsubsection}{\numberline {1.3.2}Intento de Integración con Kerberos}{19}{subsubsection.1.3.2}%
-\contentsline {subsubsection}{\numberline {1.3.3}Configuración Inicial de Kerberos}{19}{subsubsection.1.3.3}%
-\contentsline {subsubsection}{\numberline {1.3.4}}{20}{subsubsection.1.3.4}%
-\contentsline {subsubsection}{\numberline {1.3.5}Problema con los Keytabs}{20}{subsubsection.1.3.5}%
-\contentsline {subsubsection}{\numberline {1.3.6}Errores en la Autenticación de HBase}{20}{subsubsection.1.3.6}%
-\contentsline {subsubsection}{\numberline {1.3.7}Desestimación de Kerberos}{20}{subsubsection.1.3.7}%
-\contentsline {subsubsection}{\numberline {1.3.8}1. Eliminación de Kerberos}{20}{subsubsection.1.3.8}%
-\contentsline {subsubsection}{\numberline {1.3.9}2. Modificación de la configuración de HBase}{21}{subsubsection.1.3.9}%
-\contentsline {subsubsection}{\numberline {1.3.10}3. Reinicio de Servicios}{21}{subsubsection.1.3.10}%
-\contentsline {subsubsection}{\numberline {1.3.11}4. Verificación de la Configuración}{21}{subsubsection.1.3.11}%
-\contentsline {subsubsection}{\numberline {1.3.12}Operaciones Básicas en Oracle}{21}{subsubsection.1.3.12}%
-\contentsline {subsubsection}{\numberline {1.3.13}Creación superusuarios:}{22}{subsubsection.1.3.13}%
-\contentsline {subsubsection}{\numberline {1.3.14}Creación de tablespaces}{22}{subsubsection.1.3.14}%
-\contentsline {subsubsection}{\numberline {1.3.15}Creación de usuarios de escritura y lectura}{22}{subsubsection.1.3.15}%
-\contentsline {subsubsection}{\numberline {1.3.16}Creación e inserción de tablas}{23}{subsubsection.1.3.16}%
-\contentsline {subsubsection}{\numberline {1.3.17}Consultas}{24}{subsubsection.1.3.17}%
-\contentsline {subsubsection}{\numberline {1.3.18}Conclusión}{25}{subsubsection.1.3.18}%
+\contentsline {section}{\numberline {1}Introduction}{3}{section.1}%
+\contentsline {section}{\numberline {2}Configuración del entorno de trabajo (máquina virtual / uso de Docker)}{3}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Instalación de la máquina virtual}{4}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Instalación de \textit {Docker}}{5}{subsection.2.2}%
+\contentsline {section}{\numberline {3}Instalación y Administración Básica de los SGBD}{6}{section.3}%
+\contentsline {subsection}{\numberline {3.1}PostgreSQL}{8}{subsection.3.1}%
+\contentsline {subsubsection}{\numberline {3.1.1}Inicializar el contenedor}{8}{subsubsection.3.1.1}%
+\contentsline {subsubsection}{\numberline {3.1.2}Creación de la estructura básica del espacio de la base de datos}{9}{subsubsection.3.1.2}%
+\contentsline {subsubsection}{\numberline {3.1.3}Asignación de roles}{9}{subsubsection.3.1.3}%
+\contentsline {subsubsection}{\numberline {3.1.4}Conectividad remota}{12}{subsubsection.3.1.4}%
+\contentsline {subsection}{\numberline {3.2}IBM DB2}{14}{subsection.3.2}%
+\contentsline {subsubsection}{\numberline {3.2.1}Creación de un superusuario, con credenciales seguras, y verificación de que podemos conectarnos con dicho usuario.}{14}{subsubsection.3.2.1}%
+\contentsline {subsubsection}{\numberline {3.2.2}Creación de la estructura básica del espacio de datos}{15}{subsubsection.3.2.2}%
+\contentsline {subsubsection}{\numberline {3.2.3}Creación de usuarios y roles con distinto acceso sobre los elementos del espacio de datos}{18}{subsubsection.3.2.3}%
+\contentsline {subsubsection}{\numberline {3.2.4}Problemas encontrados}{19}{subsubsection.3.2.4}%
+\contentsline {subsection}{\numberline {3.3}Oracle}{19}{subsection.3.3}%
+\contentsline {subsubsection}{\numberline {3.3.1}Preparación del Entorno Oracle en Docker}{19}{subsubsection.3.3.1}%
+\contentsline {subsubsection}{\numberline {3.3.2}Configuración del Cliente Oracle Instant en la Máquina Local}{19}{subsubsection.3.3.2}%
+\contentsline {subsubsection}{\numberline {3.3.3}Configurar las variables de entorno}{20}{subsubsection.3.3.3}%
+\contentsline {subsubsection}{\numberline {3.3.4}Descargar y Configurar SQL*Plus}{20}{subsubsection.3.3.4}%
+\contentsline {subsubsection}{\numberline {3.3.5}Conectar a Oracle Usando SQL*Plus}{20}{subsubsection.3.3.5}%
+\contentsline {subsubsection}{\numberline {3.3.6}La contraseña/password, debe ser la misma que hemos introducido en el \texttt {docker-file.yml}.}{20}{subsubsection.3.3.6}%
+\contentsline {subsubsection}{\numberline {3.3.7}Redirección de puertos}{20}{subsubsection.3.3.7}%
+\contentsline {subsection}{\numberline {3.4}Apache Cassandra}{21}{subsection.3.4}%
+\contentsline {subsubsection}{\numberline {3.4.1}Inicializar el contenedor}{21}{subsubsection.3.4.1}%
+\contentsline {subsubsection}{\numberline {3.4.2}Creación de la estructura básica del espacio de la base de datos}{22}{subsubsection.3.4.2}%
+\contentsline {subsubsection}{\numberline {3.4.3}Asignación de roles}{23}{subsubsection.3.4.3}%
+\contentsline {subsubsection}{\numberline {3.4.4}Conectividad remota}{25}{subsubsection.3.4.4}%
+\contentsline {subsection}{\numberline {3.5}HBase}{27}{subsection.3.5}%
+\contentsline {subsubsection}{\numberline {3.5.1}Introducción}{27}{subsubsection.3.5.1}%
+\contentsline {subsubsection}{\numberline {3.5.2}Intento de Integración con Kerberos}{27}{subsubsection.3.5.2}%
+\contentsline {subsubsection}{\numberline {3.5.3}Configuración Inicial de Kerberos}{27}{subsubsection.3.5.3}%
+\contentsline {subsubsection}{\numberline {3.5.4}Problema con los Keytabs}{28}{subsubsection.3.5.4}%
+\contentsline {subsubsection}{\numberline {3.5.5}Errores en la Autenticación de HBase}{28}{subsubsection.3.5.5}%
+\contentsline {subsubsection}{\numberline {3.5.6}Desestimación de Kerberos}{28}{subsubsection.3.5.6}%
+\contentsline {subsubsection}{\numberline {3.5.7}1. Eliminación de Kerberos}{28}{subsubsection.3.5.7}%
+\contentsline {subsubsection}{\numberline {3.5.8}2. Modificación de la configuración de HBase}{29}{subsubsection.3.5.8}%
+\contentsline {subsubsection}{\numberline {3.5.9}3. Reinicio de Servicios}{29}{subsubsection.3.5.9}%
+\contentsline {subsubsection}{\numberline {3.5.10}4. Verificación de la Configuración}{29}{subsubsection.3.5.10}%
+\contentsline {subsubsection}{\numberline {3.5.11}Conclusión}{29}{subsubsection.3.5.11}%
+\contentsline {section}{\numberline {4}Generación de Datos y Pruebas}{30}{section.4}%
+\contentsline {subsection}{\numberline {4.1}PostgreSQL}{30}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Apache Cassandra}{32}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Operaciones Básicas en Oracle}{34}{subsection.4.3}%
+\contentsline {subsubsection}{\numberline {4.3.1}Creación de superusuarios:}{34}{subsubsection.4.3.1}%
+\contentsline {subsubsection}{\numberline {4.3.2}Creación de tablespaces}{35}{subsubsection.4.3.2}%
+\contentsline {subsubsection}{\numberline {4.3.3}Creación de usuarios de escritura y lectura:}{35}{subsubsection.4.3.3}%
+\contentsline {subsubsection}{\numberline {4.3.4}Creación e inserción de tablas}{37}{subsubsection.4.3.4}%
+\contentsline {subsubsection}{\numberline {4.3.5}IBM DB2}{41}{subsubsection.4.3.5}%
+\contentsline {subsubsection}{\numberline {4.3.6}Consultas}{41}{subsubsection.4.3.6}%
+\contentsline {subsection}{\numberline {4.4}HBase}{43}{subsection.4.4}%
+\contentsline {subsubsection}{\numberline {4.4.1}Creación superusuarios:}{43}{subsubsection.4.4.1}%
+\contentsline {subsubsection}{\numberline {4.4.2}Creación de tablespaces}{44}{subsubsection.4.4.2}%
+\contentsline {subsubsection}{\numberline {4.4.3}Creación de usuarios de escritura y lectura}{44}{subsubsection.4.4.3}%
+\contentsline {subsubsection}{\numberline {4.4.4}Creación e inserción de tablas}{45}{subsubsection.4.4.4}%
+\contentsline {subsubsection}{\numberline {4.4.5}Consultas}{47}{subsubsection.4.4.5}%
+\contentsline {section}{\numberline {5}Comentarios Acerca de las Licencias}{49}{section.5}%
+\contentsline {subsection}{\numberline {5.1}PostgreSQL}{49}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Oracle XE}{49}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}Apache Cassandra}{49}{subsection.5.3}%
+\contentsline {subsection}{\numberline {5.4}Apache HBase}{50}{subsection.5.4}%
+\contentsline {subsection}{\numberline {5.5}IBM DB2}{50}{subsection.5.5}%
+\contentsline {subsection}{\numberline {5.6}Resumen Comparativo}{50}{subsection.5.6}%
+\contentsline {section}{\numberline {6}Esfuerzos invertidos}{51}{section.6}%
+\contentsline {section}{\numberline {7}Referencias}{52}{section.7}%

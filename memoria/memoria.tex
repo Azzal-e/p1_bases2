@@ -13,6 +13,8 @@
 \usepackage{minted}
 \usepackage{geometry}
 \usepackage{nameref}
+\usepackage{array}     
+
 % DEFINICIÓN EXACTA DEL ESTILO (IGUAL AL DE crear_Espacio.sq)
 \newtcolorbox{codebox}[2][]{%
     colback=gray!5!white,
@@ -37,7 +39,6 @@
 % Configuración global para minted
 \setminted{
     breaklines=true,          % Habilita el ajuste de línea
-    breakanywhere=true,       % Permite el corte de línea en cualquier punto
     fontsize=\small,          % Tamaño de fuente pequeño
     frame=single,             % Cuadro alrededor del código
     bgcolor=lightgray,        % Fondo gris claro
@@ -78,11 +79,23 @@
     postbreak=\mbox{\textcolor{gray}{$\hookrightarrow$}\space},
     columns=fullflexible,
     tabsize=4, % Tamaño de tabulaciones
+    inputencoding=utf8,
+    extendedchars=true,
     literate=% Manejo de caracteres especiales en español
         {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
         {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
         {ñ}{{\~n}}1 {Ñ}{{\~N}}1
 }
+
+\lstset{
+    inputencoding=utf8,
+    extendedchars=true,
+    literate=
+    {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+    {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+    {ñ}{{\~n}}1 {Ñ}{{\~N}}1
+}
+
 
 \title{Memoria pr1 BBDD 2}
 \author{873983 873983}
@@ -123,17 +136,16 @@
 El objetivo de la presente práctica es el de instalar y configurar los diversos sistemas gestores de bases de datos con los que se trabajará posteriormente en las sesiones prácticas de la asignatura. Pero además, se aprovechará la ocasión para introducirse en las particularidades (aunque a grandes rasgos) de cada sistema gestor: como se gestionan los usuarios, roles y credenciales, como se estructura el espacio de trabajo, construcción semántica y sintáctica de las bases de datos y operaciones de consulta y manipulación básicas; así como sistema de puertos y conectividad externa.
 
 Pero antes de proceder a la configuración de cada gestor, se llevó a cabo un proceso de consenso para elegir la mejor, o aunque fuese la menos arriesgada, plataforma de despliegue. La distribución del trabajo y los esfuerzos dedicados por cada integrante figuran en el apartado \textcolor{blue}{\nameref{sec:Esfuerzos invertidos}}. Asimismo, se probará la conexión externa para cada gestor por medio de la plataforma \textit{\textcolor{blue}{\href{https://dbeaver.com/download/enterprise/}{Dbeaver}}}.
-\\ \\
+\newline
 Los SGBD que se van a instalar y configurar son:
 \begin{itemize}
-    \item \textbf{PostgreSQL} (): Sistema de gestión de bases de datos relacional orientado a objetos y de código abierto. Es muy potente, dado que cumple con los estándares SQL, a la par que proporciona una gran flexibilidad y extensibilidad.
-    \item \textbf{Oracle XE} (): SGBD gratuito de Oracle, que proporciona una funcionalidad reducida de la versión empresarial de la misma. De todos modos, se muestra una opción acertada para el aprendizaje de Oracle y los modelos relacionales, además de que permite acceder a funcionalidades avanzadas dado que es totalmente compatible con PL/SQL.
-    \item \textbf{Apache Cassandra} (): SGBD NoSQL distribuido de código abierto diseñada para ser fácilmente escalable y tolerante a fallos, lo que la convierte en una elección extendida cuando se trabaja sobre una red con grandes volúmenes de datos. Además, no trabaja sobre SQL, sino CLQ, lo que podrá ser enriquecedor por el hecho de forzar a paliar algunas limitaciones del lenguaje (como la inexistencia de JOINS) con las funcionalidades de las bases de datos distribuidas.
-    \item \textbf{Apache Hbase} (): SGBD NoSQL orientada a columnas, diseñada también para manejar grandes volúmenes de datos distribuidos con una gran escalabilidad. Parece presentar algunas similitudes con Cassandra, pero ambas difieren en sus arquitecturas y escenarios de uso (por ejemplo, Cassandra emplea una arquitecturan \textit{peer-to-peer} mientras que Hbase una arquitectura principal-secundaria).
-    \item \textbf{IBM DB2} (): SGBD relacional ampliamente empleado por empresas que trabajan con datos complejos. Esto se debe a que proporciona un alto rendimiento trabajando sobre SQL pero además soporta modelos híbridos incorporando otros NoSQL (Json, por columnas, etc.)
+    \item \textbf{PostgreSQL}: Sistema de gestión de bases de datos relacional orientado a objetos y de código abierto. Es muy potente, dado que cumple con los estándares SQL, a la par que proporciona una gran flexibilidad y extensibilidad.
+    \item \textbf{Oracle XE}: SGBD gratuito de Oracle, que proporciona una funcionalidad reducida de la versión empresarial de la misma. De todos modos, se muestra una opción acertada para el aprendizaje de Oracle y los modelos relacionales, además de que permite acceder a funcionalidades avanzadas dado que es totalmente compatible con PL/SQL.
+    \item \textbf{Apache Cassandra}: SGBD NoSQL distribuido de código abierto diseñada para ser fácilmente escalable y tolerante a fallos, lo que la convierte en una elección extendida cuando se trabaja sobre una red con grandes volúmenes de datos. Además, no trabaja sobre SQL, sino CLQ, lo que podrá ser enriquecedor por el hecho de forzar a paliar algunas limitaciones del lenguaje (como la inexistencia de JOINS) con las funcionalidades de las bases de datos distribuidas.
+    \item \textbf{Apache Hbase}: SGBD NoSQL orientada a columnas, diseñada también para manejar grandes volúmenes de datos distribuidos con una gran escalabilidad. Parece presentar algunas similitudes con Cassandra, pero ambas difieren en sus arquitecturas y escenarios de uso (por ejemplo, Cassandra emplea una arquitecturan \textit{peer-to-peer} mientras que Hbase una arquitectura principal-secundaria).
+    \item \textbf{IBM DB2}: SGBD relacional ampliamente empleado por empresas que trabajan con datos complejos. Esto se debe a que proporciona un alto rendimiento trabajando sobre SQL pero además soporta modelos híbridos incorporando otros NoSQL (Json, por columnas, etc.)
 \end{itemize}
 
-\\
 \section{Configuración del entorno de trabajo (máquina virtual / uso de Docker)}
 
 La fase inicial de elaboración de la práctica ocupó la decisión de \textit{cómo} y \textit{dónde} desplegar los gestores. La primera decisión fue la de emplear contenedores (\textit{dockers}). De este modo, cada gestor se encontraría aislado en su propio entorno, salvándose de interferencias inoportunas. No solo esto, sino que la rapidez y sencillez del despliegue de los contenedores, así como su consistencia e independencia de entornos la hacían idónea, dada la pluralidad de integrantes del grupo y gestores con los que trabajar.
@@ -144,24 +156,24 @@ El uso de contenedores, ahora bien, comportó otra decisión de configuración. 
 La máquina virtual se desplegará sobre   \textit{\textcolor{blue}{\href{https://www.oracle.com/es/virtualization/virtualbox/}{Virtual Box}}}. Como se encuentra disponible en todas las máquinas del laboratorio, no se detallará su instalación. La imagen de Linux a utilizar será la última versión proporcionada por \textit{\textcolor{blue}{\href{https://www.debian.org/index.es.html}{Debian}}}, en nuestro caso la versión 12.9.0 de 64 bits.
 
 En cuanto a las características de la máquina virtual, se optó por un hardware de 5 procesadores y aproximadamente 6.3 GB, así como un  discor duro de 60GB; lo que permitirá holgadamente ejecutar el sistema operativo sin problemas (como mucho, demasiado holgadamente).
-
 \\
-
 Se incluyen algunas imagenes ilustrativas del proceso (también se tuvo que configurar el NAT y cambiar el idioma del teclado, pero son procesos que ya vienen explicados en el material de apoyo):
+\begin{center}
+    \begin{figure}[H]
+        \centering
+        \begin{tabular}{c c}  % Dos columnas centradas
+        \includegraphics[width=0.6\textwidth]{instalacion_maq_1.png} & 
+        \includegraphics[width=0.6\textwidth]{instalacion_maq_2.png} \\
+        (a) Importar imagen & (b) conf. Hardware \\
+        \includegraphics[width=0.6\textwidth]{instalacion_maq_3.png} & 
+        \includegraphics[width=0.6\textwidth]{instalacion_maq_4.png} \\
+        (c) Disco duro & (d) Instalación Debian
+        \end{tabular}
+        \caption{Instalación de la máquina virtual Debian}
+        \label{fig:instalación máquina virtual}
+    \end{figure}
+\end{center}
 
-\begin{figure}[H]
-    \centering
-    \begin{tabular}{c c}  % Dos columnas centradas
-    \includegraphics[width=0.6\textwidth]{instalacion_maq_1.png} & 
-    \includegraphics[width=0.6\textwidth]{instalacion_maq_2.png} \\
-    (a) Importar imagen & (b) conf. Hardware \\
-    \includegraphics[width=0.6\textwidth]{instalacion_maq_3.png} & 
-    \includegraphics[width=0.6\textwidth]{instalacion_maq_4.png} \\
-    (c) Disco duro & (d) Instalación Debian
-    \end{tabular}
-    \caption{Instalación de la máquina virtual Debian}
-    \label{fig:instalación máquina virtual}
-\end{figure}
 
 \subsection{Instalación de \textit{Docker}}\label{subsec:Instalación de Docker}
 El primer paso será instalar \textit{\textcolor{blue}{\href{https://www.docker.com/}{Docker}}} en Debian. Para ello, será necesario seguir los siguientes pasos:
@@ -266,7 +278,7 @@ Por otra parte, se lleva a cabo un manejo explícito de las versiones a instalar
 
 
 
-\subsection{PostgreSQL}
+\subsection{PostgreSQL}\label{subsec:Instalación postgre}
 \subsubsection{Inicializar el contenedor}
 La imagen de PostgreSQL instalada es la última versión oficial disponible en Docker Hub, en este caso la versión
 \textit{\textcolor{blue}{\href{https://www.postgresql.org/ftp/source/v17.3/}{PostgreSQL 17.3}}}.
@@ -342,38 +354,38 @@ El proceso de creación de usuarios y roles es el siguiente:
 
 \begin{codebox}[crear\_Usuarios.sq]{sql}
 -- Conectar a la base de datos específica
-\connect practicas_bd
+\connect practicas\_bd
     -- Eliminar usuarios y roles existentes si existen
     DROP OWNED BY lector CASCADE;
     DROP OWNED BY escritor CASCADE;
     DROP OWNED BY admin CASCADE;
-    DROP ROLE IF EXISTS rol_lector;
-    DROP ROLE IF EXISTS rol_escritor;
+    DROP ROLE IF EXISTS rol\_lector;
+    DROP ROLE IF EXISTS rol\_escritor;
     DROP ROLE IF EXISTS admin;
 
     -- 1. Crear superusuario (admin) con todos los permisos
     CREATE ROLE admin WITH LOGIN SUPERUSER CREATEDB CREATEROLE PASSWORD 'admin123';
 
     -- 2. Crear rol lector, con  solo permisos de lectura
-    CREATE ROLE rol_lector;
-    GRANT CONNECT ON DATABASE practicas_bd TO rol_lector;
-    GRANT USAGE ON SCHEMA public TO rol_lector;
-    GRANT SELECT ON ALL TABLES IN SCHEMA public TO rol_lector;
-    ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO rol_lector;
+    CREATE ROLE rol\_lector;
+    GRANT CONNECT ON DATABASE practicas\_bd TO rol\_lector;
+    GRANT USAGE ON SCHEMA public TO rol\_lector;
+    GRANT SELECT ON ALL TABLES IN SCHEMA public TO rol\_lector;
+    ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO rol\_lector;
     
     --3.  Crear rol escritor, con permisos de lectura, escritura y modificación
-    CREATE ROLE rol_escritor;
-    GRANT CONNECT ON DATABASE practicas_bd TO rol_escritor;
-    GRANT USAGE ON SCHEMA public TO rol_escritor;
-    GRANT SELECT, INSERT, UPDATE ON ALL TABLES IN SCHEMA public TO rol_escritor;
-    ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT, INSERT, UPDATE ON TABLES TO rol_escritor;
+    CREATE ROLE rol\_escritor;
+    GRANT CONNECT ON DATABASE practicas\_bd TO rol\_escritor;
+    GRANT USAGE ON SCHEMA public TO rol\_escritor;
+    GRANT SELECT, INSERT, UPDATE ON ALL TABLES IN SCHEMA public TO rol\_escritor;
+    ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT, INSERT, UPDATE ON TABLES TO rol\_escritor;
 
     --4. Crear usuario lector con login y contraseña
     CREATE USER lector WITH PASSWORD 'lector123';
-    GRANT rol_lector TO lector;
+    GRANT rol\_lector TO lector;
     -- 5. Crear usuario escritor con login y contraseña
     CREATE USER escritor WITH PASSWORD 'escritor123';
-    GRANT rol_escritor TO escritor;
+    GRANT rol\_escritor TO escritor;
 \end{codebox}
 
 Se debe recordar que para ejecutar scripts desde dentro del docker solo se necesita especificar usuario, no contraseña, pues la autenticación viene dada por el mismo; pero cuando alguien se conecte remotamente necesitará ingresar la contraseña correcta para poder acceder como uno (y solo uno de ellos) usuarios definidos.
@@ -391,10 +403,10 @@ Se debe recordar que para ejecutar scripts desde dentro del docker solo se neces
 \end{tcolorbox}
 
 \\
-Para comprobar que la creación ha sido correcta, podemos ejecutar el comando \textit{\du} para observar la tabla de usuarios o \textit{\dp} para observar los permisos de un usuario concreto.
+Para comprobar que la creación ha sido correcta, podemos ejecutar el comando \textit{\\du} para observar la tabla de usuarios o \textit{\\dp} para observar los permisos de un usuario concreto.
 \begin{tcolorbox}[colback=black, coltext=white, fontupper=\ttfamily, title=Terminal]
 \begin{minted}[fontsize=\small]{text}
-    azzale@vbox:~/Desktop/postgreSQL$ docker exec -it postgres-db psql -U admin -d practicas_bd -c "\du"
+    azzale@vbox:~/Desktop/postgreSQL$ docker exec -it postgres-db psql -U admin -d practicas\_bd -c "\du"
                                 List of roles
     Role name   |                         Attributes                         
     --------------+------------------------------------------------------------
@@ -404,7 +416,7 @@ Para comprobar que la creación ha sido correcta, podemos ejecutar el comando \t
     rol_escritor | Cannot login
     rol_lector   | Cannot login
 
-    azzale@vbox:~/Desktop/postgreSQL$ docker exec -it postgres-db psql -U admin -d practicas_bd -c "\dp"
+    azzale@vbox:~/Desktop/postgreSQL$ docker exec -it postgres-db psql -U admin -d practicas\_bd -c "\dp"
                                         Access privileges
     Schema |      Name      |   Type   |   Access privileges    | Column privileges | Policies 
     --------+----------------+----------+------------------------+-------------------+----------
@@ -428,7 +440,7 @@ Para comprobar que la creación ha sido correcta, podemos ejecutar el comando \t
 Por último, mencionar que la verificación de permisos se realizó en la fase de creación, poblado y cosultas, tratando de realizar diferentes acciones para cada usuario. Y efectivamente, todos funcionaban correctamente, como se puede ver a continuación:
 \begin{tcolorbox}[colback=black, coltext=white, fontupper=\ttfamily, title=Terminal]
 \begin{minted}[fontsize=\small]{text}
-    azzale@vbox:~/Desktop/postgreSQL$ docker exec -it postgres-db psql -U lector -d practicas_bd -f /tmp/insertarTablas.sql
+    azzale@vbox:~/Desktop/postgreSQL$ docker exec -it postgres-db psql -U lector -d practicas\_bd -f /tmp/insertarTablas.sql
     psql:/tmp/insertarTablas.sql:3: ERROR:  permission denied for table medicos
     psql:/tmp/insertarTablas.sql:7: ERROR:  permission denied for table pacientes
     psql:/tmp/insertarTablas.sql:11: ERROR:  permission denied for table pacientes
@@ -734,6 +746,9 @@ Una vez creados, hay que acceder nuevamente a la terminal del contenedor y confi
     db2 GRANT ROLE readerrole TO reader
 \end{lstlisting}
 
+\subsubsection{Problemas encontrados}
+En este SGBD nos hemos encontrado con complicaciones para realizar el script que genere los usuarios del sistema debido a que los comandos tardan mucho en ejecutarse y da problemas a la hora de realizar muchas instrucciones seguidas.
+
 \subsection{Oracle}
 Instalar Oracle Database en Docker facilita la gestión de bases de datos ofreciendo un entorno consistente y aislado. Este método utiliza Docker para correr Oracle en un contenedor, permitiendo una configuración y despliegue rápidos. Antes de la instalación, se requiere descargar Oracle Instant Client y SQL*Plus, ajustar las variables de entorno y obtener la imagen adecuada de Docker. Este proceso simplifica la operación de Oracle, haciendo su manejo más accesible y eficiente para usuarios de todos los niveles.
 \subsubsection{Preparación del Entorno Oracle en Docker}
@@ -792,8 +807,6 @@ unzip instantclient-sqlplus-linux.x64-23.7.0.25.01.zip -d ~/instantclient_23_7
 En Oracle Database, el usuario \texttt{sys} es uno de los usuarios más importantes y tiene privilegios de superusuario. Se le considera el usuario administrador principal y es utilizado para realizar tareas de administración de alto nivel. 
 
 Establece una conexión inicial con la base de datos.
-
-\subsubsection{}
 \begin{lstlisting}
 docker exec -it oracle-xe bash
 \end{lstlisting}
@@ -803,7 +816,612 @@ docker exec -it oracle-xe bash
 sqlplus sys/password@//localhost:1521/XE as sysdba
 \end{lstlisting}
 
-\subsubsection{Operaciones Básicas en Oracle}
+\subsubsection{Redirección de puertos}
+
+Para gestionar y asegurar la correcta redirección de puertos en la configuración de una base de datos Oracle usando DBeaver Enterprise, se debe descargar e instalar la aplicacion desde el sitio oficial de DBeaver, accesible a través del enlace \textit{\textcolor{blue}{\href{https://dbeaver.com/download/enterprise/}{DBeaver Enterprise}}}. 
+
+Posteriormente, tras el proceso de registro o inicio de sesión en DBeaver, se establece una nueva conexión y se procede a especificar los detalles necesarios para conectar con la base de datos Oracle que se ha creado. 
+
+Estos detalles necesarios, incluyen: el host, usualmente localhost, el puerto estándar 1521 de Oracle, el nombre del servicio de la base de datos, que en este caso fue XEPDB1, etc. 
+
+\begin{figure}[H]
+    \centering
+    \begin{tabular}{c c}  % Dos columnas centradas
+    \includegraphics[width=0.6\textwidth]{configuracion_ajustes_conexion_oracle.png}
+    \end{tabular}
+    \caption{Instalación de la máquina virtual Debian}
+    \label{fig:Configuración DBeaver de Oracle}
+\end{figure}
+
+Una vez configurados estos parámetros, se realiza una prueba de conexión, desde "Probar conexión...", y si funciona, se pulsa sobre "Aceptar" y se establece la conexión. 
+
+Finalmente, ya tenemos accesible desde DBeaver la base de datos, y se puede modificar, crear, eliminar, consultar... sobre esta base. 
+
+\subsection{Apache Cassandra}\label{subsec:Apache Cassandra}
+
+\subsubsection{Inicializar el contenedor}
+La imagen de Apache Cassandra instalada es la última versión oficial disponible en Docker Hub, en este caso la versión
+\textit{\textcolor{blue}{\href{https://github.com/docker-library/cassandra/blob/105daf8445a12fc96ef48a1314566e0f61f473b2/5.0/Dockerfile}{Cassandra 5.0.3}}}. Esta se muestra siempre que se accede a la línea de comandos de Cassandra:
+
+\begin{tcolorbox}[colback=black, coltext=white, fontupper=\ttfamily, title=Terminal]
+\begin{minted}[fontsize=\small]{text}
+    azzale@vbox:~/Desktop/cassandra$ docker exec -it cassandra-db cqlsh -u cassandra -p cassandra 
+
+    Warning: Using a password on the command line interface can be insecure.
+    Recommendation: use the credentials file to securely provide the password.
+
+    Connected to MyCluster at 127.0.0.1:9042
+    [cqlsh 6.2.0 | Cassandra 5.0.3 | CQL spec 3.4.7 | Native protocol v5]
+    Use HELP for help.
+    cassandra@cqlsh> 
+\end{minted}
+\end{tcolorbox}
+
+Para levantar Cassandra, se ejecutará en el siguiente comando desde el mismo directorio donde se encuentra el \textit{docker-compose}:
+La inicialización del contenedor Cassandra se realiza mediante:
+\begin{lstlisting}
+    # Levantar contenedor
+    docker compose up -d cassandra-db
+\end{lstlisting}
+
+Posteriormente, se hicieron las comprobaciones pertinentes para comprobar la versión, y ademas validar que el contenedor está debidamente inicializado. Si el proceso ha salido correctamente se debe obtener una salida así:
+
+\begin{tcolorbox}[colback=black, coltext=white, fontupper=\ttfamily, title=Terminal]
+\begin{minted}[fontsize=\small]{text}
+    azzale@vbox:~/Desktop/cassandra$ sudo docker ps
+    CONTAINER ID   IMAGE              COMMAND                  CREATED      STATUS         PORTS                                                                          NAMES
+    7abd9c2803f3   cassandra:latest   "docker-entrypoint.s…"   5 days ago   Up 7 seconds   7000-7001/tcp, 7199/tcp, 9160/tcp, 0.0.0.0:9042->9042/tcp, :::9042->9042/tcp   cassandra-db
+
+\end{minted}
+\end{tcolorbox}
+
+Además, se debe mencionar que existen dos maneras de interactuar con el gestor: ejecutar comandos desde la interfaz interactiva de Cassandra o ejecutar comandos directamente desde fuera:
+\begin{lstlisting}
+    # 1. ACCEDER A INTERFAZ INTERACTIVA
+   docker exec -it cassandra-db cqlsh -u <usuario> -p <contraseña>
+
+    # 2. EJECUTAR DIRECTAMENTE DESDE  FUERA
+    docker exec -it cassandra-db cqlsh -u <usuario> -p <contraseña> "comando CQL"
+
+    # 3. PROCEDIMIENTO PARA EJECUTAR SCRIPT
+    docker cp <script.cql> cassandra-db:/<script.cql>
+    docker exec -i cassandra-db cqlsh -u <usuario> -p <contraseña> -f /<script.cql>
+\end{lstlisting}
+
+En todos los casos donde se trabaje con scripts, se mostrará la ejecución con comandos desde fuera, pero si se trata de comandos aislados se mostrará la ejecución desde dentro de la interfaz por simplicidad. De hecho, la interfaz de Cassandra esta diseñada como una consola altamente interactiva, por lo que en caso de no ejecutar scripts será la principal herramienta a usar.
+\newline
+\subsubsection{Creación de la estructura básica del espacio de la base de datos}
+
+Con Cassandra no se habla de bases de datos como tal, sino de \textit{keyspaces}. Ahora ya se trabaja, en este sentido, a un mayor grado de organización (distribuido), donde los \textit{keyspaces} no solo se almacenan tablas, sino también estrategias de replicación. Así, con el objetivo de proporcionar una mayor tolerancia a fallos, los datos se pueden hallar replicados en el espacio de la base de datos.
+\\
+Se creará, de este modo, un \textit{keyspace} sencillo con el que trabajar por el momento, con una estrategia básica y sin copias adicionales de datos (es decir, con un solo nodo):
+
+\begin{scriptbox}{crear\_Espacio.cql}
+\begin{minted}[fontsize=\small]{cql}
+    DROP KEYSPACE IF EXISTS practicas_ks;
+
+    -- Crear nuevo keyspace con un solo nodo y sin copia de datos
+    CREATE KEYSPACE practicas_ks WITH replication = {
+    'class': 'SimpleStrategy',
+    'replication_factor': 1
+    };
+\end{minted}
+\end{scriptbox}
+
+Por su parte, la validación de que se ha creado correctamente se sigue de este modo:
+
+\begin{tcolorbox}[colback=black, coltext=white, fontupper=\ttfamily, title=Terminal]
+\begin{minted}[fontsize=\small]{text}
+azzale@vbox:~/Desktop/cassandra$ docker exec -it cassandra-db cqlsh -u cassandra -p cassandra 
+
+Warning: Using a password on the command line interface can be insecure.
+Recommendation: use the credentials file to securely provide the password.
+
+Connected to MyCluster at 127.0.0.1:9042
+[cqlsh 6.2.0 | Cassandra 5.0.3 | CQL spec 3.4.7 | Native protocol v5]
+Use HELP for help.
+cassandra@cqlsh> DESCRIBE KEYSPACES
+
+practicas_ks  system_auth         system_schema  system_views         
+system        system_distributed  system_traces  system_virtual_schema
+
+cassandra@cqlsh> DESCRIBE KEYSPACE practicas_ks;
+
+CREATE KEYSPACE practicas_ks WITH replication = {'class': 'SimpleStrategy', 'replication_factor': '1'}  AND durable_writes = true;
+\end{minted}
+\end{tcolorbox}
+
+\subsubsection{Asignación de roles}
+Apache Cassandra, o al menos la versión instalada, tiene la autenticación desactivada, asi como la asignación específica de permisos. Por lo tanto, el primer paso para poder crear distintos y usuarios fue modificando las pertinententes propiedades del archivo \textit{cassandra.yaml} del contenedor. Los pasos a seguir son los siguientes:
+
+\begin{lstlisting}
+    # 1 Copiar fuera del contenedor y abrir el fichero
+    docker cp cassandra-db:/etc/cassandra/cassandra.yaml ./cassandra.yaml
+    nano cassandra.yaml
+
+    # 2. MODIFICAR LAS LÍNEAS "authenticator" y "authorizer"
+    authenticator: PasswordAuthenticator
+    authorizer: CassandraAuthorizer
+
+    # 3. Copiar el fichero modificado y reiniciar contenedor para aplicar cambios
+    docker cp ./cassandra.yaml cassandra-db:/etc/cassandra/cassandra.yaml
+    docker restart cassandra-db
+\end{lstlisting}
+
+Ahora, al intentar acceder a la interfaz de cassandra sin autenticarse se obtendrá un error:
+\begin{tcolorbox}[colback=black, coltext=white, fontupper=\ttfamily, title=Terminal]
+\begin{minted}[fontsize=\small]{text}
+azzale@vbox:~/Desktop/cassandra$ docker exec -it cassandra-db cqlsh
+Connection error: ('Unable to connect to any servers', {'127.0.0.1:9042': AuthenticationFailed('Remote end requires authentication')})
+\end{minted}
+\end{tcolorbox}
+Por lo tanto, para acceder por primera vez, se necesitará acceder con el superusuario por defecto, con nombre  y contraseña \textit{cassandra}. 
+\\
+
+Una vez se ha configurado correctamente el gestor, conviene mencioa los roles y usuarios Cassandra. Realmente, Cassandra no diferencia entre usuario y rol, de manera que un rolo puede actuar como usuario si tiene permiso login o como un conjunto de permisos (lo que es rol en otros gestores) si no lo tiene. 
+\\
+Puestos en contexto, el código para crear los roles exigidos por el guión son los siguientes:
+\begin{scriptbox}{crear\_Espacio.cql}
+\begin{minted}[fontsize=\small]{cql}
+-- Limpiar previamente roles si existen 
+DROP ROLE IF EXISTS admin;
+DROP ROLE IF EXISTS lector;
+DROP ROLE IF EXISTS escritor;
+
+-- crear admin con todos los permisos
+CREATE ROLE admin WITH PASSWORD = 'admin123' AND SUPERUSER = true AND LOGIN = true;
+
+-- Crear lector con permisos de lectura
+CREATE ROLE lector WITH PASSWORD = 'lector123' AND LOGIN = true;
+GRANT SELECT ON KEYSPACE practicas_ks TO lector;
+
+-- Crear rol escritor con permisos de modificación
+CREATE ROLE escritor WITH PASSWORD = 'escritor123' AND LOGIN = true;
+GRANT MODIFY ON KEYSPACE practicas_ks TO escritor;
+\end{minted}
+\end{scriptbox}
+Si listamos ahora los roles existentes desde la interfaz de Cassandra:
+\begin{tcolorbox}[colback=black, coltext=white, fontupper=\ttfamily, title=Terminal]
+\begin{minted}[fontsize=\small]{text}
+admin@cqlsh>  LIST ROLES ;
+
+ role      | super | login | options | datacenters
+-----------+-------+-------+---------+-------------
+     admin |  True |  True |        {} |         ALL
+ cassandra |  True |  True |        {} |         ALL
+  escritor | False |  True |        {} |         ALL
+    lector | False |  True |        {} |         ALL
+
+(4 rows)
+admin@cqlsh> LIST ALL PERMISSIONS OF escritor
+   ... ;
+
+ role     | username | resource                | permission
+----------+----------+-------------------------+------------
+ escritor | escritor | <keyspace practicas_ks> |     MODIFY
+
+(1 rows)
+\end{minted}
+\end{tcolorbox}
+Obsérvese que sigue presente el rol cassandra, el cual es además superusuario. Lo que se ha decidido en este caso es mantenerlo pero modificar su contraseña, para cubrirse ante la inoportuna eliminación involuntaria del rol \textit{admin}. Además, otro detalle importante es que el rol escritor se ha definido con el rol escritor cuenta con el permiso \textit{MODIFY}. En Cassandra, los permisos de \textit{INSERT},\textit{UPDATE} y \textit{DELETE} se engloban en un solo permiso, por lo que para impedir que el escritor pueda eliminar datos de tablas se tendría que añadir código a nivel de aplicación.
+\\
+Al igual que con el resto de gestores, se probó a conectarse con los distintos gestores y a realizar operaciones para las que cuentan y no cuentan con permisos:
+
+\begin{tcolorbox}[colback=black, coltext=white, fontupper=\ttfamily, title=Terminal]
+\begin{minted}[fontsize=\small]{text}
+azzale@vbox:~/Desktop/cassandra$ docker exec -i cassandra-db cqlsh -u lector -p lector123 -f /insertarTablas.cql
+
+Warning: Using a password on the command line interface can be insecure.
+Recommendation: use the credentials file to securely provide the password.
+
+/insertarTablas.cql:3:Unauthorized: Error from server: code=2100 [Unauthorized] message="User lector has no MODIFY permission on <table practicas_ks.pruebas> or any of its parents"
+/insertarTablas.cql:4:Unauthorized: Error from server: code=2100 [Unauthorized] message="User lector has no MODIFY permission on <table practicas_ks.medicos> or any of its parents"
+/insertarTablas.cql:5:Unauthorized: Error from server: code=2100 [Unauthorized] message="User lector has no MODIFY permission on <table practicas_ks.pacientes> or any of its parents"
+/insertarTablas.cql:9:Unauthorized: Error from server: code=2100 [Unauthorized] message="User lector has no MODIFY permission on <table practicas_ks.medicos> or any of its parents"
+/insertarTablas.cql:12:Unauthorized: Error from server: code=2100 [Unauthorized] message="User lector has no MODIFY permission on <table practicas_ks.medicos> or any of its parents"
+/insertarTablas.cql:16:Unauthorized: Error from server: code=2100 [Unauthorized] message="User lector has no MODIFY permission on <table practicas_ks.pacientes> or any of its parents"
+/insertarTablas.cql:19:Unauthorized: Error from server: code=2100 [Unauthorized] message="User lector has no MODIFY permission on <table practicas_ks.pacientes> or any of its parents"
+/insertarTablas.cql:29:Unauthorized: Error from server: code=2100 [Unauthorized] message="User lector has no MODIFY permission on <table practicas_ks.pruebas> or any of its parents"
+
+\end{minted}
+\end{tcolorbox}
+
+\subsubsection{Conectividad remota}
+
+El docker-compose configuraba el puerto 9042 para exponer Cassandra al exterior.  Antes que nada, hay que redirigir el correspondiente puerto en Virtual Box, tal como se establece en el guión de prácticas. Con solo esto, cualquier conexión será redirigida correctamente al puerto de Cassandra.
+
+La conexión con el mismo se probará con la herramienta \textit{\textcolor{blue}{\href{https://dbeaver.com/download/enterprise/}{Dbeaver}}}.Para ello, se escogerá la opción "\textit{Nueva conexión}", y dentro de ella "\textit{Cassandra}". En cuanto a la configuración, se dejará como Host la red local, se inserta en puerto \textit{9042}, como base de datos \textit{practicas\_ks}; y en usuario y contraseña las credenciales del usuario con el que se quiera establecer la conexión. 
+
+\begin{figure}[H]
+    \centering
+    \begin{tabular}{c}  % Una columna centrada
+        \includegraphics[width=1\textwidth]{cassandra1.png}\\[10pt]
+        \includegraphics[width=1\textwidth]{cassandra2.png} 
+    \end{tabular}
+    \caption{Conexión a Cassandra con DBeaver}
+    \label{fig:Configuracion_DBeaver_Cassandra}
+\end{figure}
+
+
+
+\newpage
+\subsection{HBase}
+\subsubsection{Introducción}
+HBase es un sistema de bases de datos NoSQL escalable basado en HDFS, diseñado para almacenar grandes volúmenes de datos distribuidos. En esta documentación, se describirá el proceso de instalación y configuración de HBase, incluyendo los intentos de integración con Kerberos y la posterior decisión de prescindir de esta tecnología debido a dificultades técnicas.
+
+\subsubsection{Intento de Integración con Kerberos}
+Para garantizar una autenticación segura en HBase, se intentó la integración de Kerberos como sistema de gestión de identidades. El objetivo era proporcionar una autenticación basada en tickets para controlar el acceso a los datos. Sin embargo, debido a múltiples problemas técnicos, se decidió desestimar Kerberos y proceder con una configuración sin autenticación centralizada.
+
+
+\subsubsection{Configuración Inicial de Kerberos}
+
+La instalación de Kerberos en el host se realizó con los siguientes comandos:
+
+\begin{lstlisting}[style=bashStyle]
+sudo apt update
+sudo apt install -y krb5-kdc krb5-admin-server krb5-user
+\end{lstlisting}
+
+A continuación, se configuró el archivo \texttt{/etc/krb5.conf}:
+
+\begin{minted}{text}
+[libdefaults]
+default_realm = HBASE.LOCAL
+dns_lookup_realm = false
+dns_lookup_kdc = false
+ticket_lifetime = 24h
+renew_lifetime = 7d
+forwardable = true
+
+[realms]
+HBASE.LOCAL = {
+    kdc = localhost
+    admin_server = localhost
+}
+
+[domain_realm]
+.hbase.local = HBASE.LOCAL
+hbase.local = HBASE.LOCAL
+\end{minted}
+
+Se procedió a inicializar la base de datos de Kerberos:
+
+\begin{lstlisting}[style=bashStyle]
+sudo krb5_newrealm
+\end{lstlisting}
+
+\newpage
+Se crearon los principales para HBase Master y RegionServer:
+
+\begin{lstlisting}[style=bashStyle]
+sudo kadmin.local -q "addprinc -randkey hbase-master@HBASE.LOCAL"
+sudo kadmin.local -q "addprinc -randkey hbase-regionserver@HBASE.LOCAL"
+\end{lstlisting}
+
+
+Y se generaron los keytabs:
+
+\begin{lstlisting}[style=bashStyle]
+sudo kadmin.local -q "ktadd -k /etc/hbase/keytabs/hbase-master.keytab hbase-master@HBASE.LOCAL"
+sudo kadmin.local -q "ktadd -k /etc/hbase/keytabs/hbase-regionserver.keytab hbase-regionserver@HBASE.LOCAL"
+\end{lstlisting}
+
+Estos archivos fueron copiados a los contenedores de HBase:
+
+\begin{lstlisting}[style=bashStyle]
+docker cp /etc/hbase/keytabs/hbase-master.keytab hbase-db:/etc/hbase/keytabs/hbase-master.keytab
+docker cp /etc/hbase/keytabs/hbase-regionserver.keytab hbase-db:/etc/hbase/keytabs/hbase-regionserver.keytab
+\end{lstlisting}
+
+A pesar de la configuración, surgieron diversos problemas que impidieron la correcta autenticación en HBase:
+
+\vspace{5mm}
+
+\subsubsection{Problema con los Keytabs}
+
+Al ejecutar \texttt{klist -kt} dentro del contenedor de HBase, se obtuvo el error:
+
+\begin{lstlisting}[style=bashStyle]
+klist: Unsupported key table format version number while starting keytab scan
+\end{lstlisting}
+
+
+Se intentó regenerar los keytabs y copiarlos nuevamente al contenedor sin éxito.
+
+\vspace{5mm}
+
+
+\subsubsection{Errores en la Autenticación de HBase}
+
+Al ejecutar \texttt{kinit} y listar las regiones en HBase, se obtuvo el error:
+
+\begin{minted}[breaklines=true]{text}
+ERROR: No valid credentials provided (Mechanism level: Failed to find any Kerberos tgt)
+\end{minted}
+
+Tras varios intentos, se decidió desestimar la configuración de Kerberos.
+
+\subsubsection{Desestimación de Kerberos}
+Dado que los problemas con Kerberos dificultaban el desarrollo y consumían demasiado tiempo, se optó por eliminar la configuración de seguridad y proceder sin autenticación:
+
+\vspace{5mm}
+
+\subsubsection{1. Eliminación de Kerberos}
+
+\begin{lstlisting}[style=bashStyle]
+docker-compose down
+sudo rm -rf /etc/hbase/keytabs
+sudo rm -rf /var/lib/krb5kdc
+sudo apt-get remove --purge krb5-kdc krb5-admin-server
+sudo apt-get autoremove
+\end{lstlisting}
+
+\newpage
+\subsubsection{2. Modificación de la configuración de HBase}
+
+Se editó el archivo hbase-site.xml para cambiar la autenticación:
+
+
+\begin{minted}[fontsize=\small]{xml}
+hbase.security.authentication
+simple
+
+hbase.security.authorization
+false
+\end{minted}
+
+Luego, se copió el archivo actualizado dentro del contenedor de HBase:
+
+\begin{lstlisting}[style=bashStyle]
+docker cp ~/bd2/hbase-config/hbase-site.xml hbase-db:/opt/hbase/conf/hbase-site.xml
+\end{lstlisting}
+
+
+\subsubsection{3. Reinicio de Servicios}
+
+\begin{lstlisting}[style=bashStyle]
+docker restart hbase-db
+\end{lstlisting}
+
+
+\subsubsection{4. Verificación de la Configuración}
+
+Para verificar que HBase funcionaba sin Kerberos, se ejecutaron los siguientes comandos:
+
+\begin{lstlisting}[style=bashStyle]
+docker exec -it hbase-db hbase shell
+\end{lstlisting}
+
+Se intentó crear la tabla `hbase:acl` para la gestión de permisos, pero se observó que **ya existía**, lo que indicaba que la configuración de permisos estaba activa:
+
+\begin{lstlisting}[style=bashStyle]
+hbase(main):023:0* create 'hbase:acl', {NAME => 'f', VERSIONS => 1}
+ERROR: Table already exists: hbase:acl!
+\end{lstlisting}
+
+Para confirmar su existencia, se escaneó su contenido:
+
+\begin{lstlisting}[style=bashStyle]
+hbase(main):024:0> scan 'hbase:acl'
+ROW                      COLUMN+CELL
+0 row(s)
+Took 0.0219 seconds
+\end{lstlisting}
+
+Finalmente, se verificó el estado del sistema:
+
+\begin{lstlisting}[style=bashStyle]
+hbase(main):025:0> status 'detailed'
+\end{lstlisting}
+
+Lo importante aquí fue notar la presencia de:
+
+\begin{minted}[fontsize=\small]{text}
+master coprocessors: [AccessController]
+\end{minted}
+
+Esto confirmó que **el sistema ya tenía habilitados los permisos sin necesidad de Kerberos**.
+
+
+\subsubsection{Conclusión}
+La configuración de HBase sin Kerberos permitió evitar problemas de autenticación y facilitar el acceso. La configuración final es sin autenticación, con la gestión de permisos mediante hbase:acl.
+
+\section{Generación de Datos y Pruebas}
+La fase de generación de Datos y pruebas sirvió, además para asegurar una funcionalidad y compatibilidad básica con los gestores de datos instalados, para familiarizarse un poco con la semántica de cada gestor (lenguaje). 
+Así, se opta por un esquema conceptual sencillo, correspondiente al ejemplo más básico de base de datos de pruebas médicas diseñado en clase (existen médicos, pacientes, y pruebas asociadas a ambos). Así, se trabaja con conceptos básicos como claves primarias, claves foráneas, no nulos, etc.
+
+\subsection{PostgreSQL}
+La creación de tablas en PostgreSQL no supuso grnades complicaciones ni suscitó un gran asombro, ya que cumple con estándares SQL con los que el equipo ya se encontraba familiarizado. La posibilidad de incluir funcionalidades más complejas, como el soporte a OO mediante herencia se descartó al considerar que se aleja de los objetivos de esta práctica (ya se trabajará en las posteriores).
+\begin{scriptbox}{creacion\_tablas.sql}
+\begin{minted}[fontsize=\small]{sql}
+-- Limpiar claramente objetos anteriores (si existen) para evitar conflictos
+DROP TABLE IF EXISTS pruebas CASCADE;
+DROP TABLE IF EXISTS pacientes CASCADE;
+DROP TABLE IF EXISTS medicos CASCADE;
+
+-- Crear tablas para gestión médica claramente desde cero
+
+-- Tabla de médicos
+CREATE TABLE medicos (
+    dni VARCHAR(9) PRIMARY KEY,
+    numLicencia INTEGER NOT NULL UNIQUE,
+    nombre VARCHAR(100) NOT NULL,
+    especialidad VARCHAR(100) NOT NULL,
+    telefono VARCHAR(15)
+);
+
+-- Tabla de pacientes
+CREATE TABLE pacientes (
+    dni VARCHAR(9) PRIMARY KEY,
+    nss INTEGER NOT NULL UNIQUE,
+    nombre VARCHAR(100),
+    telefono VARCHAR(15)
+);
+
+-- Tabla de pruebas médicas
+CREATE TABLE pruebas (
+    id SERIAL PRIMARY KEY,
+    dni_medico VARCHAR(9) NOT NULL REFERENCES medicos(dni),
+    dni_paciente VARCHAR(9) NOT NULL REFERENCES pacientes(dni),
+    tipo_prueba VARCHAR(100),
+    fecha DATE,
+    resultado VARCHAR(200)
+);
+\end{minted}
+\end{scriptbox}
+Se verificó además que las tablas se crearon correctamente:
+\begin{tcolorbox}[colback=black, coltext=white, fontupper=\ttfamily, title=Terminal]
+\begin{minted}[fontsize=\small]{text}
+azzale@vbox:~/Desktop/postgreSQL$ docker exec -it postgres-db psql -U 
+            admin -d practicas_bd -c "\dt"
+         List of relations
+ Schema |   Name    | Type  | Owner 
+--------+-----------+-------+-------
+ public | medicos   | table | admin
+ public | pacientes | table | admin
+ public | pruebas   | table | admin
+(3 rows)
+
+\end{minted}
+\end{tcolorbox}
+Además, se crearon scripts sencillos para la escritura y consulta básica de las tablas, los cuales se probaron con los distintos usuarios existentes.
+\begin{scriptbox}{insertarTablas.sql}
+\begin{minted}[fontsize=\small]{sql}
+-- Script para insertar y modificar datos con el usuario escritor
+\connect practicas_bd
+
+-- Limpiar tablas antes de insertar datos
+DELETE FROM pruebas;
+DELETE FROM pacientes;
+DELETE FROM medicos;
+
+-- Insertar datos en la tabla medicos
+INSERT INTO medicos (dni, numlicencia, nombre, especialidad, telefono)
+VALUES ('12345678A', 12345, 'Dr. Izquierdo', 'M.Familia', '876000111');
+
+-- Insertar datos en la tabla pacientes
+INSERT INTO pacientes (dni, nss, nombre, telefono)
+VALUES ('87654321B', 987654321, 'Ada Byron', '699654321');
+
+-- Insertar datos en la tabla pacientes
+INSERT INTO pacientes (dni, nss, nombre, telefono)
+VALUES ('87654321X', 987654322, 'Nadie', '699654322');
+
+-- Insertar datos en la tabla pruebas
+INSERT INTO pruebas (id_medico, id_paciente, tipo_prueba, fecha, resultado)
+VALUES ('12345678A', '87654321B', 'muestra de orina', '2025-02-17', 'DATO1 : X');
+
+-- Modificar datos (cambiar número de teléfono del paciente)
+UPDATE pacientes SET telefono = '655888999' WHERE dni = '87654321B';
+
+\end{minted}
+\end{scriptbox}
+
+\begin{scriptbox}{consultas.sql}
+\begin{minted}[fontsize=\small]{sql}
+-- Script para consultar datos con el usuario lector
+\connect practicas_bd
+-- Consultar todos los médicos
+SELECT * FROM medicos;
+
+-- Consultar todos los pacientes
+SELECT * FROM pacientes where nombre 'Ada Byron';
+\end{minted}
+\end{scriptbox}
+
+
+\subsection{Apache Cassandra}\label{subsec: Apache Cassandra}
+La manipulación de tablas con Cassandra suponen (o supondrán) un cambio de paradigma con respecto al anterior trabajo con SQL. En sentido, las tablas no están pensadas para hacer JOINS, por lo que no hay relaciones (claves foráneas) entre tablas. Cassandra realmente está orientada a consultas específicas, por lo que las relaciones en el modelo conceptual se transformarán en desnormalizaciones en la medida en la que se necesite. A continuación se muestra la prueba de creación de tablas:
+\begin{scriptbox}{creacionTablas.cql}
+\begin{minted}[fontsize=\small]{sql}
+-- Limpiar tablas previamente si ya existen 
+DROP TABLE IF EXISTS practicas_ks.pruebas;
+DROP TABLE IF EXISTS practicas_ks.medicos;
+DROP TABLE IF EXISTS practicas_ks.pacientes;
+USE practicas_ks;
+
+-- Crear tabla 'medicos' 
+CREATE TABLE medicos (
+    dni TEXT PRIMARY KEY,
+    numLicencia TEXT,
+    nombre TEXT,
+    especialidad TEXT,
+    telefono TEXT
+);
+
+-- Crear tabla 'pacientes' 
+CREATE TABLE pacientes (
+    dni TEXT PRIMARY KEY,
+    nss TEXT,
+    nombre TEXT,
+    telefono TEXT
+);
+
+-- Crear tabla 'pruebas' 
+CREATE TABLE pruebas (
+    id UUID PRIMARY KEY,
+    dni_medico TEXT,
+    nombre_medico TEXT,    -- Nombre médico desnormalizado
+    dni_paciente TEXT,
+    nombre_paciente TEXT,  -- Nombre paciente desnormalizado
+    tipo_prueba TEXT,
+    fecha TIMESTAMP,
+    resultado TEXT
+);
+
+-- Verificar creación
+DESCRIBE TABLES;
+
+\end{minted}
+\end{scriptbox}
+
+Obsérvese como en este caso se ha producido una desnormalización en la tabla de pruebas para incluir los nombres del médico y paciente. Esto puede ser así porque se considerará habitual consultar el nombre de los pacientes y médicos, por poner un ejemplo.
+
+Además, se realizarón pruebas para la inserción y consulta de las mismas.
+\begin{scriptbox}{insertarTablas.cql}
+\begin{minted}[fontsize=\small]{sql}
+-- Limpiar  datos de tablas
+TRUNCATE TABLE practicas_ks.pruebas;
+TRUNCATE TABLE practicas_ks.medicos;
+TRUNCATE TABLE practicas_ks.pacientes;
+
+-- Insertar datos en tabla 'medicos'
+INSERT INTO practicas_ks.medicos (dni, numLicencia, nombre, especialidad, telefono) 
+VALUES ('12345678A', 'MED123', 'Dr. López', 'Cardiología', '600123456');
+
+INSERT INTO practicas_ks.medicos (dni, numLicencia, nombre, especialidad, telefono) 
+VALUES ('87654321B', 'MED456', 'Dra. Martínez', 'Neurología', '699654321');
+
+-- Insertar datos en tabla 'pacientes'
+INSERT INTO practicas_ks.pacientes (dni, nss, nombre, telefono) 
+VALUES ('11111111C', 'NSS001', 'Ana Gómez', '655555555');
+
+INSERT INTO practicas_ks.pacientes (dni, nss, nombre, telefono) 
+VALUES ('22222222D', 'NSS002', 'Carlos Pérez', '644444444');
+
+-- Insertar datos en tabla 'pruebas'
+INSERT INTO practicas_ks.pruebas (
+    id, dni_medico, nombre_medico, dni_paciente, nombre_paciente, tipo_prueba, fecha, resultado
+) VALUES (
+    uuid(),
+    '12345678A', 'Dr. López',
+    '11111111C', 'Ana Gómez',
+    'Electrocardiograma', toTimestamp(now()), 'Normal'
+);
+
+\end{minted}
+\end{scriptbox}
+
+\begin{scriptbox}{consultas.cql}
+\begin{minted}[fontsize=\small]{cql}
+USE practicas_ks;
+SELECT * FROM pruebas;
+SELECT * FROM pruebas WHERE dni_medico = '12345678A' SELECT * FROM practicas_ks.pruebas WHERE dni_medico = '12345678A' ALLOW FILTERING;
+\end{minted}
+\end{scriptbox}
+Nótese que en la segunda consulta se ha especificado la cláusula ALLOW FILTERING. Esto se debe a que \textit{dni\_medico} no forma parte primaria de la tabla, y por lo tanto la consulta debe "forzarse" ya que su rendimiento no es idóneo. Realmente la mejor solución no es la cláusula, sino añadir como clave primaria de la tabla pruebas también el dni.
+
+\subsection{Operaciones Básicas en Oracle}
 Configuraciones iniciales, creación de usuarios y tablespaces.
 \vspace{5mm}
 
@@ -897,6 +1515,61 @@ GRANT SELECT ON WRITER.medicos TO reader;
 GRANT SELECT ON WRITER.pacientes TO reader;
 GRANT SELECT ON WRITER.pruebas TO reader;
 \end{lstlisting}
+
+
+Para realizar la creación de usuarios, también se puede realizar mediante este script:
+\begin{minted}[fontsize=\small]{text}
+    #!/bin/bash
+
+    CONTAINER_NAME="oracle-xe"
+    SYSDBA_USER="sys"
+    SYSDBA_PASS="oracle123"
+    DB_NAME="XEPDB1"
+    
+    # Función para ejecutar SQL
+    run_sql() {
+        local sql_command=$1
+        docker exec -i "$CONTAINER_NAME" bash -c "echo \"$sql_command\" | sqlplus -S $SYSDBA_USER/$SYSDBA_PASS@\"$DB_NAME\" AS SYSDBA"
+    }
+    
+    # Función para verificar existencia de usuario
+    user_exists() {
+        local username=$1
+        local sql_query="SET HEADING OFF; 
+    SET FEEDBACK OFF; 
+    SELECT username FROM dba_users WHERE username = UPPER('$username');"
+    
+        local result=$(run_sql "$sql_query" | tr -d '[:space:]')
+        
+        [ -n "$result" ] && return 0 || return 1
+    }
+    
+    # Crear usuario solo si no existe
+    create_user() {
+        local user=$1
+        local pass=$2
+        local privileges=$3
+    
+        if ! user_exists "$user"; then
+            echo "Creando usuario $user..."
+            run_sql "CREATE USER $user IDENTIFIED BY $pass DEFAULT TABLESPACE myworkspace1;"
+            run_sql "$privileges"
+            echo "Usuario $user creado exitosamente"
+        else
+            echo "El usuario $user YA EXISTE. No se realiza ninguna acción."
+        fi
+    }
+    
+    # --- Ejecución principal ---
+    create_user "writer" "writerPass" "
+    GRANT CREATE SESSION, CREATE TABLE TO writer;
+    GRANT ALTER ANY TABLE, CREATE SEQUENCE, CREATE VIEW, CREATE SYNONYM TO writer;
+    "
+    
+    create_user "reader" "readerPass" "
+    GRANT CREATE SESSION TO readerjuju;
+    "    
+\end{minted}
 
 \subsubsection{Creación e inserción de tablas}
 Para la creación de tablas, se ejecuta un archivo de script SQL denominado "CreacionTablasOracle", que contiene todos los comandos necesarios para definir las tablas y las relaciones entre ellas de médicos, pacientes y pruebas. 
@@ -1098,6 +1771,10 @@ sqlplus writer/writerPass@localhost:1521/XEPDB1
 @/opt/oracle/InsercionTablasOracle.sql
 \end{lstlisting}
 
+\subsubsection{IBM DB2}
+
+
+
 \subsubsection{Consultas}
 
 En el apartado de consultas, el usuario \texttt{reader} lleva a cabo una serie de operaciones para acceder a la información contenida en las tablas medicos, pacientes y pruebas que fueron previamente creadas y pobladas por el usuario \texttt{writer}. 
@@ -1220,414 +1897,8 @@ Para ejecutar este script, se debe ejecutar este comando:
 sqlplus reader/readerPass@localhost:1521/XEPDB1 @ConsultasOracle.sql
 \end{lstlisting}
 
-\subsubsection{Redirección de puertos}
 
-Para gestionar y asegurar la correcta redirección de puertos en la configuración de una base de datos Oracle usando DBeaver Enterprise, se debe descargar e instalar la aplicacion desde el sitio oficial de DBeaver, accesible a través del enlace \textit{\textcolor{blue}{\href{https://dbeaver.com/download/enterprise/}{DBeaver Enterprise}}}. 
-
-Posteriormente, tras el proceso de registro o inicio de sesión en DBeaver, se establece una nueva conexión y se procede a especificar los detalles necesarios para conectar con la base de datos Oracle que se ha creado. 
-
-Estos detalles necesarios, incluyen: el host, usualmente localhost, el puerto estándar 1521 de Oracle, el nombre del servicio de la base de datos, que en este caso fue XEPDB1, etc. 
-
-\begin{figure}[H]
-    \centering
-    \begin{tabular}{c c}  % Dos columnas centradas
-    \includegraphics[width=0.6\textwidth]{configuracion_ajustes_conexion_oracle.png}
-    \end{tabular}
-    \caption{Instalación de la máquina virtual Debian}
-    \label{fig:Configuración DBeaver de Oracle}
-\end{figure}
-
-Una vez configurados estos parámetros, se realiza una prueba de conexión, desde "Probar conexión...", y si funciona, se pulsa sobre "Aceptar" y se establece la conexión. 
-
-Finalmente, ya tenemos accesible desde DBeaver la base de datos, y se puede modificar, crear, eliminar, consultar... sobre esta base. 
-
-\subsection{Apache Cassandra}\label{subsec:Apache Cassandra}
-
-\subsubsection{Inicializar el contenedor}
-La imagen de Apache Cassandra instalada es la última versión oficial disponible en Docker Hub, en este caso la versión
-\textit{\textcolor{blue}{\href{https://github.com/docker-library/cassandra/blob/105daf8445a12fc96ef48a1314566e0f61f473b2/5.0/Dockerfile}{Cassandra 5.0.3}}}. Esta se muestra siempre que se accede a la línea de comandos de Cassandra:
-
-\begin{tcolorbox}[colback=black, coltext=white, fontupper=\ttfamily, title=Terminal]
-\begin{minted}[fontsize=\small]{text}
-    azzale@vbox:~/Desktop/cassandra$ docker exec -it cassandra-db cqlsh -u cassandra -p cassandra 
-
-    Warning: Using a password on the command line interface can be insecure.
-    Recommendation: use the credentials file to securely provide the password.
-
-    Connected to MyCluster at 127.0.0.1:9042
-    [cqlsh 6.2.0 | Cassandra 5.0.3 | CQL spec 3.4.7 | Native protocol v5]
-    Use HELP for help.
-    cassandra@cqlsh> 
-\end{minted}
-\end{tcolorbox}
-
-Para levantar Cassandra, se ejecutará en el siguiente comando desde el mismo directorio donde se encuentra el \textit{docker-compose}:
-La inicialización del contenedor Cassandra se realiza mediante:
-\begin{lstlisting}
-    # Levantar contenedor
-    docker compose up -d cassandra-db
-\end{lstlisting}
-
-Posteriormente, se hicieron las comprobaciones pertinentes para comprobar la versión, y ademas validar que el contenedor está debidamente inicializado. Si el proceso ha salido correctamente se debe obtener una salida así:
-
-\begin{tcolorbox}[colback=black, coltext=white, fontupper=\ttfamily, title=Terminal]
-\begin{minted}[fontsize=\small]{text}
-    azzale@vbox:~/Desktop/cassandra$ sudo docker ps
-    CONTAINER ID   IMAGE              COMMAND                  CREATED      STATUS         PORTS                                                                          NAMES
-    7abd9c2803f3   cassandra:latest   "docker-entrypoint.s…"   5 days ago   Up 7 seconds   7000-7001/tcp, 7199/tcp, 9160/tcp, 0.0.0.0:9042->9042/tcp, :::9042->9042/tcp   cassandra-db
-
-\end{minted}
-\end{tcolorbox}
-
-Además, se debe mencionar que existen dos maneras de interactuar con el gestor: ejecutar comandos desde la interfaz interactiva de Cassandra o ejecutar comandos directamente desde fuera:
-\begin{lstlisting}
-    # 1. ACCEDER A INTERFAZ INTERACTIVA
-   docker exec -it cassandra-db cqlsh -u <usuario> -p <contraseña>
-
-    # 2. EJECUTAR DIRECTAMENTE DESDE  FUERA
-    docker exec -it cassandra-db cqlsh -u <usuario> -p <contraseña> "comando CQL"
-
-    # 3. PROCEDIMIENTO PARA EJECUTAR SCRIPT
-    docker cp <script.cql> cassandra-db:/<script.cql>
-    docker exec -i cassandra-db cqlsh -u <usuario> -p <contraseña> -f /<script.cql>
-\end{lstlisting}
-
-En todos los casos donde se trabaje con scripts, se mostrará la ejecución con comandos desde fuera, pero si se trata de comandos aislados se mostrará la ejecución desde dentro de la interfaz por simplicidad. De hecho, la interfaz de Cassandra esta diseñada como una consola altamente interactiva, por lo que en caso de no ejecutar scripts será la principal herramienta a usar.
-\newline
-\subsubsection{Creación de la estructura básica del espacio de la base de datos}
-
-Con Cassandra no se habla de bases de datos como tal, sino de \textit{keyspaces}. Ahora ya se trabaja, en este sentido, a un mayor grado de organización (distribuido), donde los \textit{keyspaces} no solo se almacenan tablas, sino también estrategias de replicación. Así, con el objetivo de proporcionar una mayor tolerancia a fallos, los datos se pueden hallar replicados en el espacio de la base de datos.
-\\
-Se creará, de este modo, un \textit{keyspace} sencillo con el que trabajar por el momento, con una estrategia básica y sin copias adicionales de datos (es decir, con un solo nodo):
-
-\begin{scriptbox}{crear\_Espacio.cql}
-\begin{minted}[fontsize=\small]{cql}
-    DROP KEYSPACE IF EXISTS practicas_ks;
-
-    -- Crear nuevo keyspace con un solo nodo y sin copia de datos
-    CREATE KEYSPACE practicas_ks WITH replication = {
-    'class': 'SimpleStrategy',
-    'replication_factor': 1
-    };
-\end{minted}
-\end{scriptbox}
-
-Por su parte, la validación de que se ha creado correctamente se sigue de este modo:
-
-\begin{tcolorbox}[colback=black, coltext=white, fontupper=\ttfamily, title=Terminal]
-\begin{minted}[fontsize=\small]{text}
-azzale@vbox:~/Desktop/cassandra$ docker exec -it cassandra-db cqlsh -u cassandra -p cassandra 
-
-Warning: Using a password on the command line interface can be insecure.
-Recommendation: use the credentials file to securely provide the password.
-
-Connected to MyCluster at 127.0.0.1:9042
-[cqlsh 6.2.0 | Cassandra 5.0.3 | CQL spec 3.4.7 | Native protocol v5]
-Use HELP for help.
-cassandra@cqlsh> DESCRIBE KEYSPACES
-
-practicas_ks  system_auth         system_schema  system_views         
-system        system_distributed  system_traces  system_virtual_schema
-
-cassandra@cqlsh> DESCRIBE KEYSPACE practicas_ks;
-
-CREATE KEYSPACE practicas_ks WITH replication = {'class': 'SimpleStrategy', 'replication_factor': '1'}  AND durable_writes = true;
-\end{minted}
-\end{tcolorbox}
-
-\subsubsection{Asignación de roles}
-Apache Cassandra, o al menos la versión instalada, tiene la autenticación desactivada, asi como la asignación específica de permisos. Por lo tanto, el primer paso para poder crear distintos y usuarios fue modificando las pertinententes propiedades del archivo \textit{cassandra.yaml} del contenedor. Los pasos a seguir son los siguientes:
-
-\begin{lstlisting}
-    # 1 Copiar fuera del contenedor y abrir el fichero
-    docker cp cassandra-db:/etc/cassandra/cassandra.yaml ./cassandra.yamlç
-    nano cassandra.yaml
-
-    # 2. MODIFICAR LAS LÍNEAS "authenticator" y "authorizer"
-    authenticator: PasswordAuthenticator
-    authorizer: CassandraAuthorizer
-
-    # 3. Copiar el fichero modificado y reiniciar contenedor para aplicar cambios
-    docker cp ./cassandra.yaml cassandra-db:/etc/cassandra/cassandra.yaml
-    docker restart cassandra-db
-\end{lstlisting}
-
-Ahora, al intentar acceder a la interfaz de cassandra sin autenticarse se obtendrá un error:
-\begin{tcolorbox}[colback=black, coltext=white, fontupper=\ttfamily, title=Terminal]
-\begin{minted}[fontsize=\small]{text}
-azzale@vbox:~/Desktop/cassandra$ docker exec -it cassandra-db cqlsh
-Connection error: ('Unable to connect to any servers', {'127.0.0.1:9042': AuthenticationFailed('Remote end requires authentication')})
-\end{minted}
-\end{tcolorbox}
-Por lo tanto, para acceder por primera vez, se necesitará acceder con el superusuario por defecto, con nombre  y contraseña \textit{cassandra}. 
-\\
-
-Una vez se ha configurado correctamente el gestor, conviene mencioa los roles y usuarios Cassandra. Realmente, Cassandra no diferencia entre usuario y rol, de manera que un rolo puede actuar como usuario si tiene permiso login o como un conjunto de permisos (lo que es rol en otros gestores) si no lo tiene. 
-\\
-Puestos en contexto, el código para crear los roles exigidos por el guión son los siguientes:
-\begin{scriptbox}{crear\_Espacio.cql}
-\begin{minted}[fontsize=\small]{cql}
--- Limpiar previamente roles si existen 
-DROP ROLE IF EXISTS admin;
-DROP ROLE IF EXISTS lector;
-DROP ROLE IF EXISTS escritor;
-
--- crear admin con todos los permisos
-CREATE ROLE admin WITH PASSWORD = 'admin123' AND SUPERUSER = true AND LOGIN = true;
-
--- Crear lector con permisos de lectura
-CREATE ROLE lector WITH PASSWORD = 'lector123' AND LOGIN = true;
-GRANT SELECT ON KEYSPACE practicas_ks TO lector;
-
--- Crear rol escritor con permisos de modificación
-CREATE ROLE escritor WITH PASSWORD = 'escritor123' AND LOGIN = true;
-GRANT MODIFY ON KEYSPACE practicas_ks TO escritor;
-\end{minted}
-\end{scriptbox}
-Si listamos ahora los roles existentes desde la interfaz de Cassandra:
-\begin{tcolorbox}[colback=black, coltext=white, fontupper=\ttfamily, title=Terminal]
-\begin{minted}[fontsize=\small]{text}
-admin@cqlsh>  LIST ROLES ;
-
- role      | super | login | options | datacenters
------------+-------+-------+---------+-------------
-     admin |  True |  True |        {} |         ALL
- cassandra |  True |  True |        {} |         ALL
-  escritor | False |  True |        {} |         ALL
-    lector | False |  True |        {} |         ALL
-
-(4 rows)
-admin@cqlsh> LIST ALL PERMISSIONS OF escritor
-   ... ;
-
- role     | username | resource                | permission
-----------+----------+-------------------------+------------
- escritor | escritor | <keyspace practicas_ks> |     MODIFY
-
-(1 rows)
-\end{minted}
-\end{tcolorbox}
-Obsérvese que sigue presente el rol cassandra, el cual es además superusuario. Lo que se ha decidido en este caso es mantenerlo pero modificar su contraseña, para cubrirse ante la inoportuna eliminación involuntaria del rol \textit{admin}. Además, otro detalle importante es que el rol escritor se ha definido con el rol escritor cuenta con el permiso \textit{MODIFY}. En Cassandra, los permisos de \textit{INSERT},\textit{UPDATE} y \textit{DELETE} se engloban en un solo permiso, por lo que para impedir que el escritor pueda eliminar datos de tablas se tendría que añadir código a nivel de aplicación.
-\\
-Al igual que con el resto de gestores, se probó a conectarse con los distintos gestores y a realizar operaciones para las que cuentan y no cuentan con permisos:
-
-\begin{tcolorbox}[colback=black, coltext=white, fontupper=\ttfamily, title=Terminal]
-\begin{minted}[fontsize=\small]{text}
-azzale@vbox:~/Desktop/cassandra$ docker exec -i cassandra-db cqlsh -u lector -p lector123 -f /insertarTablas.cql
-
-Warning: Using a password on the command line interface can be insecure.
-Recommendation: use the credentials file to securely provide the password.
-
-/insertarTablas.cql:3:Unauthorized: Error from server: code=2100 [Unauthorized] message="User lector has no MODIFY permission on <table practicas_ks.pruebas> or any of its parents"
-/insertarTablas.cql:4:Unauthorized: Error from server: code=2100 [Unauthorized] message="User lector has no MODIFY permission on <table practicas_ks.medicos> or any of its parents"
-/insertarTablas.cql:5:Unauthorized: Error from server: code=2100 [Unauthorized] message="User lector has no MODIFY permission on <table practicas_ks.pacientes> or any of its parents"
-/insertarTablas.cql:9:Unauthorized: Error from server: code=2100 [Unauthorized] message="User lector has no MODIFY permission on <table practicas_ks.medicos> or any of its parents"
-/insertarTablas.cql:12:Unauthorized: Error from server: code=2100 [Unauthorized] message="User lector has no MODIFY permission on <table practicas_ks.medicos> or any of its parents"
-/insertarTablas.cql:16:Unauthorized: Error from server: code=2100 [Unauthorized] message="User lector has no MODIFY permission on <table practicas_ks.pacientes> or any of its parents"
-/insertarTablas.cql:19:Unauthorized: Error from server: code=2100 [Unauthorized] message="User lector has no MODIFY permission on <table practicas_ks.pacientes> or any of its parents"
-/insertarTablas.cql:29:Unauthorized: Error from server: code=2100 [Unauthorized] message="User lector has no MODIFY permission on <table practicas_ks.pruebas> or any of its parents"
-
-\end{minted}
-\end{tcolorbox}
-
-\subsubsection{Conectividad remota}
-
-El docker-compose configuraba el puerto 9042 para exponer Cassandra al exterior.  Antes que nada, hay que redirigir el correspondiente puerto en Virtual Box, tal como se establece en el guión de prácticas. Con solo esto, cualquier conexión será redirigida correctamente al puerto de Cassandra.
-
-La conexión con el mismo se probará con la herramienta \textit{\textcolor{blue}{\href{https://dbeaver.com/download/enterprise/}{Dbeaver}}}.Para ello, se escogerá la opción "\textit{Nueva conexión}", y dentro de ella "\textit{Cassandra}". En cuanto a la configuración, se dejará como Host la red local, se inserta en puerto \textit{9042}, como base de datos \textit{practicas\_ks}; y en usuario y contraseña las credenciales del usuario con el que se quiera establecer la conexión. 
-
-\begin{figure}[H]
-    \centering
-    \begin{tabular}{c}  % Una columna centrada
-        \includegraphics[width=1\textwidth]{cassandra1.png}\\[10pt]
-        \includegraphics[width=1\textwidth]{cassandra2.png} 
-    \end{tabular}
-    \caption{Conexión a Cassandra con DBeaver}
-    \label{fig:Configuracion_DBeaver_Cassandra}
-\end{figure}
-
-
-
-\newpage
 \subsection{HBase}
-\subsubsection{Introducción}
-HBase es un sistema de bases de datos NoSQL escalable basado en HDFS, diseñado para almacenar grandes volúmenes de datos distribuidos. En esta documentación, se describirá el proceso de instalación y configuración de HBase, incluyendo los intentos de integración con Kerberos y la posterior decisión de prescindir de esta tecnología debido a dificultades técnicas.
-
-\subsubsection{Intento de Integración con Kerberos}
-Para garantizar una autenticación segura en HBase, se intentó la integración de Kerberos como sistema de gestión de identidades. El objetivo era proporcionar una autenticación basada en tickets para controlar el acceso a los datos. Sin embargo, debido a múltiples problemas técnicos, se decidió desestimar Kerberos y proceder con una configuración sin autenticación centralizada.
-
-
-\subsubsection{Configuración Inicial de Kerberos}
-
-La instalación de Kerberos en el host se realizó con los siguientes comandos:
-
-\begin{lstlisting}[style=bashStyle]
-sudo apt update
-sudo apt install -y krb5-kdc krb5-admin-server krb5-user
-\end{lstlisting}
-
-A continuación, se configuró el archivo \texttt{/etc/krb5.conf}:
-
-\begin{minted}{text}
-[libdefaults]
-default_realm = HBASE.LOCAL
-dns_lookup_realm = false
-dns_lookup_kdc = false
-ticket_lifetime = 24h
-renew_lifetime = 7d
-forwardable = true
-
-[realms]
-HBASE.LOCAL = {
-    kdc = localhost
-    admin_server = localhost
-}
-
-[domain_realm]
-.hbase.local = HBASE.LOCAL
-hbase.local = HBASE.LOCAL
-\end{minted}
-
-Se procedió a inicializar la base de datos de Kerberos:
-
-\begin{lstlisting}[style=bashStyle]
-sudo krb5_newrealm
-\end{lstlisting}
-
-\newpage
-Se crearon los principales para HBase Master y RegionServer:
-
-\begin{lstlisting}[style=bashStyle]
-sudo kadmin.local -q "addprinc -randkey hbase-master@HBASE.LOCAL"
-sudo kadmin.local -q "addprinc -randkey hbase-regionserver@HBASE.LOCAL"
-\end{lstlisting}
-
-
-Y se generaron los keytabs:
-
-\begin{lstlisting}[style=bashStyle]
-sudo kadmin.local -q "ktadd -k /etc/hbase/keytabs/hbase-master.keytab hbase-master@HBASE.LOCAL"
-sudo kadmin.local -q "ktadd -k /etc/hbase/keytabs/hbase-regionserver.keytab hbase-regionserver@HBASE.LOCAL"
-\end{lstlisting}
-
-Estos archivos fueron copiados a los contenedores de HBase:
-
-\begin{lstlisting}[style=bashStyle]
-docker cp /etc/hbase/keytabs/hbase-master.keytab hbase-db:/etc/hbase/keytabs/hbase-master.keytab
-docker cp /etc/hbase/keytabs/hbase-regionserver.keytab hbase-db:/etc/hbase/keytabs/hbase-regionserver.keytab
-\end{lstlisting}
-
-\subsubsection{}
-A pesar de la configuración, surgieron diversos problemas que impidieron la correcta autenticación en HBase:
-
-\vspace{5mm}
-
-\subsubsection{Problema con los Keytabs}
-
-Al ejecutar \texttt{klist -kt} dentro del contenedor de HBase, se obtuvo el error:
-
-\begin{lstlisting}[style=bashStyle]
-klist: Unsupported key table format version number while starting keytab scan
-\end{lstlisting}
-
-
-Se intentó regenerar los keytabs y copiarlos nuevamente al contenedor sin éxito.
-
-\vspace{5mm}
-
-
-\subsubsection{Errores en la Autenticación de HBase}
-
-Al ejecutar \texttt{kinit} y listar las regiones en HBase, se obtuvo el error:
-
-\begin{minted}[breaklines=true]{text}
-ERROR: No valid credentials provided (Mechanism level: Failed to find any Kerberos tgt)
-\end{minted}
-
-Tras varios intentos, se decidió desestimar la configuración de Kerberos.
-
-\subsubsection{Desestimación de Kerberos}
-Dado que los problemas con Kerberos dificultaban el desarrollo y consumían demasiado tiempo, se optó por eliminar la configuración de seguridad y proceder sin autenticación:
-
-\vspace{5mm}
-
-\subsubsection{1. Eliminación de Kerberos}
-
-\begin{lstlisting}[style=bashStyle]
-docker-compose down
-sudo rm -rf /etc/hbase/keytabs
-sudo rm -rf /var/lib/krb5kdc
-sudo apt-get remove --purge krb5-kdc krb5-admin-server
-sudo apt-get autoremove
-\end{lstlisting}
-
-\newpage
-\subsubsection{2. Modificación de la configuración de HBase}
-
-Se editó el archivo hbase-site.xml para cambiar la autenticación:
-
-
-\begin{minted}[fontsize=\small]{xml}
-hbase.security.authentication
-simple
-
-hbase.security.authorization
-false
-\end{minted}
-
-Luego, se copió el archivo actualizado dentro del contenedor de HBase:
-
-\begin{lstlisting}[style=bashStyle]
-docker cp ~/bd2/hbase-config/hbase-site.xml hbase-db:/opt/hbase/conf/hbase-site.xml
-\end{lstlisting}
-
-
-\subsubsection{3. Reinicio de Servicios}
-
-\begin{lstlisting}[style=bashStyle]
-docker restart hbase-db
-\end{lstlisting}
-
-
-\subsubsection{4. Verificación de la Configuración}
-
-Para verificar que HBase funcionaba sin Kerberos, se ejecutaron los siguientes comandos:
-
-\begin{lstlisting}[style=bashStyle]
-docker exec -it hbase-db hbase shell
-\end{lstlisting}
-
-Se intentó crear la tabla `hbase:acl` para la gestión de permisos, pero se observó que **ya existía**, lo que indicaba que la configuración de permisos estaba activa:
-
-\begin{lstlisting}[style=bashStyle]
-hbase(main):023:0* create 'hbase:acl', {NAME => 'f', VERSIONS => 1}
-ERROR: Table already exists: hbase:acl!
-\end{lstlisting}
-
-Para confirmar su existencia, se escaneó su contenido:
-
-\begin{lstlisting}[style=bashStyle]
-hbase(main):024:0> scan 'hbase:acl'
-ROW                      COLUMN+CELL
-0 row(s)
-Took 0.0219 seconds
-\end{lstlisting}
-
-Finalmente, se verificó el estado del sistema:
-
-\begin{lstlisting}[style=bashStyle]
-hbase(main):025:0> status 'detailed'
-\end{lstlisting}
-
-Lo importante aquí fue notar la presencia de:
-
-\begin{minted}[fontsize=\small]{text}
-master coprocessors: [AccessController]
-\end{minted}
-
-Esto confirmó que **el sistema ya tenía habilitados los permisos sin necesidad de Kerberos**.
-
-\subsubsection{Operaciones Básicas en Oracle}
 
 Tras la desestimación de Kerberos, se procedió a la configuración de HBase sin autenticación centralizada. En esta sección se describen las operaciones realizadas para gestionar el acceso de usuarios, la creación de espacios, tablas y la ejecución de consultas.
 
@@ -1703,6 +1974,59 @@ Took 0.0290 seconds
 \end{lstlisting}
 
 Aquí se pudo confirmar que `admin` tenía todos los permisos (`RWXCA`), `escritor` tenía `RW`, y `lector` tenía únicamente `R`.
+
+La creación de usuarios también se puede realizar mediante este script:
+\begin{minted}[fontsize=\small]{text}
+    #!/bin/bash
+
+    # Función para verificar si un usuario existe
+    check_user_exists() {
+      local user=$1
+      # Escanear la tabla hbase:acl y buscar el usuario en la columna 'l'
+      local result=$(docker exec -i hbase-db hbase shell <<EOF
+    scan 'hbase:acl', {COLUMNS => 'l'}
+    EOF
+      )
+    
+      # Buscar el patrón "l:<usuario>" en la salida
+      if echo "$result" | grep -q "l:$user"; then
+        echo "El usuario '$user' ya existe."
+        return 0  # Usuario encontrado
+      else
+        echo "El usuario '$user' no existe."
+        return 1  # Usuario no encontrado
+      fi
+    }
+    
+    # Función para crear un usuario
+    create_user() {
+      local user=$1
+      local role=$2
+      local namespace=$3
+    
+      # Comprobamos si el usuario ya existe
+      if ! check_user_exists "$user"; then
+        echo "Creando el usuario '$user' con el rol '$role' en el espacio de nombres '$namespace'..."
+    
+        # Crear el usuario
+        docker exec -i hbase-db hbase shell <<EOF
+    grant '$user', '$role', '@$namespace'
+    EOF
+    
+        if [ $? -eq 0 ]; then
+          echo "Usuario '$user' creado con éxito."
+        else
+          echo "Error al crear el usuario '$user'." >&2
+          return 1
+        fi
+      fi
+    }
+    
+    # Crear usuarios
+    create_user 'admin' 'RWXCA' 'espacioHBase'
+    create_user 'escritor' 'RW' 'espacioHBase'
+    create_user 'hiho' 'R' 'espacioHBase'
+\end{minted}
 
 
 \subsubsection{Creación e inserción de tablas}
@@ -1862,205 +2186,7 @@ chmod +x ConsultasHBase.sh
 ./ConsultasHBase.sh
 \end{lstlisting}
 
-\subsubsection{Conclusión}
-La configuración de HBase sin Kerberos permitió evitar problemas de autenticación y facilitar el acceso. La configuración final es sin autenticación, con la gestión de permisos mediante hbase:acl.
 
-\section{Generación de Datos y Pruebas}
-La fase de generación de Datos y pruebas sirvió, además para asegurar una funcionalidad y compatibilidad básica con los gestores de datos instalados, para familiarizarse un poco con la semántica de cada gestor (lenguaje). 
-Así, se opta por un esquema conceptual sencillo, correspondiente al ejemplo más básico de base de datos de pruebas médicas diseñado en clase (existen médicos, pacientes, y pruebas asociadas a ambos). Así, se trabaja con conceptos básicos como claves primarias, claves foráneas, no nulos, etc.
-
-\subsection{PostgreSQL}
-La creación de tablas en PostgreSQL no supuso grnades complicaciones ni suscitó un gran asombro, ya que cumple con estándares SQL con los que el equipo ya se encontraba familiarizado. La posibilidad de incluir funcionalidades más complejas, como el soporte a OO mediante herencia se descartó al considerar que se aleja de los objetivos de esta práctica (ya se trabajará en las posteriores).
-\begin{scriptbox}{creacion\_tablas.sql}
-\begin{minted}[fontsize=\small]{sql}
--- Limpiar claramente objetos anteriores (si existen) para evitar conflictos
-DROP TABLE IF EXISTS pruebas CASCADE;
-DROP TABLE IF EXISTS pacientes CASCADE;
-DROP TABLE IF EXISTS medicos CASCADE;
-
--- Crear tablas para gestión médica claramente desde cero
-
--- Tabla de médicos
-CREATE TABLE medicos (
-    dni VARCHAR(9) PRIMARY KEY,
-    numLicencia INTEGER NOT NULL UNIQUE,
-    nombre VARCHAR(100) NOT NULL,
-    especialidad VARCHAR(100) NOT NULL,
-    telefono VARCHAR(15)
-);
-
--- Tabla de pacientes
-CREATE TABLE pacientes (
-    dni VARCHAR(9) PRIMARY KEY,
-    nss INTEGER NOT NULL UNIQUE,
-    nombre VARCHAR(100),
-    telefono VARCHAR(15)
-);
-
--- Tabla de pruebas médicas
-CREATE TABLE pruebas (
-    id SERIAL PRIMARY KEY,
-    dni_medico VARCHAR(9) NOT NULL REFERENCES medicos(dni),
-    dni_paciente VARCHAR(9) NOT NULL REFERENCES pacientes(dni),
-    tipo_prueba VARCHAR(100),
-    fecha DATE,
-    resultado VARCHAR(200)
-);
-\end{minted}
-\end{scriptbox}
-Se verificó además que las tablas se crearon correctamente:
-\begin{tcolorbox}[colback=black, coltext=white, fontupper=\ttfamily, title=Terminal]
-\begin{minted}[fontsize=\small]{text}
-azzale@vbox:~/Desktop/postgreSQL$ docker exec -it postgres-db psql -U 
-            admin -d practicas_bd -c "\dt"
-         List of relations
- Schema |   Name    | Type  | Owner 
---------+-----------+-------+-------
- public | medicos   | table | admin
- public | pacientes | table | admin
- public | pruebas   | table | admin
-(3 rows)
-
-\end{minted}
-\end{tcolorbox}
-\newline
-\\ \\ 
-Además, se crearon scripts sencillos para la escritura y consulta básica de las tablas, los cuales se probaron con los distintos usuarios existentes.
-\begin{scriptbox}{insertarTablas.sql}
-\begin{minted}[fontsize=\small]{sql}
--- Script para insertar y modificar datos con el usuario escritor
-\connect practicas_bd
-
--- Limpiar tablas antes de insertar datos
-DELETE FROM pruebas;
-DELETE FROM pacientes;
-DELETE FROM medicos;
-
--- Insertar datos en la tabla medicos
-INSERT INTO medicos (dni, numlicencia, nombre, especialidad, telefono)
-VALUES ('12345678A', 12345, 'Dr. Izquierdo', 'M.Familia', '876000111');
-
--- Insertar datos en la tabla pacientes
-INSERT INTO pacientes (dni, nss, nombre, telefono)
-VALUES ('87654321B', 987654321, 'Ada Byron', '699654321');
-
--- Insertar datos en la tabla pacientes
-INSERT INTO pacientes (dni, nss, nombre, telefono)
-VALUES ('87654321X', 987654322, 'Nadie', '699654322');
-
--- Insertar datos en la tabla pruebas
-INSERT INTO pruebas (id_medico, id_paciente, tipo_prueba, fecha, resultado)
-VALUES ('12345678A', '87654321B', 'muestra de orina', '2025-02-17', 'DATO1 : X');
-
--- Modificar datos (cambiar número de teléfono del paciente)
-UPDATE pacientes SET telefono = '655888999' WHERE dni = '87654321B';
-
-\end{minted}
-\end{scriptbox}
-
-\begin{scriptbox}{consultas.sql}
-\begin{minted}[fontsize=\small]{sql}
--- Script para consultar datos con el usuario lector
-\connect practicas_bd
--- Consultar todos los médicos
-SELECT * FROM medicos;
-
--- Consultar todos los pacientes
-SELECT * FROM pacientes where nombre 'Ada Byron';
-\end{minted}
-\end{scriptbox}
-
-
-\subsection{Apache Cassandra}\label{subsec: Apache Cassandra}
-La manipulación de tablas con Cassandra suponen (o supondrán) un cambio de paradigma con respecto al anterior trabajo con SQL. En sentido, las tablas no están pensadas para hacer JOINS, por lo que no hay relaciones (claves foráneas) entre tablas. Cassandra realmente está orientada a consultas específicas, por lo que las relaciones en el modelo conceptual se transformarán en desnormalizaciones en la medida en la que se necesite. A continuación se muestra la prueba de creación de tablas:
-\begin{scriptbox}{creacionTablas.cql}
-\begin{minted}[fontsize=\small]{sql}
--- Limpiar tablas previamente si ya existen 
-DROP TABLE IF EXISTS practicas_ks.pruebas;
-DROP TABLE IF EXISTS practicas_ks.medicos;
-DROP TABLE IF EXISTS practicas_ks.pacientes;
-USE practicas_ks;
-
--- Crear tabla 'medicos' 
-CREATE TABLE medicos (
-    dni TEXT PRIMARY KEY,
-    numLicencia TEXT,
-    nombre TEXT,
-    especialidad TEXT,
-    telefono TEXT
-);
-
--- Crear tabla 'pacientes' 
-CREATE TABLE pacientes (
-    dni TEXT PRIMARY KEY,
-    nss TEXT,
-    nombre TEXT,
-    telefono TEXT
-);
-
--- Crear tabla 'pruebas' 
-CREATE TABLE pruebas (
-    id UUID PRIMARY KEY,
-    dni_medico TEXT,
-    nombre_medico TEXT,    -- Nombre médico desnormalizado
-    dni_paciente TEXT,
-    nombre_paciente TEXT,  -- Nombre paciente desnormalizado
-    tipo_prueba TEXT,
-    fecha TIMESTAMP,
-    resultado TEXT
-);
-
--- Verificar creación
-DESCRIBE TABLES;
-
-\end{minted}
-\end{scriptbox}
-
-Obsérvese como en este caso se ha producido una desnormalización en la tabla de pruebas para incluir los nombres del médico y paciente. Esto puede ser así porque se considerará habitual consultar el nombre de los pacientes y médicos, por poner un ejemplo.
-
-Además, se realizarón pruebas para la inserción y consulta de las mismas.
-\begin{scriptbox}{insertarTablas.cql}
-\begin{minted}[fontsize=\small]{sql}
--- Limpiar  datos de tablas
-TRUNCATE TABLE practicas_ks.pruebas;
-TRUNCATE TABLE practicas_ks.medicos;
-TRUNCATE TABLE practicas_ks.pacientes;
-
--- Insertar datos en tabla 'medicos'
-INSERT INTO practicas_ks.medicos (dni, numLicencia, nombre, especialidad, telefono) 
-VALUES ('12345678A', 'MED123', 'Dr. López', 'Cardiología', '600123456');
-
-INSERT INTO practicas_ks.medicos (dni, numLicencia, nombre, especialidad, telefono) 
-VALUES ('87654321B', 'MED456', 'Dra. Martínez', 'Neurología', '699654321');
-
--- Insertar datos en tabla 'pacientes'
-INSERT INTO practicas_ks.pacientes (dni, nss, nombre, telefono) 
-VALUES ('11111111C', 'NSS001', 'Ana Gómez', '655555555');
-
-INSERT INTO practicas_ks.pacientes (dni, nss, nombre, telefono) 
-VALUES ('22222222D', 'NSS002', 'Carlos Pérez', '644444444');
-
--- Insertar datos en tabla 'pruebas'
-INSERT INTO practicas_ks.pruebas (
-    id, dni_medico, nombre_medico, dni_paciente, nombre_paciente, tipo_prueba, fecha, resultado
-) VALUES (
-    uuid(),
-    '12345678A', 'Dr. López',
-    '11111111C', 'Ana Gómez',
-    'Electrocardiograma', toTimestamp(now()), 'Normal'
-);
-
-\end{minted}
-\end{scriptbox}
-
-\begin{scriptbox}{consultas.cql}
-\begin{minted}[fontsize=\small]csql}
-USE practicas_ks;
-SELECT * FROM pruebas;
-SELECT * FROM pruebas WHERE dni_medico = '12345678A' SELECT * FROM practicas_ks.pruebas WHERE dni_medico = '12345678A' ALLOW FILTERING;
-\end{minted}
-\end{scriptbox}
-Nótese que en la segunda consulta se ha especificado la cláusula ALLOW FILTERING. Esto se debe a que \textit{dni_medico} no forma parte primaria de la tabla, y por lo tanto la consulta debe "forzarse" ya que su rendimiento no es idóneo. Realmente la mejor solución no es la cláusula, sino añadir como clave primaria de la tabla pruebas también el dni.
 
 \newpage
 \section{Comentarios Acerca de las Licencias}
@@ -2174,9 +2300,6 @@ A continuación se detallan los aspectos más relevantes de las licencias de l
     \end{itemize}
 \end{itemize}
 
-\section{Poblado de memoria}\label{sec:Poblado de memoria}
-
-
 
 \section{Esfuerzos invertidos}\label{sec:Esfuerzos invertidos}
 
@@ -2188,19 +2311,19 @@ El proceso de decisión del entorno y plataforma de despliegue se realizó conju
     \label{tab:esfuerzos}
     \begin{tabular}{|l|c|c|c|}
     \hline
-    \textbf{Tarea} & \textbf{Sergio Isla (873983)} & \textbf{Irene Pascual (871627)} & \textbf{Athanasios Usero (839543)} \\ \hline
-    Instalación SGBD & X horas & 3 horas & 3 horas \\ \hline
-    Configuración de Docker & X horas & 0.25 horas & 2 horas \\ \hline
-    Configurar archivos de configuración & X horas & 2 horas & 1 horas \\ \hline
-    Desarrollo de scripts & X horas & 7 horas & 6.5 horas \\ \hline
-    Configuración acceso remoto & X horas & 0.5 horas & 1 horas \\ \hline
-    Creación de tablas/espacios & X horas & 0.5 horas & 1 horas \\ \hline
-    Gestión de usuarios & X horas & 2 horas & 3 horas \\ \hline
-    Inserciones de datos & X horas & 1 horas & 1 horas \\ \hline
-    Consultas & X horas & 0.5 horas & 0.5 horas \\ \hline
-    Documentación y memoria & X horas & 3 horas & 5.5 horas \\ \hline
-    Resolución de problemas & X horas & 8 horas & 5 horas \\ \hline \hline
-    \textbf{Total por integrante} & X horas & 27.75 horas & 29.5 horas \\ \hline
+    \textbf{Tarea} & \textbf{Sergio Isla} & \textbf{Irene Pascual} & \textbf{Athanasios Usero} \\ \hline
+    Instalación SGBD & 3 horas & 3 horas & 3 horas \\ \hline
+    Configuración de Docker & 0.5 horas & 0.25 horas & 2 horas \\ \hline
+    Configurar archivos de configuración & 0.5 horas & 2 horas & 1 horas \\ \hline
+    Desarrollo de scripts & 6 horas & 7 horas & 6.5 horas \\ \hline
+    Configuración acceso remoto & 1 horas & 0.5 horas & 1 horas \\ \hline
+    Creación de tablas/espacios & 1 horas & 0.5 horas & 1 horas \\ \hline
+    Gestión de usuarios & 6 horas & 2 horas & 3 horas \\ \hline
+    Inserciones de datos & 2 horas & 1 horas & 1 horas \\ \hline
+    Consultas & 1 horas & 0.5 horas & 0.5 horas \\ \hline
+    Documentación y memoria & 3 horas & 3 horas & 5.25 horas \\ \hline
+    Resolución de problemas & 4 horas & 8 horas & 5 horas \\ \hline \hline
+    \textbf{Total por integrante} & 27.5 horas & 27.5 horas & 29.5 horas \\ \hline
     \end{tabular}
     \end{table}
     

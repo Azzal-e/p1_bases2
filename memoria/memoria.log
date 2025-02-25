@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2025.2.17)  25 FEB 2025 20:29
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2025.2.17)  26 FEB 2025 00:23
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -23,17 +23,32 @@ File: size10.clo 2021/10/04 v1.4n Standard LaTeX file (size option)
 \belowcaptionskip=\skip48
 \bibindent=\dimen138
 )
-(/usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty
-Package: inputenc 2021/02/14 v1.3d Input encoding file
-\inpenc@prehook=\toks16
-\inpenc@posthook=\toks17
-)
+(/usr/share/texlive/texmf-dist/tex/latex/tcolorbox/tcolorbox.sty
+Package: tcolorbox 2022/01/07 version 5.0.2 text color boxes
+
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/basiclayer/pgf.sty
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/utilities/pgfrcs.sty
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfutil-common.tex
+\pgfutil@everybye=\toks16
+\pgfutil@tempdima=\dimen139
+\pgfutil@tempdimb=\dimen140
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfutil-common-lists.t
+ex)) (/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfutil-latex.def
+\pgfutil@abb=\box50
+) (/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfrcs.code.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/pgf.revision.tex)
+Package: pgfrcs 2021/05/15 v3.1.9a (3.1.9a)
+))
+Package: pgf 2021/05/15 v3.1.9a (3.1.9a)
+
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/basiclayer/pgfcore.sty
 (/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
 Package: graphicx 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
 
 (/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
 Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
-\KV@toks@=\toks18
+\KV@toks@=\toks17
 )
 (/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
 Package: graphics 2021/03/04 v1.4d Standard LaTeX Graphics (DPC,SPQR)
@@ -49,41 +64,63 @@ Package graphics Info: Driver file: pdftex.def on input line 107.
 (/usr/share/texlive/texmf-dist/tex/latex/graphics-def/pdftex.def
 File: pdftex.def 2020/10/05 v1.2a Graphics/color driver for pdftex
 ))
-\Gin@req@height=\dimen139
-\Gin@req@width=\dimen140
+\Gin@req@height=\dimen141
+\Gin@req@width=\dimen142
 )
-(/usr/share/texlive/texmf-dist/tex/latex/float/float.sty
-Package: float 2001/11/08 v1.3d Float enhancements (AL)
-\c@float@type=\count193
-\float@exts=\toks19
-\float@box=\box50
-\@float@everytoks=\toks20
-\@floatcapt=\box51
-)
-(/usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
-Package: caption 2020/10/26 v3.5g Customizing captions (AR)
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/systemlayer/pgfsys.sty
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsys.code.tex
+Package: pgfsys 2021/05/15 v3.1.9a (3.1.9a)
 
-(/usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
-Package: caption3 2020/10/21 v2.2e caption3 kernel (AR)
-\captionmargin=\dimen141
-\captionmargin@=\dimen142
-\captionwidth=\dimen143
-\caption@tempdima=\dimen144
-\caption@indent=\dimen145
-\caption@parindent=\dimen146
-\caption@hangindent=\dimen147
-Package caption Info: Standard document class detected.
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex
+\pgfkeys@pathtoks=\toks18
+\pgfkeys@temptoks=\toks19
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfkeysfiltered.code.t
+ex
+\pgfkeys@tmptoks=\toks20
+))
+\pgf@x=\dimen143
+\pgf@y=\dimen144
+\pgf@xa=\dimen145
+\pgf@ya=\dimen146
+\pgf@xb=\dimen147
+\pgf@yb=\dimen148
+\pgf@xc=\dimen149
+\pgf@yc=\dimen150
+\pgf@xd=\dimen151
+\pgf@yd=\dimen152
+\w@pgf@writea=\write3
+\r@pgf@reada=\read2
+\c@pgf@counta=\count193
+\c@pgf@countb=\count194
+\c@pgf@countc=\count195
+\c@pgf@countd=\count196
+\t@pgf@toka=\toks21
+\t@pgf@tokb=\toks22
+\t@pgf@tokc=\toks23
+\pgf@sys@id@count=\count197
+ (/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgf.cfg
+File: pgf.cfg 2021/05/15 v3.1.9a (3.1.9a)
 )
-\c@caption@flags=\count194
-\c@continuedfloat=\count195
-Package caption Info: float package is loaded.
+Driver file for pgf: pgfsys-pdftex.def
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-pdftex.def
+File: pgfsys-pdftex.def 2021/05/15 v3.1.9a (3.1.9a)
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-common-pdf.de
+f
+File: pgfsys-common-pdf.def 2021/05/15 v3.1.9a (3.1.9a)
+)))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsyssoftpath.code.
+tex
+File: pgfsyssoftpath.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgfsyssoftpath@smallbuffer@items=\count198
+\pgfsyssoftpath@bigbuffer@items=\count199
 )
-(/usr/share/texlive/texmf-dist/tex/latex/caption/subcaption.sty
-Package: subcaption 2020/10/07 v1.3j Sub-captions (AR)
-\c@subfigure=\count196
-\c@subtable=\count197
-)
-(/usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsysprotocol.code.
+tex
+File: pgfsysprotocol.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+)) (/usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty
 Package: xcolor 2021/10/31 v2.13 LaTeX color extensions (UK)
 
 (/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/color.cfg
@@ -100,25 +137,588 @@ Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1373.
 Package xcolor Info: Model `Gray' substituted by `gray' on input line 1374.
 Package xcolor Info: Model `wave' substituted by `hsb' on input line 1375.
 )
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcore.code.tex
+Package: pgfcore 2021/05/15 v3.1.9a (3.1.9a)
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathcalc.code.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathutil.code.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathparser.code.tex
+\pgfmath@dimen=\dimen153
+\pgfmath@count=\count266
+\pgfmath@box=\box51
+\pgfmath@toks=\toks24
+\pgfmath@stack@operand=\toks25
+\pgfmath@stack@operation=\toks26
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.code.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.basic.code
+.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.trigonomet
+ric.code.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.random.cod
+e.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.comparison
+.code.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.base.code.
+tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.round.code
+.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.misc.code.
+tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.integerari
+thmetics.code.tex)))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfloat.code.tex
+\c@pgfmathroundto@lastzeros=\count267
+))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfint.code.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepoints.code.te
+x
+File: pgfcorepoints.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgf@picminx=\dimen154
+\pgf@picmaxx=\dimen155
+\pgf@picminy=\dimen156
+\pgf@picmaxy=\dimen157
+\pgf@pathminx=\dimen158
+\pgf@pathmaxx=\dimen159
+\pgf@pathminy=\dimen160
+\pgf@pathmaxy=\dimen161
+\pgf@xx=\dimen162
+\pgf@xy=\dimen163
+\pgf@yx=\dimen164
+\pgf@yy=\dimen165
+\pgf@zx=\dimen166
+\pgf@zy=\dimen167
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathconstruct.
+code.tex
+File: pgfcorepathconstruct.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgf@path@lastx=\dimen168
+\pgf@path@lasty=\dimen169
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathusage.code
+.tex
+File: pgfcorepathusage.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgf@shorten@end@additional=\dimen170
+\pgf@shorten@start@additional=\dimen171
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorescopes.code.te
+x
+File: pgfcorescopes.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgfpic=\box52
+\pgf@hbox=\box53
+\pgf@layerbox@main=\box54
+\pgf@picture@serial@count=\count268
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoregraphicstate.c
+ode.tex
+File: pgfcoregraphicstate.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgflinewidth=\dimen172
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretransformation
+s.code.tex
+File: pgfcoretransformations.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgf@pt@x=\dimen173
+\pgf@pt@y=\dimen174
+\pgf@pt@temp=\dimen175
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorequick.code.tex
+File: pgfcorequick.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreobjects.code.t
+ex
+File: pgfcoreobjects.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathprocessing
+.code.tex
+File: pgfcorepathprocessing.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorearrows.code.te
+x
+File: pgfcorearrows.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgfarrowsep=\dimen176
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreshade.code.tex
+File: pgfcoreshade.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgf@max=\dimen177
+\pgf@sys@shading@range@num=\count269
+\pgf@shadingcount=\count270
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreimage.code.tex
+File: pgfcoreimage.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreexternal.code.
+tex
+File: pgfcoreexternal.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgfexternal@startupbox=\box55
+))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorelayers.code.te
+x
+File: pgfcorelayers.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretransparency.c
+ode.tex
+File: pgfcoretransparency.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepatterns.code.
+tex
+File: pgfcorepatterns.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorerdf.code.tex
+File: pgfcorerdf.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+)))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/modules/pgfmoduleshapes.code.tex
+File: pgfmoduleshapes.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgfnodeparttextbox=\box56
+) (/usr/share/texlive/texmf-dist/tex/generic/pgf/modules/pgfmoduleplot.code.tex
+File: pgfmoduleplot.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-0-65
+.sty
+Package: pgfcomp-version-0-65 2021/05/15 v3.1.9a (3.1.9a)
+\pgf@nodesepstart=\dimen178
+\pgf@nodesepend=\dimen179
+)
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-1-18
+.sty
+Package: pgfcomp-version-1-18 2021/05/15 v3.1.9a (3.1.9a)
+)) (/usr/share/texlive/texmf-dist/tex/latex/tools/verbatim.sty
+Package: verbatim 2020-07-07 v1.5u LaTeX2e package for verbatim enhancements
+\every@verbatim=\toks27
+\verbatim@line=\toks28
+\verbatim@in@stream=\read3
+)
+(/usr/share/texlive/texmf-dist/tex/latex/environ/environ.sty
+Package: environ 2014/05/04 v0.3 A new way to define environments
+
+(/usr/share/texlive/texmf-dist/tex/latex/trimspaces/trimspaces.sty
+Package: trimspaces 2009/09/17 v1.1 Trim spaces around a token list
+)
+\@envbody=\toks29
+)
+(/usr/share/texlive/texmf-dist/tex/latex/etoolbox/etoolbox.sty
+Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count271
+)
+\tcb@titlebox=\box57
+\tcb@upperbox=\box58
+\tcb@lowerbox=\box59
+\tcb@phantombox=\box60
+\c@tcbbreakpart=\count272
+\c@tcblayer=\count273
+\c@tcolorbox@number=\count274
+\tcb@temp=\box61
+\tcb@temp=\box62
+\tcb@temp=\box63
+\tcb@temp=\box64
+)
+(/usr/share/texlive/texmf-dist/tex/latex/tcolorbox/tcbminted.code.tex
+Library (tcolorbox): 'tcbminted.code.tex' version '5.0.2'
+(/usr/share/texlive/texmf-dist/tex/latex/minted/minted.sty
+Package: minted 2021/12/24 v2.6 Yet another Pygments shim for LaTeX
+
+(/usr/share/texlive/texmf-dist/tex/latex/kvoptions/kvoptions.sty
+Package: kvoptions 2020-10-07 v3.14 Key value format for package options (HO)
+
+(/usr/share/texlive/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
+Package: ltxcmds 2020-05-10 v1.25 LaTeX kernel commands for general use (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/kvsetkeys/kvsetkeys.sty
+Package: kvsetkeys 2019/12/15 v1.18 Key value parser (HO)
+))
+(/usr/share/texlive/texmf-dist/tex/latex/fvextra/fvextra.sty
+Package: fvextra 2019/02/04 v1.4 fvextra - extensions and patches for fancyvrb
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
+Package: ifthen 2020/11/24 v1.1c Standard LaTeX ifthen package (DPC)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/fancyvrb/fancyvrb.sty
+Package: fancyvrb 2021/12/21 4.1b verbatim text (tvz,hv)
+\FV@CodeLineNo=\count275
+\FV@InFile=\read4
+\FV@TabBox=\box65
+\c@FancyVerbLine=\count276
+\FV@StepNumber=\count277
+\FV@OutFile=\write4
+)
+(/usr/share/texlive/texmf-dist/tex/latex/upquote/upquote.sty
+Package: upquote 2012/04/19 v1.3 upright-quote and grave-accent glyphs in verba
+tim
+)
+(/usr/share/texlive/texmf-dist/tex/latex/lineno/lineno.sty
+Package: lineno 2005/11/02 line numbers on paragraphs v4.41
+\linenopenalty=\count278
+\output=\toks30
+\linenoprevgraf=\count279
+\linenumbersep=\dimen180
+\linenumberwidth=\dimen181
+\c@linenumber=\count280
+\c@pagewiselinenumber=\count281
+\c@LN@truepage=\count282
+\c@internallinenumber=\count283
+\c@internallinenumbers=\count284
+\quotelinenumbersep=\dimen182
+\bframerule=\dimen183
+\bframesep=\dimen184
+\bframebox=\box66
+LaTeX Info: Redefining \\ on input line 3056.
+)
+\c@FV@TrueTabGroupLevel=\count285
+\c@FV@TrueTabCounter=\count286
+\FV@TabBox@Group=\box67
+\FV@TmpLength=\skip49
+\c@FV@HighlightLinesStart=\count287
+\c@FV@HighlightLinesStop=\count288
+\FV@LoopCount=\count289
+\FV@NCharsBox=\box68
+\FV@BreakIndent=\dimen185
+\FV@BreakIndentNChars=\count290
+\FV@BreakSymbolSepLeft=\dimen186
+\FV@BreakSymbolSepLeftNChars=\count291
+\FV@BreakSymbolSepRight=\dimen187
+\FV@BreakSymbolSepRightNChars=\count292
+\FV@BreakSymbolIndentLeft=\dimen188
+\FV@BreakSymbolIndentLeftNChars=\count293
+\FV@BreakSymbolIndentRight=\dimen189
+\FV@BreakSymbolIndentRightNChars=\count294
+\c@FancyVerbLineBreakLast=\count295
+\FV@LineBox=\box69
+\FV@LineIndentBox=\box70
+\FV@LineWidth=\dimen190
+)
+(/usr/share/texlive/texmf-dist/tex/latex/tools/calc.sty
+Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
+\calc@Acount=\count296
+\calc@Bcount=\count297
+\calc@Adimen=\dimen191
+\calc@Bdimen=\dimen192
+\calc@Askip=\skip50
+\calc@Bskip=\skip51
+LaTeX Info: Redefining \setlength on input line 80.
+LaTeX Info: Redefining \addtolength on input line 81.
+\calc@Ccount=\count298
+\calc@Cskip=\skip52
+)
+(/usr/share/texlive/texmf-dist/tex/latex/tools/shellesc.sty
+Package: shellesc 2019/11/08 v1.0c unified shell escape interface for LaTeX
+Package shellesc Info: Unrestricted shell escape enabled on input line 75.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/ifplatform/ifplatform.sty
+Package: ifplatform 2017/10/13 v0.4a Testing for the operating system
+
+(/usr/share/texlive/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty
+Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO
+)
+
+(/usr/share/texlive/texmf-dist/tex/generic/infwarerr/infwarerr.sty
+Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/iftex/iftex.sty
+Package: iftex 2020/03/06 v1.0d TeX engine tests
+)
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+)
+(/usr/share/texlive/texmf-dist/tex/generic/catchfile/catchfile.sty
+Package: catchfile 2019/12/09 v1.8 Catch the contents of a file (HO)
+
+(/usr/share/texlive/texmf-dist/tex/generic/etexcmds/etexcmds.sty
+Package: etexcmds 2019/12/15 v1.7 Avoid name clashes with e-TeX commands (HO)
+))
+(/usr/share/texlive/texmf-dist/tex/generic/iftex/ifluatex.sty
+Package: ifluatex 2019/10/25 v1.5 ifluatex legacy package. Use iftex instead.
+)
+runsystem(uname -s > "memoria.w18")...executed.
+
+ (./memoria.w18)
+runsystem(rm -- "memoria.w18")...executed.
+
+) (/usr/share/texlive/texmf-dist/tex/generic/xstring/xstring.sty
+(/usr/share/texlive/texmf-dist/tex/generic/xstring/xstring.tex
+\integerpart=\count299
+\decimalpart=\count300
+)
+Package: xstring 2021/07/21 v1.84 String manipulations (CT)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/framed/framed.sty
+Package: framed 2011/10/22 v 0.96: framed or shaded text with page breaks
+\OuterFrameSep=\skip53
+\fb@frw=\dimen193
+\fb@frh=\dimen194
+\FrameRule=\dimen195
+\FrameSep=\dimen196
+)
+(/usr/share/texlive/texmf-dist/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count301
+\float@exts=\toks31
+\float@box=\box71
+\@float@everytoks=\toks32
+\@floatcapt=\box72
+)
+\minted@appexistsfile=\read5
+\minted@bgbox=\box73
+\minted@code=\write5
+\c@minted@FancyVerbLineTemp=\count302
+\c@minted@pygmentizecounter=\count303
+\@float@every@listing=\toks33
+\c@listing=\count304
+)
+runsystem(mkdir -p _minted-memoria)...executed.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/tcolorbox/tcblistingscore.code.tex
+Library (tcolorbox): 'tcblistingscore.code.tex' version '5.0.2'
+(/usr/share/texlive/texmf-dist/tex/latex/tcolorbox/tcbprocessing.code.tex
+Library (tcolorbox): 'tcbprocessing.code.tex' version '5.0.2'
+)
+\c@tcblisting=\count305
+)) (/usr/share/texlive/texmf-dist/tex/latex/tcolorbox/tcbskins.code.tex
+Library (tcolorbox): 'tcbskins.code.tex' version '5.0.2'
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/frontendlayer/tikz.sty
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/utilities/pgffor.sty
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/utilities/pgfkeys.sty
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex))
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/math/pgfmath.sty
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgffor.code.tex
+Package: pgffor 2021/05/15 v3.1.9a (3.1.9a)
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex)
+\pgffor@iter=\dimen197
+\pgffor@skip=\dimen198
+\pgffor@stack=\toks34
+\pgffor@toks=\toks35
+))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/tikz.code.tex
+Package: tikz 2021/05/15 v3.1.9a (3.1.9a)
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/pgflibraryplothandlers
+.code.tex
+File: pgflibraryplothandlers.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgf@plot@mark@count=\count306
+\pgfplotmarksize=\dimen199
+)
+\tikz@lastx=\dimen256
+\tikz@lasty=\dimen257
+\tikz@lastxsaved=\dimen258
+\tikz@lastysaved=\dimen259
+\tikz@lastmovetox=\dimen260
+\tikz@lastmovetoy=\dimen261
+\tikzleveldistance=\dimen262
+\tikzsiblingdistance=\dimen263
+\tikz@figbox=\box74
+\tikz@figbox@bg=\box75
+\tikz@tempbox=\box76
+\tikz@tempbox@bg=\box77
+\tikztreelevel=\count307
+\tikznumberofchildren=\count308
+\tikznumberofcurrentchild=\count309
+\tikz@fig@count=\count310
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/modules/pgfmodulematrix.code.tex
+File: pgfmodulematrix.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgfmatrixcurrentrow=\count311
+\pgfmatrixcurrentcolumn=\count312
+\pgf@matrix@numberofcolumns=\count313
+)
+\tikz@expandcount=\count314
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tik
+zlibrarytopaths.code.tex
+File: tikzlibrarytopaths.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+)))
+\tcb@waterbox=\box78
+
+(/usr/share/texlive/texmf-dist/tex/latex/tcolorbox/tcbskinsjigsaw.code.tex
+Library (tcolorbox): 'tcbskinsjigsaw.code.tex' version '5.0.2'
+)) (/usr/share/texlive/texmf-dist/tex/latex/tcolorbox/tcbbreakable.code.tex
+Library (tcolorbox): 'tcbbreakable.code.tex' version '5.0.2'
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/pdfcol.sty
+Package: pdfcol 2019/12/29 v1.6 Handle new color stacks for pdfTeX (HO)
+)
+Package pdfcol Info: New color stack `tcb@breakable' = 1 on input line 23.
+\tcb@testbox=\box79
+\tcb@totalupperbox=\box80
+\tcb@totallowerbox=\box81
+)
+(/usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty
+Package: inputenc 2021/02/14 v1.3d Input encoding file
+\inpenc@prehook=\toks36
+\inpenc@posthook=\toks37
+)
+(/usr/share/texlive/texmf-dist/tex/latex/mdframed/mdframed.sty
+Package: mdframed 2013/07/01 1.9b: mdframed
+
+(/usr/share/texlive/texmf-dist/tex/latex/l3packages/xparse/xparse.sty
+(/usr/share/texlive/texmf-dist/tex/latex/l3kernel/expl3.sty
+Package: expl3 2022-01-21 L3 programming layer (loader) 
+
+(/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
+File: l3backend-pdftex.def 2022-01-12 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count315
+\l__pdf_internal_box=\box82
+))
+Package: xparse 2022-01-12 L3 Experimental document command parser
+)
+(/usr/share/texlive/texmf-dist/tex/latex/zref/zref-abspage.sty
+Package: zref-abspage 2020-07-03 v2.32 Module abspage for zref (HO)
+
+(/usr/share/texlive/texmf-dist/tex/latex/zref/zref-base.sty
+Package: zref-base 2020-07-03 v2.32 Module base for zref (HO)
+
+(/usr/share/texlive/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty
+Package: kvdefinekeys 2019-12-19 v1.6 Define keys (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/auxhook/auxhook.sty
+Package: auxhook 2019-12-17 v1.6 Hooks for auxiliary files (HO)
+)
+Package zref Info: New property list: main on input line 764.
+Package zref Info: New property: default on input line 765.
+Package zref Info: New property: page on input line 766.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/base/atbegshi-ltx.sty
+Package: atbegshi-ltx 2021/01/10 v1.0c Emulation of the original atbegshi
+package with kernel methods
+)
+\c@abspage=\count316
+Package zref Info: New property: abspage on input line 66.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/needspace/needspace.sty
+Package: needspace 2010/09/12 v1.3d reserve vertical space
+)
+\mdf@templength=\skip54
+\c@mdf@globalstyle@cnt=\count317
+\mdf@skipabove@length=\skip55
+\mdf@skipbelow@length=\skip56
+\mdf@leftmargin@length=\skip57
+\mdf@rightmargin@length=\skip58
+\mdf@innerleftmargin@length=\skip59
+\mdf@innerrightmargin@length=\skip60
+\mdf@innertopmargin@length=\skip61
+\mdf@innerbottommargin@length=\skip62
+\mdf@splittopskip@length=\skip63
+\mdf@splitbottomskip@length=\skip64
+\mdf@outermargin@length=\skip65
+\mdf@innermargin@length=\skip66
+\mdf@linewidth@length=\skip67
+\mdf@innerlinewidth@length=\skip68
+\mdf@middlelinewidth@length=\skip69
+\mdf@outerlinewidth@length=\skip70
+\mdf@roundcorner@length=\skip71
+\mdf@footenotedistance@length=\skip72
+\mdf@userdefinedwidth@length=\skip73
+\mdf@needspace@length=\skip74
+\mdf@frametitleaboveskip@length=\skip75
+\mdf@frametitlebelowskip@length=\skip76
+\mdf@frametitlerulewidth@length=\skip77
+\mdf@frametitleleftmargin@length=\skip78
+\mdf@frametitlerightmargin@length=\skip79
+\mdf@shadowsize@length=\skip80
+\mdf@extratopheight@length=\skip81
+\mdf@subtitleabovelinewidth@length=\skip82
+\mdf@subtitlebelowlinewidth@length=\skip83
+\mdf@subtitleaboveskip@length=\skip84
+\mdf@subtitlebelowskip@length=\skip85
+\mdf@subtitleinneraboveskip@length=\skip86
+\mdf@subtitleinnerbelowskip@length=\skip87
+\mdf@subsubtitleabovelinewidth@length=\skip88
+\mdf@subsubtitlebelowlinewidth@length=\skip89
+\mdf@subsubtitleaboveskip@length=\skip90
+\mdf@subsubtitlebelowskip@length=\skip91
+\mdf@subsubtitleinneraboveskip@length=\skip92
+\mdf@subsubtitleinnerbelowskip@length=\skip93
+
+(/usr/share/texlive/texmf-dist/tex/latex/mdframed/md-frame-0.mdf
+File: md-frame-0.mdf 2013/07/01\ 1.9b: md-frame-0
+)
+\mdf@frametitlebox=\box83
+\mdf@footnotebox=\box84
+\mdf@splitbox@one=\box85
+\mdf@splitbox@two=\box86
+\mdf@splitbox@save=\box87
+\mdfsplitboxwidth=\skip94
+\mdfsplitboxtotalwidth=\skip95
+\mdfsplitboxheight=\skip96
+\mdfsplitboxdepth=\skip97
+\mdfsplitboxtotalheight=\skip98
+\mdfframetitleboxwidth=\skip99
+\mdfframetitleboxtotalwidth=\skip100
+\mdfframetitleboxheight=\skip101
+\mdfframetitleboxdepth=\skip102
+\mdfframetitleboxtotalheight=\skip103
+\mdffootnoteboxwidth=\skip104
+\mdffootnoteboxtotalwidth=\skip105
+\mdffootnoteboxheight=\skip106
+\mdffootnoteboxdepth=\skip107
+\mdffootnoteboxtotalheight=\skip108
+\mdftotallinewidth=\skip109
+\mdfboundingboxwidth=\skip110
+\mdfboundingboxtotalwidth=\skip111
+\mdfboundingboxheight=\skip112
+\mdfboundingboxdepth=\skip113
+\mdfboundingboxtotalheight=\skip114
+\mdf@freevspace@length=\skip115
+\mdf@horizontalwidthofbox@length=\skip116
+\mdf@verticalmarginwhole@length=\skip117
+\mdf@horizontalspaceofbox=\skip118
+\mdfsubtitleheight=\skip119
+\mdfsubsubtitleheight=\skip120
+\c@mdfcountframes=\count318
+
+****** mdframed patching \endmdf@trivlist
+
+****** -- success******
+
+\mdf@envdepth=\count319
+\c@mdf@env@i=\count320
+\c@mdf@env@ii=\count321
+\c@mdf@zref@counter=\count322
+Package zref Info: New property: mdf@pagevalue on input line 895.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2020/10/26 v3.5g Customizing captions (AR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2020/10/21 v2.2e caption3 kernel (AR)
+\captionmargin=\dimen264
+\captionmargin@=\dimen265
+\captionwidth=\dimen266
+\caption@tempdima=\dimen267
+\caption@indent=\dimen268
+\caption@parindent=\dimen269
+\caption@hangindent=\dimen270
+Package caption Info: Standard document class detected.
+)
+\c@caption@flags=\count323
+\c@continuedfloat=\count324
+Package caption Info: float package is loaded.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/caption/subcaption.sty
+Package: subcaption 2020/10/07 v1.3j Sub-captions (AR)
+\c@subfigure=\count325
+\c@subtable=\count326
+)
 (/usr/share/texlive/texmf-dist/tex/latex/listings/listings.sty
-\lst@mode=\count198
-\lst@gtempboxa=\box52
-\lst@token=\toks21
-\lst@length=\count199
-\lst@currlwidth=\dimen148
-\lst@column=\count266
-\lst@pos=\count267
-\lst@lostspace=\dimen149
-\lst@width=\dimen150
-\lst@newlines=\count268
-\lst@lineno=\count269
-\lst@maxwidth=\dimen151
+\lst@mode=\count327
+\lst@gtempboxa=\box88
+\lst@token=\toks38
+\lst@length=\count328
+\lst@currlwidth=\dimen271
+\lst@column=\count329
+\lst@pos=\count330
+\lst@lostspace=\dimen272
+\lst@width=\dimen273
+\lst@newlines=\count331
+\lst@lineno=\count332
+\lst@maxwidth=\dimen274
 
 (/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2020/03/24 1.8d (Carsten Heinz)
-\c@lstnumber=\count270
-\lst@skipnumbers=\count271
-\lst@framebox=\box53
+\c@lstnumber=\count333
+\lst@skipnumbers=\count334
+\lst@framebox=\box89
 )
 (/usr/share/texlive/texmf-dist/tex/latex/listings/listings.cfg
 File: listings.cfg 2020/03/24 1.8d listings configuration
@@ -128,29 +728,6 @@ Package: listings 2020/03/24 1.8d (Carsten Heinz)
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/hyperref.sty
 Package: hyperref 2021-06-07 v7.00m Hypertext links for LaTeX
 
-(/usr/share/texlive/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
-Package: ltxcmds 2020-05-10 v1.25 LaTeX kernel commands for general use (HO)
-)
-(/usr/share/texlive/texmf-dist/tex/generic/iftex/iftex.sty
-Package: iftex 2020/03/06 v1.0d TeX engine tests
-)
-(/usr/share/texlive/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty
-Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO
-)
-
-(/usr/share/texlive/texmf-dist/tex/generic/infwarerr/infwarerr.sty
-Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
-)
-Package pdftexcmds Info: \pdf@primitive is available.
-Package pdftexcmds Info: \pdf@ifprimitive is available.
-Package pdftexcmds Info: \pdfdraftmode found.
-)
-(/usr/share/texlive/texmf-dist/tex/generic/kvsetkeys/kvsetkeys.sty
-Package: kvsetkeys 2019/12/15 v1.18 Key value parser (HO)
-)
-(/usr/share/texlive/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty
-Package: kvdefinekeys 2019-12-19 v1.6 Define keys (HO)
-)
 (/usr/share/texlive/texmf-dist/tex/generic/pdfescape/pdfescape.sty
 Package: pdfescape 2019/12/09 v1.15 Implements pdfTeX's escape features (HO)
 )
@@ -160,15 +737,9 @@ Package: hycolor 2020-01-27 v1.10 Color options for hyperref/bookmark (HO)
 (/usr/share/texlive/texmf-dist/tex/latex/letltxmacro/letltxmacro.sty
 Package: letltxmacro 2019/12/03 v1.6 Let assignment for LaTeX macros (HO)
 )
-(/usr/share/texlive/texmf-dist/tex/latex/auxhook/auxhook.sty
-Package: auxhook 2019-12-17 v1.6 Hooks for auxiliary files (HO)
-)
-(/usr/share/texlive/texmf-dist/tex/latex/kvoptions/kvoptions.sty
-Package: kvoptions 2020-10-07 v3.14 Key value format for package options (HO)
-)
-\@linkdim=\dimen152
-\Hy@linkcounter=\count272
-\Hy@pagecounter=\count273
+\@linkdim=\dimen275
+\Hy@linkcounter=\count335
+\Hy@pagecounter=\count336
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/pd1enc.def
 File: pd1enc.def 2021-06-07 v7.00m Hyperref: PDFDocEncoding definition (HO)
@@ -182,10 +753,7 @@ nguages
 (/usr/share/texlive/texmf-dist/tex/generic/intcalc/intcalc.sty
 Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
 )
-(/usr/share/texlive/texmf-dist/tex/generic/etexcmds/etexcmds.sty
-Package: etexcmds 2019/12/15 v1.7 Avoid name clashes with e-TeX commands (HO)
-)
-\Hy@SavedSpaceFactor=\count274
+\Hy@SavedSpaceFactor=\count337
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/puenc.def
 File: puenc.def 2021-06-07 v7.00m Hyperref: PDF Unicode definition (HO)
@@ -200,14 +768,14 @@ Package hyperref Info: Plain pages OFF on input line 4207.
 Package hyperref Info: Backreferencing OFF on input line 4212.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
 Package hyperref Info: Bookmarks ON on input line 4445.
-\c@Hy@tempcnt=\count275
+\c@Hy@tempcnt=\count338
 
 (/usr/share/texlive/texmf-dist/tex/latex/url/url.sty
 \Urlmuskip=\muskip16
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
 LaTeX Info: Redefining \url on input line 4804.
-\XeTeXLinkMargin=\dimen153
+\XeTeXLinkMargin=\dimen276
 
 (/usr/share/texlive/texmf-dist/tex/generic/bitset/bitset.sty
 Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
@@ -216,9 +784,9 @@ Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
 Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO
 )
 ))
-\Fld@menulength=\count276
-\Field@Width=\dimen154
-\Fld@charsize=\dimen155
+\Fld@menulength=\count339
+\Field@Width=\dimen277
+\Fld@charsize=\dimen278
 Package hyperref Info: Hyper figures OFF on input line 6076.
 Package hyperref Info: Link nesting OFF on input line 6081.
 Package hyperref Info: Hyper index ON on input line 6084.
@@ -228,14 +796,9 @@ Package hyperref Info: Link coloring with OCG OFF on input line 6101.
 Package hyperref Info: PDF/A mode OFF on input line 6106.
 LaTeX Info: Redefining \ref on input line 6146.
 LaTeX Info: Redefining \pageref on input line 6150.
-
-(/usr/share/texlive/texmf-dist/tex/latex/base/atbegshi-ltx.sty
-Package: atbegshi-ltx 2021/01/10 v1.0c Emulation of the original atbegshi
-package with kernel methods
-)
-\Hy@abspage=\count277
-\c@Item=\count278
-\c@Hfootnote=\count279
+\Hy@abspage=\count340
+\c@Item=\count341
+\c@Hfootnote=\count342
 )
 Package hyperref Info: Driver (autodetected): hpdftex.
 
@@ -247,8 +810,9 @@ Package: atveryend-ltx 2020/08/19 v1.0a Emulation of the original atveryend pac
 kage
 with kernel methods
 )
-\Fld@listcount=\count280
-\c@bookmark@seq@number=\count281
+\HyAnn@Count=\count343
+\Fld@listcount=\count344
+\c@bookmark@seq@number=\count345
 
 (/usr/share/texlive/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
 Package: rerunfilecheck 2019/12/05 v1.9 Rerun checks for auxiliary files (HO)
@@ -259,196 +823,87 @@ Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
 Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 86.
 )
-\Hy@SectionHShift=\skip49
+\Hy@SectionHShift=\skip121
 )
-(/usr/share/texlive/texmf-dist/tex/latex/minted/minted.sty
-Package: minted 2021/12/24 v2.6 Yet another Pygments shim for LaTeX
-
-(/usr/share/texlive/texmf-dist/tex/latex/fvextra/fvextra.sty
-Package: fvextra 2019/02/04 v1.4 fvextra - extensions and patches for fancyvrb
-
-(/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
-Package: ifthen 2020/11/24 v1.1c Standard LaTeX ifthen package (DPC)
-)
-(/usr/share/texlive/texmf-dist/tex/latex/etoolbox/etoolbox.sty
-Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
-\etb@tempcnta=\count282
-)
-(/usr/share/texlive/texmf-dist/tex/latex/fancyvrb/fancyvrb.sty
-Package: fancyvrb 2021/12/21 4.1b verbatim text (tvz,hv)
-\FV@CodeLineNo=\count283
-\FV@InFile=\read2
-\FV@TabBox=\box54
-\c@FancyVerbLine=\count284
-\FV@StepNumber=\count285
-\FV@OutFile=\write3
-)
-(/usr/share/texlive/texmf-dist/tex/latex/upquote/upquote.sty
-Package: upquote 2012/04/19 v1.3 upright-quote and grave-accent glyphs in verba
-tim
-)
-(/usr/share/texlive/texmf-dist/tex/latex/lineno/lineno.sty
-Package: lineno 2005/11/02 line numbers on paragraphs v4.41
-\linenopenalty=\count286
-\output=\toks22
-\linenoprevgraf=\count287
-\linenumbersep=\dimen156
-\linenumberwidth=\dimen157
-\c@linenumber=\count288
-\c@pagewiselinenumber=\count289
-\c@LN@truepage=\count290
-\c@internallinenumber=\count291
-\c@internallinenumbers=\count292
-\quotelinenumbersep=\dimen158
-\bframerule=\dimen159
-\bframesep=\dimen160
-\bframebox=\box55
-LaTeX Info: Redefining \\ on input line 3056.
-)
-\c@FV@TrueTabGroupLevel=\count293
-\c@FV@TrueTabCounter=\count294
-\FV@TabBox@Group=\box56
-\FV@TmpLength=\skip50
-\c@FV@HighlightLinesStart=\count295
-\c@FV@HighlightLinesStop=\count296
-\FV@LoopCount=\count297
-\FV@NCharsBox=\box57
-\FV@BreakIndent=\dimen161
-\FV@BreakIndentNChars=\count298
-\FV@BreakSymbolSepLeft=\dimen162
-\FV@BreakSymbolSepLeftNChars=\count299
-\FV@BreakSymbolSepRight=\dimen163
-\FV@BreakSymbolSepRightNChars=\count300
-\FV@BreakSymbolIndentLeft=\dimen164
-\FV@BreakSymbolIndentLeftNChars=\count301
-\FV@BreakSymbolIndentRight=\dimen165
-\FV@BreakSymbolIndentRightNChars=\count302
-\c@FancyVerbLineBreakLast=\count303
-\FV@LineBox=\box58
-\FV@LineIndentBox=\box59
-\FV@LineWidth=\dimen166
-)
-(/usr/share/texlive/texmf-dist/tex/latex/tools/calc.sty
-Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
-\calc@Acount=\count304
-\calc@Bcount=\count305
-\calc@Adimen=\dimen167
-\calc@Bdimen=\dimen168
-\calc@Askip=\skip51
-\calc@Bskip=\skip52
-LaTeX Info: Redefining \setlength on input line 80.
-LaTeX Info: Redefining \addtolength on input line 81.
-\calc@Ccount=\count306
-\calc@Cskip=\skip53
-)
-(/usr/share/texlive/texmf-dist/tex/latex/tools/shellesc.sty
-Package: shellesc 2019/11/08 v1.0c unified shell escape interface for LaTeX
-Package shellesc Info: Unrestricted shell escape enabled on input line 75.
-)
-(/usr/share/texlive/texmf-dist/tex/latex/ifplatform/ifplatform.sty
-Package: ifplatform 2017/10/13 v0.4a Testing for the operating system
-
-(/usr/share/texlive/texmf-dist/tex/generic/catchfile/catchfile.sty
-Package: catchfile 2019/12/09 v1.8 Catch the contents of a file (HO)
-)
-(/usr/share/texlive/texmf-dist/tex/generic/iftex/ifluatex.sty
-Package: ifluatex 2019/10/25 v1.5 ifluatex legacy package. Use iftex instead.
-)
-runsystem(uname -s > "memoria.w18")...executed.
-
- (./memoria.w18)
-runsystem(rm -- "memoria.w18")...executed.
-
-) (/usr/share/texlive/texmf-dist/tex/generic/xstring/xstring.sty
-(/usr/share/texlive/texmf-dist/tex/generic/xstring/xstring.tex
-\integerpart=\count307
-\decimalpart=\count308
-)
-Package: xstring 2021/07/21 v1.84 String manipulations (CT)
-)
-(/usr/share/texlive/texmf-dist/tex/latex/framed/framed.sty
-Package: framed 2011/10/22 v 0.96: framed or shaded text with page breaks
-\OuterFrameSep=\skip54
-\fb@frw=\dimen169
-\fb@frh=\dimen170
-\FrameRule=\dimen171
-\FrameSep=\dimen172
-)
-\minted@appexistsfile=\read3
-\minted@bgbox=\box60
-\minted@code=\write4
-\c@minted@FancyVerbLineTemp=\count309
-\c@minted@pygmentizecounter=\count310
-\@float@every@listing=\toks23
-\c@listing=\count311
-)
-runsystem(mkdir -p _minted-memoria)...executed.
-
-
 (/usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty
 Package: geometry 2020/01/02 v5.9 Page Geometry
 
 (/usr/share/texlive/texmf-dist/tex/generic/iftex/ifvtex.sty
 Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
 )
-\Gm@cnth=\count312
-\Gm@cntv=\count313
-\c@Gm@tempcnt=\count314
-\Gm@bindingoffset=\dimen173
-\Gm@wd@mp=\dimen174
-\Gm@odd@mp=\dimen175
-\Gm@even@mp=\dimen176
-\Gm@layoutwidth=\dimen177
-\Gm@layoutheight=\dimen178
-\Gm@layouthoffset=\dimen179
-\Gm@layoutvoffset=\dimen180
-\Gm@dimlist=\toks24
+\Gm@cnth=\count346
+\Gm@cntv=\count347
+\c@Gm@tempcnt=\count348
+\Gm@bindingoffset=\dimen279
+\Gm@wd@mp=\dimen280
+\Gm@odd@mp=\dimen281
+\Gm@even@mp=\dimen282
+\Gm@layoutwidth=\dimen283
+\Gm@layoutheight=\dimen284
+\Gm@layouthoffset=\dimen285
+\Gm@layoutvoffset=\dimen286
+\Gm@dimlist=\toks39
+)
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
+Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
+
+(/usr/share/texlive/texmf-dist/tex/latex/refcount/refcount.sty
+Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
+Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
+)
+\c@section@level=\count349
+)
+(/usr/share/texlive/texmf-dist/tex/latex/tools/array.sty
+Package: array 2021/10/04 v2.5f Tabular extension package (FMi)
+\col@sep=\dimen287
+\ar@mcellbox=\box90
+\extrarowheight=\dimen288
+\NC@list=\toks40
+\extratabsurround=\skip122
+\backup@length=\skip123
+\ar@cellbox=\box91
 )
 runsystem(which pygmentize && touch memoria.aex)...executed.
 
 runsystem(rm memoria.aex)...executed.
 
-
-(/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
-File: l3backend-pdftex.def 2022-01-12 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count315
-\l__pdf_internal_box=\box61
-)
-(./memoria.aux)
+ (./memoria.aux)
 \openout1 = `memoria.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 57.
-LaTeX Font Info:    ... okay on input line 57.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 57.
-LaTeX Font Info:    ... okay on input line 57.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 57.
-LaTeX Font Info:    ... okay on input line 57.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 57.
-LaTeX Font Info:    ... okay on input line 57.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 57.
-LaTeX Font Info:    ... okay on input line 57.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 57.
-LaTeX Font Info:    ... okay on input line 57.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 57.
-LaTeX Font Info:    ... okay on input line 57.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 57.
-LaTeX Font Info:    ... okay on input line 57.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 57.
-LaTeX Font Info:    ... okay on input line 57.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 104.
+LaTeX Font Info:    ... okay on input line 104.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 104.
+LaTeX Font Info:    ... okay on input line 104.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 104.
+LaTeX Font Info:    ... okay on input line 104.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 104.
+LaTeX Font Info:    ... okay on input line 104.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 104.
+LaTeX Font Info:    ... okay on input line 104.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 104.
+LaTeX Font Info:    ... okay on input line 104.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 104.
+LaTeX Font Info:    ... okay on input line 104.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 104.
+LaTeX Font Info:    ... okay on input line 104.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 104.
+LaTeX Font Info:    ... okay on input line 104.
 
 (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count316
-\scratchdimen=\dimen181
-\scratchbox=\box62
-\nofMPsegments=\count317
-\nofMParguments=\count318
-\everyMPshowfont=\toks25
-\MPscratchCnt=\count319
-\MPscratchDim=\dimen182
-\MPnumerator=\count320
-\makeMPintoPDFobject=\count321
-\everyMPtoPDFconversion=\toks26
+\scratchcounter=\count350
+\scratchdimen=\dimen289
+\scratchbox=\box92
+\nofMPsegments=\count351
+\nofMParguments=\count352
+\everyMPshowfont=\toks41
+\MPscratchCnt=\count353
+\MPscratchDim=\dimen290
+\MPnumerator=\count354
+\makeMPintoPDFobject=\count355
+\everyMPtoPDFconversion=\toks42
 ) (/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
@@ -466,27 +921,15 @@ Package caption Info: End \AtBeginDocument code.
 (/usr/share/texlive/texmf-dist/tex/latex/base/textcomp.sty
 Package: textcomp 2020/02/02 v2.0n Standard LaTeX package
 )
-\c@lstlisting=\count322
-Package hyperref Info: Link coloring OFF on input line 57.
-
-(/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
-Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
-
-(/usr/share/texlive/texmf-dist/tex/latex/refcount/refcount.sty
-Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
-)
-(/usr/share/texlive/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
-Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
-)
-\c@section@level=\count323
-)
-LaTeX Info: Redefining \ref on input line 57.
-LaTeX Info: Redefining \pageref on input line 57.
-LaTeX Info: Redefining \nameref on input line 57.
-
-(./memoria.out) (./memoria.out)
-\@outlinefile=\write5
-\openout5 = `memoria.out'.
+\c@lstlisting=\count356
+Package hyperref Info: Link coloring OFF on input line 104.
+LaTeX Info: Redefining \ref on input line 104.
+LaTeX Info: Redefining \pageref on input line 104.
+LaTeX Info: Redefining \nameref on input line 104.
+ (./memoria.out)
+(./memoria.out)
+\@outlinefile=\write6
+\openout6 = `memoria.out'.
 
 
 *geometry* driver: auto-detecting
@@ -523,39 +966,571 @@ LaTeX Info: Redefining \nameref on input line 57.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-<logo.png, id=36, 1204.5pt x 343.2825pt>
+<logo.png, id=268, 1204.5pt x 343.2825pt>
 File: logo.png Graphic file (type png)
 <use logo.png>
-Package pdftex.def Info: logo.png  used on input line 61.
+Package pdftex.def Info: logo.png  used on input line 108.
 (pdftex.def)             Requested size: 472.03123pt x 134.52914pt.
 [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./logo.png>]
-(./memoria.toc)
-\tf@toc=\write6
-\openout6 = `memoria.toc'.
+(./memoria.toc
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 3.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 3.
+
+Overfull \hbox (3.57982pt too wide) in paragraph at lines 22--22
+ [][] [][]\OT1/cmr/m/n/10 La con-trase~na/password, debe ser la misma que hemos
+ in-tro-ducido en el \OT1/cmtt/m/n/10 docker-file.yml\OT1/cmr/m/n/10 .[] [][]  
+
+ []
 
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has 
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.85 \newpage
-              [1] [2]
-(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
-File: lstlang1.sty 2020/03/24 1.8d listings language file
+l.48 ...rción de tablas}{36}{subsubsection.4.3.4}
+                                                  % [1])
+\tf@toc=\write7
+\openout7 = `memoria.toc'.
+
+ [2]
+Overfull \hbox (8.36417pt too wide) in paragraph at lines 145--146
+[]\OT1/cmr/bx/n/10 Apache Hbase\OT1/cmr/m/n/10 : SGBD NoSQL ori-en-tada a colum
+-nas, dise~nada tambi^^Sen para mane-jar grandes vol^^Sumenes
+ []
+
+[3]
+<instalacion_maq_1.png, id=368, 541.42274pt x 274.626pt>
+File: instalacion_maq_1.png Graphic file (type png)
+<use instalacion_maq_1.png>
+Package pdftex.def Info: instalacion_maq_1.png  used on input line 165.
+(pdftex.def)             Requested size: 283.22162pt x 143.66118pt.
+<instalacion_maq_2.png, id=369, 539.616pt x 272.217pt>
+File: instalacion_maq_2.png Graphic file (type png)
+<use instalacion_maq_2.png>
+Package pdftex.def Info: instalacion_maq_2.png  used on input line 166.
+(pdftex.def)             Requested size: 283.22162pt x 142.87866pt.
+<instalacion_maq_3.png, id=370, 694.84593pt x 414.04688pt>
+File: instalacion_maq_3.png Graphic file (type png)
+<use instalacion_maq_3.png>
+Package pdftex.def Info: instalacion_maq_3.png  used on input line 168.
+(pdftex.def)             Requested size: 283.22162pt x 168.76208pt.
+<instalacion_maq_4.png, id=371, 596.98032pt x 504.38437pt>
+File: instalacion_maq_4.png Graphic file (type png)
+<use instalacion_maq_4.png>
+Package pdftex.def Info: instalacion_maq_4.png  used on input line 169.
+(pdftex.def)             Requested size: 283.22162pt x 239.2926pt.
+
+Overfull \hbox (118.41203pt too wide) in paragraph at lines 164--172
+ [][] 
+ []
+
+[4 <./instalacion_maq_1.png> <./instalacion_maq_2.png> <./instalacion_maq_3.png
+> <./instalacion_maq_4.png>]
+Overfull \hbox (109.97469pt too wide) in paragraph at lines 185--186
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 1
+88.
+(/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
-(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
-File: lstlang1.sty 2020/03/24 1.8d listings language file
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 188.
+
+Overfull \hbox (307.9767pt too wide) in paragraph at lines 188--189
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
+][][][][][][][][][] 
+ []
+
+LaTeX Font Info:    Trying to load font information for OML+cmr on input line 1
+91.
+(/usr/share/texlive/texmf-dist/tex/latex/base/omlcmr.fd
+File: omlcmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <9> on input line 97.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 97.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 97.
+LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <10> not available
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 191.
+
+Overfull \hbox (907.9828pt too wide) in paragraph at lines 191--192
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
+][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
+[][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (79.97438pt too wide) in paragraph at lines 200--201
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+[5]
+\openout4 = `memoria.pyg'.
+
+ (./_minted-memoria/default.pygstyle)
+(./_minted-memoria/B3445E236AFA5C5A0ED0A3BB1E95A493923DB6563B42D30C99C4EE894AC8
+D413.pygtex
 LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <9> not available
-(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 98.
- [3]
+(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 2.
+)
+Package mdframed Info: You first box width is to small
+ mdframed fixed it
+(mdframed)              on input line 274.
+ [6]
+Overfull \vbox (73.54652pt too high) detected at line 274
+ []
+
+Package mdframed Info: Box was splittet wrong
+ starting loop to iterate the splitting point
+(mdframed)              on input line 274.
+
+Overfull \vbox (74.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (75.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (76.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (77.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (78.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (79.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (80.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (81.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (82.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (83.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (84.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (85.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (86.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (87.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (88.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (89.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (90.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (91.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (92.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (93.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (94.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (95.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (96.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (97.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (98.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (99.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (100.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (101.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (102.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (103.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (104.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (105.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (106.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (107.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (108.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (109.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (110.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (111.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (112.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (113.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (114.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (115.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (116.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (117.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (118.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (119.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (120.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (121.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (122.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (123.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (124.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (125.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (126.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (127.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (128.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (129.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (130.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (131.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (132.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (133.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (134.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (135.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (136.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (137.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (138.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (139.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (140.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (141.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (142.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (143.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (144.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (145.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (146.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (147.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (148.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (149.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (150.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (151.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (152.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (153.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (154.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (155.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (156.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (157.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (158.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (159.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (160.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (161.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (162.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (163.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (164.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (165.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (166.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (167.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (168.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (169.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (170.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (171.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (172.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (173.54652pt too high) detected at line 274
+ []
+
+
+Package mdframed Warning: correct box splittet fails
+ It seems you are using a non splittable contents
+(mdframed)                 on input line 274.
+
+
+Overfull \vbox (174.54652pt too high) detected at line 274
+ []
+
+
+Overfull \vbox (73.54652pt too high) has occurred while \output is active []
+
+
+[7]
+\openout4 = `memoria.pyg'.
+
+
+(./_minted-memoria/1C5B8048A8986BE9CB0FC0BDAD5C3F1FFED6166BE26A64D57C8EB3E362DE
+5A6A.pygtex)
+\openout4 = `memoria.pyg'.
+
+
+(./_minted-memoria/5DFB7C696507520269BB183F7F871D88FED6166BE26A64D57C8EB3E362DE
+5A6A.pygtex) [8]
+Overfull \hbox (19.97377pt too wide) in paragraph at lines 327--330
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+\openout4 = `memoria.pyg'.
+
+
+(./_minted-memoria/8232C5FAD9EBBCE98AE51FC95DC7BE035C396ACB65F53DB323853EAC4290
+F017.pygtex)
+Underfull \hbox (badness 10000) in paragraph at lines 350--354
+
+ []
+
+! Undefined control sequence.
+l.357 \connect
+               practicas\_bd
+? 
+[9]
+\openout4 = `memoria.pyg'.
+
+
+(./_minted-memoria/6C90B5CADE4F572D872876DD52EF4CA9FED6166BE26A64D57C8EB3E362DE
+5A6A.pygtex)
 
 ! LaTeX Error: There's no line here to end.
 
@@ -563,152 +1538,726 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.148 E
+l.406 P
+       ara comprobar que la creación ha sido correcta, podemos ejecutar el ...
+
+? 
+\openout4 = `memoria.pyg'.
+
+
+(./_minted-memoria/81F5D21742D8DC8294DE8E8B4E5ED2E8FED6166BE26A64D57C8EB3E362DE
+5A6A.pygtex
+Overfull \hbox (44.5612pt too wide) in paragraph at lines 15--15
+\OT1/cmtt/m/n/9 --------+----------------+----------+------------------------+-
+------------------+----------|  
+ []
+
+)
+
+! LaTeX Error: There's no line here to end.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.440 P
+       or último, mencionar que la verificación de permisos se realizó en...
+
+? 
+[10]
+\openout4 = `memoria.pyg'.
+
+
+(./_minted-memoria/F8753108CD6860B4C6E077BC193AC0FBFED6166BE26A64D57C8EB3E362DE
+5A6A.pygtex) [11]
+<Captura de pantalla 2025-02-23 215450.png, id=457, 615.80063pt x 462.22687pt>
+File: Captura de pantalla 2025-02-23 215450.png Graphic file (type png)
+<use Captura de pantalla 2025-02-23 215450.png>
+Package pdftex.def Info: Captura de pantalla 2025-02-23 215450.png  used on inp
+ut line 463.
+(pdftex.def)             Requested size: 472.03123pt x 354.32181pt.
+<Captura de pantalla 2025-02-23 215235.png, id=458, 1444.64719pt x 770.88pt>
+File: Captura de pantalla 2025-02-23 215235.png Graphic file (type png)
+<use Captura de pantalla 2025-02-23 215235.png>
+Package pdftex.def Info: Captura de pantalla 2025-02-23 215235.png  used on inp
+ut line 464.
+(pdftex.def)             Requested size: 472.03123pt x 251.87398pt.
+
+Overfull \hbox (12.00002pt too wide) in paragraph at lines 462--466
+ [][] 
+ []
+
+[12]
+Overfull \vbox (21.1424pt too high) has occurred while \output is active []
+
+
+[13 <./Captura de pantalla 2025-02-23 215450.png> <./Captura de pantalla 2025-0
+2-23 215235.png>]
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2020/03/24 1.8d listings language file
+)
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2020/03/24 1.8d listings language file
+)
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <9> on input line 477.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 477.
+ [14]
+
+! LaTeX Error: There's no line here to end.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.528 E
        n el fichero \textit{create\_database.sql} se ha creado la base de da...
 
 ? 
-\openout3 = `memoria.pyg'.
+\openout4 = `memoria.pyg'.
 
-(./_minted-memoria/default.pygstyle)
+
 (./_minted-memoria/858552D8225AFFFC438BC73065B86B3DFED6166BE26A64D57C8EB3E362DE
 5A6A.pygtex)
-Overfull \vbox (2.20482pt too high) detected at line 198
+Overfull \vbox (2.20482pt too high) detected at line 578
  []
 
-[4]
-\openout3 = `memoria.pyg'.
+[15]
+\openout4 = `memoria.pyg'.
 
 
-(./_minted-memoria/5C90F0C3578039041DE73AD9833B2886FED6166BE26A64D57C8EB3E362DE
-5A6A.pygtex
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 7.
-)
-Overfull \vbox (3.5465pt too high) detected at line 289
- []
+(./_minted-memoria/A3A4B76EBA8DAEB91E8B189A6C36AA76FED6166BE26A64D57C8EB3E362DE
+5A6A.pygtex) [16]
+\openout4 = `memoria.pyg'.
 
-[5]
-\openout3 = `memoria.pyg'.
-
-
+ [17]
 (./_minted-memoria/F8380009A41D32069E3DE5656F4F1C8DFED6166BE26A64D57C8EB3E362DE
-5A6A.pygtex) [6]
-\openout3 = `memoria.pyg'.
+5A6A.pygtex)
+\openout4 = `memoria.pyg'.
 
 
 (./_minted-memoria/33B717B0041062441F267BC35F4979BDFED6166BE26A64D57C8EB3E362DE
-5A6A.pygtex) [7]
+5A6A.pygtex) [18] [19]
 LaTeX Font Info:    Trying to load font information for TS1+cmtt on input line 
-404.
+787.
  (/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmtt.fd
 File: ts1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
-[8]
 LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <10> not available
-(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 433.
+(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 814.
 
-Overfull \hbox (0.89642pt too wide) in paragraph at lines 433--433
+Overfull \hbox (0.89642pt too wide) in paragraph at lines 814--814
 []\OT1/cmr/bx/n/10 La con-trase~na/password, debe ser la misma que hemos in-tro
 -ducido en el \OT1/cmtt/m/n/10 docker-file.yml\OT1/cmr/bx/n/10 . 
  []
 
-[9] [10] [11] [12] [13] [14] [15] [16]
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 865.
-<configuracion_ajustes_conexion_oracle.png, id=535, 553.31718pt x 520.94624pt>
+<configuracion_ajustes_conexion_oracle.png, id=577, 553.31718pt x 520.94624pt>
 File: configuracion_ajustes_conexion_oracle.png Graphic file (type png)
 <use configuracion_ajustes_conexion_oracle.png>
 Package pdftex.def Info: configuracion_ajustes_conexion_oracle.png  used on inp
-ut line 866.
+ut line 830.
 (pdftex.def)             Requested size: 283.22162pt x 266.64885pt.
- [17] [18 <./configuracion_ajustes_conexion_oracle.png>]
-\openout3 = `memoria.pyg'.
+[20]
+\openout4 = `memoria.pyg'.
+
+
+(./_minted-memoria/74F8E9AA3EFBF5E2946DFC14E64C56C8FED6166BE26A64D57C8EB3E362DE
+5A6A.pygtex) [21 <./configuracion_ajustes_conexion_oracle.png>]
+\openout4 = `memoria.pyg'.
+
+
+(./_minted-memoria/FF71D6FBFFCB9C4139D43D0B11C851CFFED6166BE26A64D57C8EB3E362DE
+5A6A.pygtex)
+Overfull \hbox (13.97371pt too wide) in paragraph at lines 884--886
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (25.97383pt too wide) in paragraph at lines 888--889
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
+][] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 891--893
+
+ []
+
+\openout4 = `memoria.pyg'.
+
+runsystem(pygmentize -l cql -f latex -P commandprefix=PYG -F tokenmerge -P stri
+pnl=False -o _minted-memoria/BAF2A297BC29E66C7B570F4ACA3CB3BB46C8F5F53F375F2B0D
+19C3FF3FB53DAA.pygtex memoria.pyg)...executed.
+
+
+! Package minted Error: Missing Pygments output; \inputminted was
+probably given a file that does not exist--otherwise, you may need 
+the outputdir package option, or may be using an incompatible build tool,
+or may be using frozencache with a missing file.
+
+See the minted package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.908 \end{minted}
+                  
+? 
+\openout4 = `memoria.pyg'.
+
+
+(./_minted-memoria/154B31286B388A338F050755810711D5FED6166BE26A64D57C8EB3E362DE
+5A6A.pygtex) [22]
+Overfull \hbox (13.97371pt too wide) in paragraph at lines 946--947
+[][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+\openout4 = `memoria.pyg'.
+
+
+(./_minted-memoria/12B1F528A4CA8D2FFBC8D04A94902451FED6166BE26A64D57C8EB3E362DE
+5A6A.pygtex)
+Underfull \hbox (badness 10000) in paragraph at lines 958--960
+
+ []
+
+[23]
+\openout4 = `memoria.pyg'.
+
+runsystem(pygmentize -l cql -f latex -P commandprefix=PYG -F tokenmerge -P stri
+pnl=False -o _minted-memoria/F0F03B1D50C70FFFD852B995BE9D9EC046C8F5F53F375F2B0D
+19C3FF3FB53DAA.pygtex memoria.pyg)...executed.
+
+
+
+! Package minted Error: Missing Pygments output; \inputminted was
+probably given a file that does not exist--otherwise, you may need 
+the outputdir package option, or may be using an incompatible build tool,
+or may be using frozencache with a missing file.
+
+See the minted package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.981 \end{minted}
+                  
+? 
+\openout4 = `memoria.pyg'.
+
+
+(./_minted-memoria/4BFB6D27BAB9D86C5437554D82BAD5E0FED6166BE26A64D57C8EB3E362DE
+5A6A.pygtex)
+\openout4 = `memoria.pyg'.
+
+
+(./_minted-memoria/19ADC24F4AF16D36F2629AE60B90176CFED6166BE26A64D57C8EB3E362DE
+5A6A.pygtex) [24]
+<cassandra1.png, id=648, 653.44125pt x 561.59813pt>
+File: cassandra1.png Graphic file (type png)
+<use cassandra1.png>
+Package pdftex.def Info: cassandra1.png  used on input line 1038.
+(pdftex.def)             Requested size: 472.03123pt x 405.68715pt.
+<cassandra2.png, id=649, 660.96938pt x 564.60938pt>
+File: cassandra2.png Graphic file (type png)
+<use cassandra2.png>
+Package pdftex.def Info: cassandra2.png  used on input line 1039.
+(pdftex.def)             Requested size: 472.03123pt x 403.22742pt.
+
+Overfull \hbox (12.00002pt too wide) in paragraph at lines 1037--1041
+ [][] 
+ []
+
+[25]
+Overfull \vbox (223.86118pt too high) has occurred while \output is active []
+
+
+[26 <./cassandra1.png> <./cassandra2.png>]
+\openout4 = `memoria.pyg'.
 
 
 (./_minted-memoria/580E48AD608A442AA4DB764684FAD4E4FED6166BE26A64D57C8EB3E362DE
-5A6A.pygtex) [19]
-\openout3 = `memoria.pyg'.
+5A6A.pygtex) [27]
+\openout4 = `memoria.pyg'.
 
 
 (./_minted-memoria/97FE08D55EFC761758B6C53711955893FED6166BE26A64D57C8EB3E362DE
-5A6A.pygtex) [20]
-\openout3 = `memoria.pyg'.
+5A6A.pygtex) [28]
+\openout4 = `memoria.pyg'.
 
 
 (./_minted-memoria/3D00D6B6DCC0CD55CAD80A0A872BEC28054A5913F152B154DD30F2A54950
 147F.pygtex)
-\openout3 = `memoria.pyg'.
+\openout4 = `memoria.pyg'.
 
 
 (./_minted-memoria/21605B55BD9547ADA147562C06E6025CFED6166BE26A64D57C8EB3E362DE
-5A6A.pygtex) [21]
-\openout3 = `memoria.pyg'.
+5A6A.pygtex) [29]
+\openout4 = `memoria.pyg'.
+
+
+(./_minted-memoria/53E1800DD0E96270A1EF2E5B5FE3BE2A5C396ACB65F53DB323853EAC4290
+F017.pygtex)
+\openout4 = `memoria.pyg'.
+
+
+(./_minted-memoria/0CEF03FD04787ECE441309E08C5793F5FED6166BE26A64D57C8EB3E362DE
+5A6A.pygtex) [30]
+\openout4 = `memoria.pyg'.
+
+
+(./_minted-memoria/28B0A94E937CDE3470155A18C08710D55C396ACB65F53DB323853EAC4290
+F017.pygtex)
+\openout4 = `memoria.pyg'.
+
+
+(./_minted-memoria/7AFFE00525DA6D931F1FC3B670E97DAD5C396ACB65F53DB323853EAC4290
+F017.pygtex) [31]
+\openout4 = `memoria.pyg'.
+
+
+(./_minted-memoria/2FA653ACC9697CE6F3A69D397E0F48045C396ACB65F53DB323853EAC4290
+F017.pygtex) [32]
+\openout4 = `memoria.pyg'.
+
+
+(./_minted-memoria/66ED3A15929D9DF657A16C548C5D07AD5C396ACB65F53DB323853EAC4290
+F017.pygtex) [33]
+\openout4 = `memoria.pyg'.
+
+runsystem(pygmentize -l cql -f latex -P commandprefix=PYG -F tokenmerge -P stri
+pnl=False -o _minted-memoria/C73F221B28A986D5DAF035FD77C7690F46C8F5F53F375F2B0D
+19C3FF3FB53DAA.pygtex memoria.pyg)...executed.
+
+
+
+! Package minted Error: Missing Pygments output; \inputminted was
+probably given a file that does not exist--otherwise, you may need 
+the outputdir package option, or may be using an incompatible build tool,
+or may be using frozencache with a missing file.
+
+See the minted package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1420 \end{minted}
+                   
+? 
+[34] [35]
+\openout4 = `memoria.pyg'.
+
+
+(./_minted-memoria/9F17C4D4D3CBAE757312315C125EB77AFED6166BE26A64D57C8EB3E362DE
+5A6A.pygtex) [36] [37] [38] [39] [40] [41] [42]
+\openout4 = `memoria.pyg'.
 
 
 (./_minted-memoria/359B73381233A5328EED8A663AE09245FED6166BE26A64D57C8EB3E362DE
-5A6A.pygtex) [22]
-\openout3 = `memoria.pyg'.
+5A6A.pygtex) [43]
+\openout4 = `memoria.pyg'.
+
+
+(./_minted-memoria/47BC9F00E9B3A6EF8FA5CB375F55D439FED6166BE26A64D57C8EB3E362DE
+5A6A.pygtex) [44]
+\openout4 = `memoria.pyg'.
 
 
 (./_minted-memoria/AEE88BA32BBC2AE50CCCAD53E3472E33FED6166BE26A64D57C8EB3E362DE
 5A6A.pygtex)
-\openout3 = `memoria.pyg'.
+\openout4 = `memoria.pyg'.
 
 
 (./_minted-memoria/712D9C51093B550310E9554267405592FED6166BE26A64D57C8EB3E362DE
-5A6A.pygtex)
-\openout3 = `memoria.pyg'.
+5A6A.pygtex) [45]
+\openout4 = `memoria.pyg'.
 
 
 (./_minted-memoria/853841047A97034DAFECC99B40618E10FED6166BE26A64D57C8EB3E362DE
-5A6A.pygtex) [23]
-\openout3 = `memoria.pyg'.
+5A6A.pygtex) [46]
+\openout4 = `memoria.pyg'.
 
 
 (./_minted-memoria/696E2E986CD37522E30C7DEAB9592594FED6166BE26A64D57C8EB3E362DE
-5A6A.pygtex) [24] [25] (./memoria.aux)
+5A6A.pygtex) [47] [48]
+
+! LaTeX Error: Unicode character ́ (U+0301)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2194 A continuació
+                      n se detallan los aspectos más relevantes de las lic...
+
+? 
+
+! LaTeX Error: Unicode character ́ (U+0301)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2194 ...inuación se detallan los aspectos má
+                                                  s relevantes de las licenc...
+
+? 
+
+! LaTeX Error: Unicode character ́ (U+0301)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2199     \item \textbf{Características}
+                                           :
+? 
+
+! LaTeX Error: Unicode character ́ (U+0301)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2201         \item Có
+                         digo abierto para uso comercial.
+? 
+
+! LaTeX Error: Unicode character ́ (U+0301)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2202         \item Sin obligació
+                                    n de compartir modificaciones.
+? 
+\openout4 = `memoria.pyg'.
+
+
+(./_minted-memoria/BA9C4B8994EA5D2B2F4D41F9CACB1297FED6166BE26A64D57C8EB3E362DE
+5A6A.pygtex)
+
+! LaTeX Error: Unicode character ́ (U+0301)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2218 ...icencia}: Propietaria (gratuita con lí
+                                                  mites)
+? 
+
+! LaTeX Error: Unicode character ́ (U+0301)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2219     \item \textbf{Características}
+                                           :
+? 
+
+! LaTeX Error: Unicode character ́ (U+0301)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2221         \item 12GB almacenamiento má
+                                             ximo.
+? 
+\openout4 = `memoria.pyg'.
+
+
+(./_minted-memoria/193C4DF0F732836806788EA58AB933EBFED6166BE26A64D57C8EB3E362DE
+5A6A.pygtex)
+
+! LaTeX Error: Unicode character ́ (U+0301)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2231 ...iere licencia comercial para producció
+                                                  n.
+? 
+
+! LaTeX Error: Unicode character ́ (U+0301)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2232         \item Auditorí
+                               as de cumplimiento.
+? 
+
+! LaTeX Error: Unicode character ́ (U+0301)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2239     \item \textbf{Características}
+                                           :
+? 
+
+! LaTeX Error: Unicode character ́ (U+0301)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2242         \item Atribució
+                                n obligatoria.
+? 
+\openout4 = `memoria.pyg'.
+
+
+(./_minted-memoria/39AC03A1AA921DDCFCD618453F5437C0FED6166BE26A64D57C8EB3E362DE
+5A6A.pygtex) [49]
+
+! LaTeX Error: Unicode character ́ (U+0301)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2251         \item Requiere menció
+                                      n de copyright.
+? 
+\openout4 = `memoria.pyg'.
+
+
+(./_minted-memoria/D8496B6F1CCAEB1FB5F206DE7264491BFED6166BE26A64D57C8EB3E362DE
+5A6A.pygtex)
+
+! LaTeX Error: Unicode character ́ (U+0301)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2265 ...em Debe incluir disclaimer (declaració
+                                                  n legal) original.
+? 
+
+! LaTeX Error: Unicode character ́ (U+0301)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2271 ... de licencia}: Propietaria (suscripció
+                                                  n)
+? 
+
+! LaTeX Error: Unicode character ́ (U+0301)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2272     \item \textbf{Características}
+                                           :
+? 
+
+! LaTeX Error: Unicode character ́ (U+0301)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2275         \item Modelo por nú
+                                    cleos CPU.
+? 
+\openout4 = `memoria.pyg'.
+
+
+(./_minted-memoria/12BB1B32D0138970AF86908E15A81879FED6166BE26A64D57C8EB3E362DE
+5A6A.pygtex)
+
+! LaTeX Error: Unicode character ́ (U+0301)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2284 ...  \item Costes escalables en producció
+                                                  n.
+? 
+
+! LaTeX Error: Unicode character ́ (U+0301)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2285         \item Verificació
+                                  n de licencias periódica.
+? 
+
+! LaTeX Error: Unicode character ́ (U+0301)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2285 ...item Verificación de licencias perió
+                                                  dica.
+? 
+
+! LaTeX Error: Unicode character ́ (U+0301)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2291     \item \textbf{Código abierto}
+                                          :
+? 
+
+! LaTeX Error: Unicode character ́ (U+0301)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2293 ...s son ejemplos de bases de datos de có
+                                                  digo abierto. Son libres p...
+
+? 
+
+! LaTeX Error: Unicode character ́ (U+0301)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2294         \item Apache Cassandra: Atribució
+                                                  n requerida, es decir, que...
+
+? 
+
+! LaTeX Error: Unicode character ́ (U+0301)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2294 ...es decir, que son bases de datos de có
+                                                  digo abierto y gratuitas, ...
+
+? 
+
+! LaTeX Error: Unicode character ́ (U+0301)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2294 ...i se hace uso de ella, se debe dar cré
+                                                  dito a la autoría original.
+
+? 
+
+! LaTeX Error: Unicode character ́ (U+0301)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2294 ...lla, se debe dar crédito a la autorí
+                                                  a original.
+? 
+
+! LaTeX Error: Unicode character ́ (U+0301)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2299 ...omerciales, lo cual significa que está
+                                                  n controladas por empresas...
+
+? 
+
+! LaTeX Error: Unicode character ́ (U+0301)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2299 ...e la base de datos crece, ya sea en té
+                                                  rminos de usuarios, volume...
+
+? 
+[50] [51] [52] (./memoria.aux)
 
 LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
-
-Package rerunfilecheck Warning: File `memoria.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `memoria.out':
-(rerunfilecheck)             Before: 7E246FD024042D510FBA2BF1AEFA5B65;2579
-(rerunfilecheck)             After:  1F3F19755D8762BD1060E50878BF3483;9189.
+Package rerunfilecheck Info: File `memoria.out' has not changed.
+(rerunfilecheck)             Checksum: A4FC3512852857EE2F7FBED5C58AB912;14177.
 runsystem(rm memoria.pyg)...executed.
 
  ) 
 Here is how much of TeX's memory you used:
- 16560 strings out of 478287
- 281820 string characters out of 5849289
- 1413442 words of memory out of 5000000
- 33962 multiletter control sequences out of 15000+600000
- 476539 words of font info for 54 fonts, out of 8000000 for 9000
+ 31405 strings out of 478287
+ 636465 string characters out of 5849289
+ 1737964 words of memory out of 5000000
+ 48327 multiletter control sequences out of 15000+600000
+ 475818 words of font info for 51 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 61i,12n,67p,745b,1986s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 99i,13n,104p,866b,1994s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/share/texli
 ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/tex
 mf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dis
-t/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/texlive/texmf-dist/fon
-ts/type1/public/amsfonts/cm/cmitt10.pfb></usr/share/texlive/texmf-dist/fonts/ty
-pe1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
-lic/amsfonts/cm/cmmi9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.
-pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></u
-sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/shar
-e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texl
-ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texlive/te
-xmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb></usr/share/texmf/fonts/type1
-/public/cm-super/sfrm1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sft
-t0900.pfb>
-Output written on memoria.pdf (26 pages, 460663 bytes).
+t/fonts/type1/public/amsfonts/cm/cmbxti10.pfb></usr/share/texlive/texmf-dist/fo
+nts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/texlive/texmf-dist/fonts/t
+ype1/public/amsfonts/cm/cmitt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmmi9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
+mr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pf
+b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/
+share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/
+texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/share/texlive
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texlive/texmf-
+dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/f
+onts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist/fonts/t
+ype1/public/amsfonts/cm/cmtt9.pfb></usr/share/texmf/fonts/type1/public/cm-super
+/sfrm1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt0900.pfb>
+Output written on memoria.pdf (53 pages, 975639 bytes).
 PDF statistics:
- 875 PDF objects out of 1000 (max. 8388607)
- 803 compressed objects within 9 object streams
- 553 named destinations out of 1000 (max. 500000)
- 75 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1397 PDF objects out of 1440 (max. 8388607)
+ 1272 compressed objects within 13 object streams
+ 671 named destinations out of 1000 (max. 500000)
+ 583 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{USE}\PYG{+w}{ }\PYG{n}{practicas\PYGZus{}ks}\PYG{p}{;}
+\PYG{n}{SELECT}\PYG{+w}{ }\PYG{o}{*}\PYG{+w}{ }\PYG{n}{FROM}\PYG{+w}{ }\PYG{n}{pruebas}\PYG{p}{;}
+\PYG{n}{SELECT}\PYG{+w}{ }\PYG{o}{*}\PYG{+w}{ }\PYG{n}{FROM}\PYG{+w}{ }\PYG{n}{pruebas}\PYG{+w}{ }\PYG{n}{WHERE}\PYG{+w}{ }\PYG{n}{dni\PYGZus{}medico}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{err}{\PYGZsq{}}\PYG{l+m+mi}{12345678}\PYG{n}{A}\PYG{err}{\PYGZsq{}}\PYG{+w}{ }\PYG{n}{SELECT}\PYG{+w}{ }\PYG{o}{*}\PYG{+w}{ }\PYG{n}{FROM}\PYG{+w}{ }\PYG{n}{practicas\PYGZus{}ks}\PYG{p}{.}\PYG{n}{pruebas}\PYG{+w}{ }\PYG{n}{WHERE}\PYG{+w}{ }\PYG{n}{dni\PYGZus{}medico}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{err}{\PYGZsq{}}\PYG{l+m+mi}{12345678}\PYG{n}{A}\PYG{err}{\PYGZsq{}}\PYG{+w}{ }\PYG{n}{ALLOW}\PYG{+w}{ }\PYG{n}{FILTERING}\PYG{p}{;}
+\end{Verbatim}

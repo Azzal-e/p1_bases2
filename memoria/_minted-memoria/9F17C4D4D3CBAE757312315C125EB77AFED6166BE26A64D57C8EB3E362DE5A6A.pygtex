@@ -1,0 +1,52 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+    \PYGZsh{}!/bin/bash
+
+    CONTAINER\PYGZus{}NAME=\PYGZdq{}oracle\PYGZhy{}xe\PYGZdq{}
+    SYSDBA\PYGZus{}USER=\PYGZdq{}sys\PYGZdq{}
+    SYSDBA\PYGZus{}PASS=\PYGZdq{}oracle123\PYGZdq{}
+    DB\PYGZus{}NAME=\PYGZdq{}XEPDB1\PYGZdq{}
+
+    \PYGZsh{} Función para ejecutar SQL
+    run\PYGZus{}sql() \PYGZob{}
+        local sql\PYGZus{}command=\PYGZdl{}1
+        docker exec \PYGZhy{}i \PYGZdq{}\PYGZdl{}CONTAINER\PYGZus{}NAME\PYGZdq{} bash \PYGZhy{}c \PYGZdq{}echo \PYGZbs{}\PYGZdq{}\PYGZdl{}sql\PYGZus{}command\PYGZbs{}\PYGZdq{} | sqlplus \PYGZhy{}S \PYGZdl{}SYSDBA\PYGZus{}USER/\PYGZdl{}SYSDBA\PYGZus{}PASS@\PYGZbs{}\PYGZdq{}\PYGZdl{}DB\PYGZus{}NAME\PYGZbs{}\PYGZdq{} AS SYSDBA\PYGZdq{}
+    \PYGZcb{}
+
+    \PYGZsh{} Función para verificar existencia de usuario
+    user\PYGZus{}exists() \PYGZob{}
+        local username=\PYGZdl{}1
+        local sql\PYGZus{}query=\PYGZdq{}SET HEADING OFF;
+    SET FEEDBACK OFF;
+    SELECT username FROM dba\PYGZus{}users WHERE username = UPPER(\PYGZsq{}\PYGZdl{}username\PYGZsq{});\PYGZdq{}
+
+        local result=\PYGZdl{}(run\PYGZus{}sql \PYGZdq{}\PYGZdl{}sql\PYGZus{}query\PYGZdq{} | tr \PYGZhy{}d \PYGZsq{}[:space:]\PYGZsq{})
+
+        [ \PYGZhy{}n \PYGZdq{}\PYGZdl{}result\PYGZdq{} ] \PYGZam{}\PYGZam{} return 0 || return 1
+    \PYGZcb{}
+
+    \PYGZsh{} Crear usuario solo si no existe
+    create\PYGZus{}user() \PYGZob{}
+        local user=\PYGZdl{}1
+        local pass=\PYGZdl{}2
+        local privileges=\PYGZdl{}3
+
+        if ! user\PYGZus{}exists \PYGZdq{}\PYGZdl{}user\PYGZdq{}; then
+            echo \PYGZdq{}Creando usuario \PYGZdl{}user...\PYGZdq{}
+            run\PYGZus{}sql \PYGZdq{}CREATE USER \PYGZdl{}user IDENTIFIED BY \PYGZdl{}pass DEFAULT TABLESPACE myworkspace1;\PYGZdq{}
+            run\PYGZus{}sql \PYGZdq{}\PYGZdl{}privileges\PYGZdq{}
+            echo \PYGZdq{}Usuario \PYGZdl{}user creado exitosamente\PYGZdq{}
+        else
+            echo \PYGZdq{}El usuario \PYGZdl{}user YA EXISTE. No se realiza ninguna acción.\PYGZdq{}
+        fi
+    \PYGZcb{}
+
+    \PYGZsh{} \PYGZhy{}\PYGZhy{}\PYGZhy{} Ejecución principal \PYGZhy{}\PYGZhy{}\PYGZhy{}
+    create\PYGZus{}user \PYGZdq{}writer\PYGZdq{} \PYGZdq{}writerPass\PYGZdq{} \PYGZdq{}
+    GRANT CREATE SESSION, CREATE TABLE TO writer;
+    GRANT ALTER ANY TABLE, CREATE SEQUENCE, CREATE VIEW, CREATE SYNONYM TO writer;
+    \PYGZdq{}
+
+    create\PYGZus{}user \PYGZdq{}reader\PYGZdq{} \PYGZdq{}readerPass\PYGZdq{} \PYGZdq{}
+    GRANT CREATE SESSION TO readerjuju;
+    \PYGZdq{}
+\end{Verbatim}
