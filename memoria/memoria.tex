@@ -134,7 +134,6 @@ Los SGBD que se van a instalar y configurar son:
 \end{itemize}
 
 \\
-\newpage
 \section{Configuración del entorno de trabajo (máquina virtual / uso de Docker)}
 
 La fase inicial de elaboración de la práctica ocupó la decisión de \textit{cómo} y \textit{dónde} desplegar los gestores. La primera decisión fue la de emplear contenedores (\textit{dockers}). De este modo, cada gestor se encontraría aislado en su propio entorno, salvándose de interferencias inoportunas. No solo esto, sino que la rapidez y sencillez del despliegue de los contenedores, así como su consistencia e independencia de entornos la hacían idónea, dada la pluralidad de integrantes del grupo y gestores con los que trabajar.
@@ -164,7 +163,7 @@ Se incluyen algunas imagenes ilustrativas del proceso (también se tuvo que conf
     \label{fig:instalación máquina virtual}
 \end{figure}
 
-\subsection{Instalación de \textit{Docker}}\label{subsec:Instalación de la máquina virtual}
+\subsection{Instalación de \textit{Docker}}\label{subsec:Instalación de Docker}
 El primer paso será instalar \textit{\textcolor{blue}{\href{https://www.docker.com/}{Docker}}} en Debian. Para ello, será necesario seguir los siguientes pasos:
 
 \begin{lstlisting}
@@ -2064,12 +2063,192 @@ SELECT * FROM pruebas WHERE dni_medico = '12345678A' SELECT * FROM practicas_ks.
 Nótese que en la segunda consulta se ha especificado la cláusula ALLOW FILTERING. Esto se debe a que \textit{dni_medico} no forma parte primaria de la tabla, y por lo tanto la consulta debe "forzarse" ya que su rendimiento no es idóneo. Realmente la mejor solución no es la cláusula, sino añadir como clave primaria de la tabla pruebas también el dni.
 
 \newpage
+\section{Comentarios Acerca de las Licencias}
+
+A continuación se detallan los aspectos más relevantes de las licencias de los SGBD mencionados.
+
+\subsection{PostgreSQL}
+\begin{itemize}
+    \item \textbf{Tipo de licencia}: Licencia PostgreSQL (similar a BSD/MIT)
+    \item \textbf{Características}:
+    \begin{itemize}
+        \item Código abierto para uso comercial.
+        \item Sin obligación de compartir modificaciones.
+    \end{itemize}
+    \item \textbf{Fragmento clave}:
+    \begin{minted}[bgcolor=lightgray!20, fontsize=\small]{text}
+    Permission to use, copy, modify, and distribute this software [...] 
+    without fee, and without a written agreement is hereby granted...
+    \end{minted}
+    \item \textbf{Implicaciones}:
+    \begin{itemize}
+        \item Adecuado para proyectos flexibles sin coste.
+        \item Soporte profesional opcional (de pago).
+    \end{itemize}
+\end{itemize}
+
+\subsection{Oracle XE}
+\begin{itemize}
+    \item \textbf{Tipo de licencia}: Propietaria (gratuita con límites)
+    \item \textbf{Características}:
+    \begin{itemize}
+        \item 12GB almacenamiento máximo.
+        \item Limitado a 2 CPUs.
+    \end{itemize}
+    \item \textbf{Fragmento clave}:
+    \begin{minted}[bgcolor=lightgray!20, fontsize=\small]{text}
+    Oracle Database XE may be used for free for development [...] 
+    (subject to resource constraints)
+    \end{minted}
+    \item \textbf{Implicaciones}:
+    \begin{itemize}
+        \item Requiere licencia comercial para producción.
+        \item Auditorías de cumplimiento.
+    \end{itemize}
+\end{itemize}
+
+\subsection{Apache Cassandra}
+\begin{itemize}
+    \item \textbf{Tipo de licencia}: Apache 2.0
+    \item \textbf{Características}:
+    \begin{itemize}
+        \item Modificaciones permitidas.
+        \item Atribución obligatoria.
+    \end{itemize}
+    \item \textbf{Fragmento clave}:
+    \begin{minted}[bgcolor=lightgray!20, fontsize=\small]{text}
+    You must give recipients a copy of this License...
+    \end{minted}
+    \item \textbf{Implicaciones}:
+    \begin{itemize}
+        \item Compatible con software propietario.
+        \item Requiere mención de copyright.
+    \end{itemize}
+\end{itemize}
+
+\subsection{Apache HBase}
+\begin{itemize}
+    \item \textbf{Tipo de licencia}: Apache 2.0
+    \item \textbf{Fragmento clave}:
+    \begin{minted}[bgcolor=lightgray!20, fontsize=\small]{text}
+    Redistributions must reproduce copyright notice...
+    \end{minted}
+    \item \textbf{Implicaciones}:
+    \begin{itemize}
+        \item Mismas condiciones que Cassandra.
+        \item Debe incluir disclaimer (declaración legal) original.
+    \end{itemize}
+\end{itemize}
+
+\subsection{IBM DB2}
+\begin{itemize}
+    \item \textbf{Tipo de licencia}: Propietaria (suscripción)
+    \item \textbf{Características}:
+    \begin{itemize}
+        \item Community Edition con limitaciones.
+        \item Modelo por núcleos CPU.
+    \end{itemize}
+    \item \textbf{Fragmento clave}:
+    \begin{minted}[bgcolor=lightgray!20, fontsize=\small]{text}
+    The Program may not be used for production [...] 
+    unless IBM has received payment...
+    \end{minted}
+    \item \textbf{Implicaciones}:
+    \begin{itemize}
+        \item Costes escalables en producción.
+        \item Verificación de licencias periódica.
+    \end{itemize}
+\end{itemize}
+
+\subsection{Resumen Comparativo}
+\begin{itemize}
+    \item \textbf{Código abierto}:
+    \begin{itemize}
+        \item PostgreSQL/Cassandra/Apache HBase: Estos sistemas son ejemplos de bases de datos de código abierto. Son libres para redistribuir. Esto significa que puedes usar estos sistemas de basos de datos sin necesidad de pagar licencias u obtener permiso de una entidad propietaria. 
+        \item Apache Cassandra: Atribución requerida, es decir, que son bases de datos de código abierto y gratuitas, pero si se hace uso de ella, se debe dar crédito a la autoría original. 
+    \end{itemize}
+    
+    \item \textbf{Propietarias}:
+    \begin{itemize}
+        \item Oracle XE/IBM DB2: Son bases de datos comerciales, lo cual significa que están controladas por empresas propietarias (Oracle Corporation para Oracle y IBM para DB2). Estas bases de datos comerciales, suelen tener costos variables asociados con el escalado del sistema (a medida que la base de datos crece, ya sea en términos de usuarios, volumen de datos o funcionalidades adicionales, los costos de uso pueden aumentar.
+    \end{itemize}
+\end{itemize}
+
+\section{Poblado de memoria}\label{sec:Poblado de memoria}
+
+
+
 \section{Esfuerzos invertidos}\label{sec:Esfuerzos invertidos}
 
-El proceso de decisión del entorno y plataforma de despliegue se realizó conjuntamente.
+El proceso de decisión del entorno y plataforma de despliegue se realizó conjuntamente. 
 
+\begin{table}[H]
+    \centering
+    \caption{Distribución de horas por integrante}
+    \label{tab:esfuerzos}
+    \begin{tabular}{|l|c|c|c|}
+    \hline
+    \textbf{Tarea} & \textbf{Sergio Isla (873983)} & \textbf{Irene Pascual (871627)} & \textbf{Athanasios Usero (839543)} \\ \hline
+    Instalación SGBD & X horas & 3 horas & 3 horas \\ \hline
+    Configuración de Docker & X horas & 0.25 horas & 2 horas \\ \hline
+    Configurar archivos de configuración & X horas & 2 horas & 1 horas \\ \hline
+    Desarrollo de scripts & X horas & 7 horas & 6.5 horas \\ \hline
+    Configuración acceso remoto & X horas & 0.5 horas & 1 horas \\ \hline
+    Creación de tablas/espacios & X horas & 0.5 horas & 1 horas \\ \hline
+    Gestión de usuarios & X horas & 2 horas & 3 horas \\ \hline
+    Inserciones de datos & X horas & 1 horas & 1 horas \\ \hline
+    Consultas & X horas & 0.5 horas & 0.5 horas \\ \hline
+    Documentación y memoria & X horas & 3 horas & 5.5 horas \\ \hline
+    Resolución de problemas & X horas & 8 horas & 5 horas \\ \hline \hline
+    \textbf{Total por integrante} & X horas & 27.75 horas & 29.5 horas \\ \hline
+    \end{tabular}
+    \end{table}
+    
 \newpage
+
 \section{Referencias}
+
+A continuación se detallan las fuentes y recursos utilizados para la realización de esta práctica:
+
+\begin{itemize}
+    \item \textbf{Oficial PostgreSQL Documentation}: \\
+    \url{https://www.postgresql.org/docs/} \\
+    Documentación oficial de PostgreSQL, utilizada para consultar la sintaxis de comandos SQL, configuración de roles y permisos.
+
+    \item \textbf{Oracle XE Documentation}: \\
+    \url{https://docs.oracle.com/en/database/oracle/oracle-database/} \\
+    Guía oficial de Oracle Database Express Edition (XE), empleada para la instalación, configuración y administración básica.
+
+    \item \textbf{Apache Cassandra Documentation}: \\
+    \url{https://cassandra.apache.org/doc/latest/} \\
+    Documentación oficial de Apache Cassandra, útil para entender la creación de keyspaces, tablas y la configuración de seguridad.
+
+    \item \textbf{Apache HBase Documentation}: \\
+    \url{https://hbase.apache.org/book.html} \\
+    Guía oficial de Apache HBase, consultada para la configuración de namespaces, tablas y la gestión de permisos.
+
+    \item \textbf{IBM DB2 Documentation}: \\
+    \url{https://www.ibm.com/docs/en/db2/} \\
+    Documentación oficial de IBM DB2, utilizada para la creación de bases de datos, esquemas y la gestión de usuarios.
+
+    \item \textbf{Docker Documentation}: \\
+    \url{https://docs.docker.com/} \\
+    Recursos oficiales de Docker, empleados para la creación y configuración de contenedores para cada SGBD.
+
+    \item \textbf{DBeaver Documentation}: \\
+    \url{https://dbeaver.io/docs/} \\
+    Guía oficial de DBeaver, utilizada para configurar conexiones remotas a los SGBD.
+
+    \item \textbf{Stack Overflow}: \\
+    \url{https://stackoverflow.com/} \\
+    Foro de preguntas y respuestas utilizado para resolver problemas técnicos específicos durante la instalación y configuración.
+
+    \item \textbf{GitHub Repositories}: \\
+    \url{https://github.com/} \\
+    Repositorios de GitHub consultados para encontrar scripts y configuraciones de ejemplo para los SGBD.
+\end{itemize}
+
+\textbf{Nota}: Todas las referencias fueron consultadas durante el desarrollo de la práctica para garantizar la correcta instalación, configuración y uso de los sistemas gestores de bases de datos.
 
 \end{document}
 
