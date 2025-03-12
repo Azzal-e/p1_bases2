@@ -1,4 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-azzale@vbox:\PYGZti{}/Desktop/cassandra\PYGZdl{} docker exec \PYGZhy{}it cassandra\PYGZhy{}db cqlsh
-Connection error: (\PYGZsq{}Unable to connect to any servers\PYGZsq{}, \PYGZob{}\PYGZsq{}127.0.0.1:9042\PYGZsq{}: AuthenticationFailed(\PYGZsq{}Remote end requires authentication\PYGZsq{})\PYGZcb{})
-\end{Verbatim}

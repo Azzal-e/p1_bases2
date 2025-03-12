@@ -1,7 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-      \PYGZob{}R\PYGZcb{} \PYGZhy{} Read (Lectura)
-      \PYGZob{}W\PYGZcb{} \PYGZhy{} Write (Escritura)
-      \PYGZob{}C\PYGZcb{} \PYGZhy{} Create (Creación)
-      \PYGZob{}X\PYGZcb{} \PYGZhy{} Execute (Ejecución)
-      \PYGZob{}A\PYGZcb{} \PYGZhy{} Admin (Administración)
-\end{Verbatim}

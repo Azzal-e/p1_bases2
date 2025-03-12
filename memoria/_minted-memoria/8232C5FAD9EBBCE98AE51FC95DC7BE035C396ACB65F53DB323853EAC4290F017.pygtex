@@ -1,7 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{+w}{    }\PYG{k}{DROP}\PYG{+w}{ }\PYG{k}{DATABASE}\PYG{+w}{ }\PYG{k}{IF}\PYG{+w}{ }\PYG{k}{EXISTS}\PYG{+w}{ }\PYG{n}{practicas\PYGZus{}bd}\PYG{p}{;}
-\PYG{+w}{    }\PYG{k}{CREATE}\PYG{+w}{ }\PYG{k}{DATABASE}\PYG{+w}{ }\PYG{n}{practicas\PYGZus{}bd}\PYG{p}{;}
-
-\PYG{+w}{    }\PYG{err}{\PYGZbs{}}\PYG{k}{c}\PYG{+w}{ }\PYG{n}{practicas\PYGZus{}bd}\PYG{p}{;}\PYG{+w}{ }\PYG{c+c1}{\PYGZhy{}\PYGZhy{} Conecta a la base de datos practicas\PYGZus{}bd}
-\PYG{+w}{                    }\PYG{c+c1}{\PYGZhy{}\PYGZhy{} automáticamente}
-\end{Verbatim}

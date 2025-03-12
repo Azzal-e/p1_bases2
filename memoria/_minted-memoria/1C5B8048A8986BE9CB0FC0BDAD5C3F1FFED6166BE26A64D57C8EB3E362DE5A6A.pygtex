@@ -1,8 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-    azzale@vbox:\PYGZti{}\PYGZdl{} psql \PYGZhy{}\PYGZhy{}version
-    PostgreSQL 17.3 (Debian 17.3\PYGZhy{}1.pgdg120+1) on x86\PYGZus{}64\PYGZhy{}pc\PYGZhy{}linux\PYGZhy{}gnu,
-    compiled by gcc (Debian 12.2.0\PYGZhy{}14) 12.2.0, 64\PYGZhy{}bit
-
-    (END) Cancel request sent
-    log file:
-\end{Verbatim}

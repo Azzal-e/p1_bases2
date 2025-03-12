@@ -1,8 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-    azzale@vbox:\PYGZti{}/Desktop/postgreSQL\PYGZdl{} docker exec \PYGZhy{}it postgres\PYGZhy{}db psql \PYGZhy{}U lector \PYGZhy{}d practicas\PYGZbs{}\PYGZus{}bd \PYGZhy{}f /tmp/insertarTablas.sql
-    psql:/tmp/insertarTablas.sql:3: ERROR:  permission denied for table medicos
-    psql:/tmp/insertarTablas.sql:7: ERROR:  permission denied for table pacientes
-    psql:/tmp/insertarTablas.sql:11: ERROR:  permission denied for table pacientes
-    psql:/tmp/insertarTablas.sql:15: ERROR:  permission denied for table pruebas
-    psql:/tmp/insertarTablas.sql:18: ERROR:  permission denied for table pacientes
-\end{Verbatim}

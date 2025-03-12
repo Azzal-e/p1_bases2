@@ -1,6 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-    azzale@vbox:\PYGZti{}/Desktop/cassandra\PYGZdl{} sudo docker ps
-    CONTAINER ID   IMAGE              COMMAND                  CREATED      STATUS         PORTS                                                                          NAMES
-    7abd9c2803f3   cassandra:latest   \PYGZdq{}docker\PYGZhy{}entrypoint.s…\PYGZdq{}   5 days ago   Up 7 seconds   7000\PYGZhy{}7001/tcp, 7199/tcp, 9160/tcp, 0.0.0.0:9042\PYGZhy{}\PYGZgt{}9042/tcp, :::9042\PYGZhy{}\PYGZgt{}9042/tcp   cassandra\PYGZhy{}db
-
-\end{Verbatim}
