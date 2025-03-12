@@ -1,0 +1,98 @@
+#version: '3.8'
+networks:
+  bd2_network:
+    driver: bridge
+    
+services:
+  zookeeper:
+    image: zookeeper:latest
+    container_name: zookeeper
+    networks:
+      - bd2_network
+    ports:
+      - "2181:2181"
+    environment:
+      ZOO_MY_ID: 1
+      ZOO_SERVERS: server.1=zookeeper:2888:3888
+    volumes:
+      - ./hbase-config/zoo.cfg:/conf/zoo.cfg
+      
+  postgres:
+    image: postgres:latest
+    container_name: postgres-db
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin123
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+
+  oracle:
+    image: container-registry.oracle.com/database/express:latest
+    container_name: oracle-xe
+    networks:
+      - bd2_network
+    environment:
+      ORACLE_PWD: oracle123
+    ports:
+      - "1521:1521"
+      - "5500:5500"
+    volumes:
+      - oracle_data:/opt/oracle/oradata
+
+  cassandra:
+    image: cassandra:latest
+    container_name: cassandra-db
+    environment:
+      CASSANDRA_CLUSTER_NAME: "MyCluster"
+    ports:
+      - "9042:9042"
+    volumes:
+      - cassandra_data:/var/lib/cassandra
+
+  hbase:
+    image: dajobe/hbase
+    container_name: hbase-db
+    networks:
+      - bd2_network
+    environment:
+      JAVA_HOME: /usr/lib/jvm/java-8-openjdk-amd64
+    depends_on:
+      - zookeeper
+    ports:
+      - "16010:16010" 
+      - "8080:8080"   
+      - "16201:16201"  
+    volumes:
+      - hbase_data:/opt/hbase-data
+      - ./hbase-config:/opt/hbase/conf
+      - /etc/krb5.conf:/etc/krb5.conf
+    command: >
+      sh -c "/opt/hbase/bin/start-hbase.sh &&
+             /opt/hbase/bin/hbase-daemon.sh start regionserver &&
+             tail -f /dev/null"
+
+  db2:
+    image: ibmcom/db2
+    container_name: contenedor_db2
+    restart: always
+    privileged: true
+    ports:
+      - 50000:50000
+    environment:
+      LICENSE: accept
+      DB2INST1_PASSWORD: db2inst1
+      DBNAME: db2inst1
+      PERSISTENT_HOME: "false"
+      ARCHIVE_LOGS: "false"
+      TEXT_SEARCH: "false"
+    volumes:
+      - ./data:/database
+
+volumes:
+  pg_data:
+  oracle_data:
+  cassandra_data:
+  hbase_data:
+  db2_data:

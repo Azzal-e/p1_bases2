@@ -1,0 +1,12 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+azzale@vbox:\PYGZti{}/Desktop/postgreSQL\PYGZdl{} docker exec \PYGZhy{}it postgres\PYGZhy{}db psql \PYGZhy{}U
+            admin \PYGZhy{}d practicas\PYGZus{}bd \PYGZhy{}c \PYGZdq{}\PYGZbs{}dt\PYGZdq{}
+         List of relations
+ Schema |   Name    | Type  | Owner
+\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}+\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}+\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}+\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}
+ public | medicos   | table | admin
+ public | pacientes | table | admin
+ public | pruebas   | table | admin
+(3 rows)
+
+\end{Verbatim}

@@ -1,0 +1,16 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+azzale@vbox:\PYGZti{}/Desktop/cassandra\PYGZdl{} docker exec \PYGZhy{}i cassandra\PYGZhy{}db cqlsh \PYGZhy{}u lector \PYGZhy{}p lector123 \PYGZhy{}f /insertarTablas.cql
+
+Warning: Using a password on the command line interface can be insecure.
+Recommendation: use the credentials file to securely provide the password.
+
+/insertarTablas.cql:3:Unauthorized: Error from server: code=2100 [Unauthorized] message=\PYGZdq{}User lector has no MODIFY permission on \PYGZlt{}table practicas\PYGZus{}ks.pruebas\PYGZgt{} or any of its parents\PYGZdq{}
+/insertarTablas.cql:4:Unauthorized: Error from server: code=2100 [Unauthorized] message=\PYGZdq{}User lector has no MODIFY permission on \PYGZlt{}table practicas\PYGZus{}ks.medicos\PYGZgt{} or any of its parents\PYGZdq{}
+/insertarTablas.cql:5:Unauthorized: Error from server: code=2100 [Unauthorized] message=\PYGZdq{}User lector has no MODIFY permission on \PYGZlt{}table practicas\PYGZus{}ks.pacientes\PYGZgt{} or any of its parents\PYGZdq{}
+/insertarTablas.cql:9:Unauthorized: Error from server: code=2100 [Unauthorized] message=\PYGZdq{}User lector has no MODIFY permission on \PYGZlt{}table practicas\PYGZus{}ks.medicos\PYGZgt{} or any of its parents\PYGZdq{}
+/insertarTablas.cql:12:Unauthorized: Error from server: code=2100 [Unauthorized] message=\PYGZdq{}User lector has no MODIFY permission on \PYGZlt{}table practicas\PYGZus{}ks.medicos\PYGZgt{} or any of its parents\PYGZdq{}
+/insertarTablas.cql:16:Unauthorized: Error from server: code=2100 [Unauthorized] message=\PYGZdq{}User lector has no MODIFY permission on \PYGZlt{}table practicas\PYGZus{}ks.pacientes\PYGZgt{} or any of its parents\PYGZdq{}
+/insertarTablas.cql:19:Unauthorized: Error from server: code=2100 [Unauthorized] message=\PYGZdq{}User lector has no MODIFY permission on \PYGZlt{}table practicas\PYGZus{}ks.pacientes\PYGZgt{} or any of its parents\PYGZdq{}
+/insertarTablas.cql:29:Unauthorized: Error from server: code=2100 [Unauthorized] message=\PYGZdq{}User lector has no MODIFY permission on \PYGZlt{}table practicas\PYGZus{}ks.pruebas\PYGZgt{} or any of its parents\PYGZdq{}
+
+\end{Verbatim}

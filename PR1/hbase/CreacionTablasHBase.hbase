@@ -1,0 +1,15 @@
+drop 'medicos'
+drop 'pacientes'
+drop 'pruebas'
+
+# Crear la tabla de médicos
+create 'medicos', {NAME => 'info', VERSIONS => 1}
+
+# Crear la tabla de pacientes
+create 'pacientes', {NAME => 'info', VERSIONS => 1}
+
+# Crear la tabla de pruebas médicas
+create 'pruebas', {NAME => 'info', VERSIONS => 1}
+
+# Verificar que las tablas se crearon
+list

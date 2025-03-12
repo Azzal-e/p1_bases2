@@ -1,0 +1,30 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+    azzale@vbox:\PYGZti{}/Desktop/postgreSQL\PYGZdl{} docker exec \PYGZhy{}it postgres\PYGZhy{}db psql \PYGZhy{}U admin \PYGZhy{}d practicas\PYGZbs{}\PYGZus{}bd \PYGZhy{}c \PYGZdq{}\PYGZbs{}du\PYGZdq{}
+                                List of roles
+    Role name   |                         Attributes
+    \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}+\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}
+    admin        | Superuser, Create role, Create DB, Replication, Bypass RLS
+    escritor     |
+    lector       |
+    rol\PYGZus{}escritor | Cannot login
+    rol\PYGZus{}lector   | Cannot login
+
+    azzale@vbox:\PYGZti{}/Desktop/postgreSQL\PYGZdl{} docker exec \PYGZhy{}it postgres\PYGZhy{}db psql \PYGZhy{}U admin \PYGZhy{}d practicas\PYGZbs{}\PYGZus{}bd \PYGZhy{}c \PYGZdq{}\PYGZbs{}dp\PYGZdq{}
+                                        Access privileges
+    Schema |      Name      |   Type   |   Access privileges    | Column privileges | Policies
+    \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}+\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}+\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}+\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}+\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}+\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}
+    public | medicos        | table    | admin=arwdDxtm/admin  +|                   |
+            |                |          | lector\PYGZus{}rol=r/admin    +|                   |
+            |                |          | rol\PYGZus{}lector=r/admin    +|                   |
+            |                |          | rol\PYGZus{}escritor=arw/admin |                   |
+    public | pacientes      | table    | admin=arwdDxtm/admin  +|                   |
+            |                |          | lector\PYGZus{}rol=r/admin    +|                   |
+            |                |          | rol\PYGZus{}lector=r/admin    +|                   |
+            |                |          | rol\PYGZus{}escritor=arw/admin |                   |
+    public | pruebas        | table    | admin=arwdDxtm/admin  +|                   |
+            |                |          | lector\PYGZus{}rol=r/admin    +|                   |
+            |                |          | rol\PYGZus{}lector=r/admin    +|                   |
+            |                |          | rol\PYGZus{}escritor=arw/admin |                   |
+    public | pruebas\PYGZus{}id\PYGZus{}seq | sequence | admin=rwU/admin        |                   |
+    (4 rows)
+\end{Verbatim}

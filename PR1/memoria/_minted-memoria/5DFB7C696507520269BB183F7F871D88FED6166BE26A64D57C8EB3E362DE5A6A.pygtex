@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+    azzale@vbox:\PYGZti{}\PYGZdl{} docker ps
+    CONTAINER ID   IMAGE             COMMAND                  CREATED      STATUS          PORTS                                       NAMES
+    42877b1f3e93   postgres:latest   \PYGZdq{}docker\PYGZhy{}entrypoint.s…\PYGZdq{}   5 days ago   Up 48 minutes   0.0.0.0:5432\PYGZhy{}\PYGZgt{}5432/tcp, :::5432\PYGZhy{}\PYGZgt{}5432/tcp   postgres\PYGZhy{}db
+\end{Verbatim}

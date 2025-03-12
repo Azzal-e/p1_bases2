@@ -1,0 +1,9 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} Script para consultar datos con el usuario lector}
+\PYG{err}{\PYGZbs{}}\PYG{k}{connect}\PYG{+w}{ }\PYG{n}{practicas\PYGZus{}bd}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} Consultar todos los médicos}
+\PYG{k}{SELECT}\PYG{+w}{ }\PYG{o}{*}\PYG{+w}{ }\PYG{k}{FROM}\PYG{+w}{ }\PYG{n}{medicos}\PYG{p}{;}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} Consultar todos los pacientes}
+\PYG{k}{SELECT}\PYG{+w}{ }\PYG{o}{*}\PYG{+w}{ }\PYG{k}{FROM}\PYG{+w}{ }\PYG{n}{pacientes}\PYG{+w}{ }\PYG{k}{where}\PYG{+w}{ }\PYG{n}{nombre}\PYG{+w}{ }\PYG{l+s+s1}{\PYGZsq{}Ada Byron\PYGZsq{}}\PYG{p}{;}
+\end{Verbatim}

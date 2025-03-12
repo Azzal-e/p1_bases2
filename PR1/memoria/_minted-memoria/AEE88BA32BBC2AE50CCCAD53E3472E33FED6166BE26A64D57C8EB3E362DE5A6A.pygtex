@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+      medicos: Para almacenar información de los médicos.
+      pacientes: Para registrar a los pacientes.
+      pruebas: Para almacenar pruebas médicas realizadas.
+\end{Verbatim}
