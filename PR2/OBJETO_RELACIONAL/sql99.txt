@@ -5,9 +5,9 @@
 
 -- Creacion de DISTINCT TYPES
 
-CREATE TYPE DNI AS VARCHAR(9)
+CREATE TYPE DNI AS VARCHAR(20)
 CREATE TYPE IBAN AS (prefijoIBAN VARCHAR(4), numeroCuenta VARCHAR(30))
-CREATE TYPE TELEFONO AS VARCHAR(9)
+CREATE TYPE TELEFONO AS VARCHAR(16)
 
 
 
@@ -35,25 +35,28 @@ CREATE TYPE CuentaUdt AS (
 )instanciable not final is system generated; 
 
 CREATE TYPE cuentaCorrienteUdt under cuentaUdt AS(
-   interes DECIMAL(5,2),
+   refOficina_Adscrito ref(oficinaUdt) scope Oficiona 
+      references are checked on delete set null
+   
 )instanciable not final is system generated 
 
 CREATE TYPE cuentaAhorroUdt under cuentaUdt AS(
-   refOficina_Adscrito ref(oficinaUdt) scope Oficiona 
-      references are checked on delete set null
+   interes DECIMAL(5,2),
 )instanciable not final is system generated ;
 
 CREATE TYPE oficinaUdt AS(
    codigoOficina DECIMAL(4,0),
    direccion VARCHAR(100),
    telefono TELEFONO,
-   descripcion VARCHAR(200),
    -- ASOCIACION CON CUENTA UNIDIRECCIONAL, AQUÍ  NO HAY REFERENCIAS
 )instanciable not final is system generated; 
 
 CREATE TYPE operacionUdt AS (
+   codigo DECIMAL(10,0),
+   IBAN_cuentaEmisora IBAN,
    fechaYHora TIMESTAMP,
    cuantia DECIMAL(15,2),
+   descripcion VARCHAR(200),
    refCuenta_Emisora ref(cuentaUdt) scope Cuenta 
       references are checked on delete cascade
 )instanciable not final is system generated; 
@@ -71,21 +74,64 @@ CREATE TYPE  transferenciaUdt under operacionUdt AS (
 
 --CREACIÓN DE TABLAS
 
-CREATE TABLE Cliente of ClienteUdt ()
+CREATE TABLE Cliente of ClienteUdt (
+   PRIMARY KEY (dni),
+   CONSTRAINT nombre_obligatorio CHECK (nombre IS NOT NULL),
+   CONSTRAINT apellidos_obligatorio CHECK (apellidos IS NOT NULL),
+   CONSTRAINT fechaDeNacimiento_obligatorio CHECK (fechaDeNacimiento IS NOT NULL),
+   CONSTRAINT telefono_obligatorio CHECK (telefono IS NOT NULL),
+   CONSTRAINT direccion_obligatorio CHECK (direccion IS NOT NULL),
+   CONSTRAINT telefono_valido CHECK (telefono SIMILAR TO '\+\d+'),
+   CONSTRAINT email_valido CHECK (email SIMILAR TO '%@%.%')
+   ref is clientID system generated
+)
+CREATE TABLE Cuenta of CuentaUdt (
+   PRIMARY KEY (IBAN),
+   CONSTRAINT fechaCreacion_obligatoria CHECK (fechaCreacion IS NOT NULL),
+   CONSTRAINT saldo_obligatorio CHECK (saldo IS NOT NULL),
+   CONSTRAINT saldo_positivo CHECK (saldo >= 0),
+   CONSTRAINT saldo_defecto DEFAULT 0,
+   -- NO ESTOY SEGURO DE QUE SE PUEDA CONSTRAINT  OSEA QUE NO, VAMOS chk_ref_no_repetido CHECK (CARDINALITY(refTitular) = CARDINALITY(UNIQUE(refTitular))),
 
-CREATE TABLE Cuenta of CuentaUdt ()
+)
 
-CREATE TABLE cuentaCorriente of cuentaCorrienteUdt under Cuenta ()
+CREATE TABLE cuentaCorriente of cuentaCorrienteUdt under Cuenta (
+   CONSTRAINT refOficina_Adscrito_obligatorio CHECK (refOficina_Adscrito IS NOT NULL),
+)
 
-CREATE TABLE cuentaAhorro of cuentaAhorroUdt under Cuenta ()
+CREATE TABLE cuentaAhorro of cuentaAhorroUdt under Cuenta (
+   CONSTRAINT interes_obligatorio CHECK (interes IS NOT NULL),
+   CONSTRAINT interes_positivo CHECK (interes >= 0),
+   CONSTRAINT interes_defecto DEFAULT 0
+)
 
-CREATE TABLE Oficina of oficinaUdt ()
+CREATE TABLE Oficina of oficinaUdt (
+   PRIMARY KEY (codigoOficina),
+   CONSTRAINT direccion_obligatoria CHECK (direccion IS NOT NULL),
+   CONSTRAINT telefono_obligatorio CHECK (telefono IS NOT NULL),
+   CONSTRAINT telefono_valido CHECK (telefono SIMILAR TO '\+\d+'),
+   ref is oficinaID system generated
+)
 
-CREATE TABLE Operacion of operacionUdt ()
+CREATE TABLE Operacion of operacionUdt (
+   PRIMARY KEY (codigo, IBAN_cuentaEmisora),
+   CONSTRAINT fechaYHora_obligatoria CHECK (fechaYHora IS NOT NULL),
+   CONSTRAINT cuantia_obligatoria CHECK (cuantia IS NOT NULL),
+   CONSTRAINT refCuenta_Emisora_obligatorio CHECK (refCuenta_Emisora IS NOT NULL),
+   CONSTRAINT chk_consistencia CHECK (DEREF(refCuenta_Emisora).IBAN = IBAN_cuentaEmisora),
+   CONSTRAINT descripcion_obligatoria CHECK (descripcion IS NOT NULL),
+   ref is operacionID system generated
+)
 
-CREATE TABLE OperacionEfectiva of operacionEfectivaUdt under Operacion ()
+CREATE TABLE OperacionEfectiva of operacionEfectivaUdt under Operacion (
+   CONSTRAINT refSucursal_obligatorio CHECK (refSucursal IS NOT NULL),
+   CONSTRAINT tipoOperacion_obligatorio CHECK (tipoOperacion IS NOT NULL),
+   CONSTRAINT tipoOperacion_valido CHECK (tipoOperacion IN ('INGRESO', 'RETIRADA')),
+)
 
-CREATE TABLE Transferencia of transferenciaUdt under operacion ()
+CREATE TABLE Transferencia of transferenciaUdt under Operacion (
+   CONSTRAINT refCuenta_Receptora_obligatorio CHECK (refCuenta_Receptora IS NOT NULL),
+)
 
 
 -- RESTRICCIONES ADICIONALES
@@ -93,3 +139,29 @@ CREATE TABLE Transferencia of transferenciaUdt under operacion ()
 1. Para toda ocurrencia de (prefijoIBAN, numeroCuenta) en la tabla cuenta,
    debe existir una ocurrencia de (prefijoIBAN, numeroCuenta) en la tabla Titular.
 
+2. Fechas anteriores a la fecha actual.
+
+3. Fecha de una operación posterior a la de cuenta y emisora (y receptora para transferencias).
+
+4. Asegurar especialización obligatoria de cuentas y operaciones.
+ -> Se hará con assertions o triggers.
+
+5. Asegurar exclusividad en clases especializadas de cuentas y operaciones.
+ -> Se hará con assertions (si lompermite el gestor) o con triggers.
+
+??. Constraints para arrays de referencias con elementos no repetidos.??
+
+6. Mantener coherencia entre la referencia y clave foránea de  tabla Operacion.
+-> Check o trigger.
+
+7. Verificar que cuenta emisora no puede actuar además como receptora en una operación.
+-> Check o trigger. POR QUÉ? PORQUE NO SE PUEDE AÑADIR RESTRICCIONES SOBRE ATRIBUTOS HEREDADOS.
+
+?? Asegurar cardinalidad de arrays de referencias.??
+
+#TODO: 
+
+CREO QUE LOS SIMILAR TO Y DEREF DENTRO DE CHECK NO SON VALIDOS EN SQL:99. REVISAR.
+TB LO DEL DEFAULT ME DICE CHAT QUE LO MIRA, PORQUE NO PUEDE ESTAR DENTRO DE CHECK
+
+CAMBIAR SIMILAR TO POR LIKE!!!!!!!!!!!
