@@ -1,0 +1,95 @@
+/**
+ * Diseño lógico empleando el modelo objeto/relacional
+    empleando el estándar SQL:1999.
+ */
+
+-- Creacion de DISTINCT TYPES
+
+CREATE TYPE DNI AS VARCHAR(9)
+CREATE TYPE IBAN AS (prefijoIBAN VARCHAR(4), numeroCuenta VARCHAR(30))
+CREATE TYPE TELEFONO AS VARCHAR(9)
+
+
+
+-- CREACIÓN DE TIPOS
+
+CREATE TYPE ClienteUdt AS (
+   dni DNI,
+   nombre VARCHAR(50),
+   apellidos VARCHAR(75),
+   fechaDeNacimiento DATE,
+   telefono TELEFONO,
+   direccion VARCHAR(200),
+   email VARCHAR(250),
+   refCuenta ref(asignaturaUdt) array[50] scope Cuenta 
+      references are checked on delete set null
+
+) instanciable not final is system generated; 
+
+CREATE TYPE CuentaUdt AS (
+   iban IBAN,
+   fechaDeCreacion DATE,
+   saldo DECIMAL(15,2),
+   refTitular ref(ClienteUdt) array[6] scope Cliente 
+      references are checked on delete set null
+)instanciable not final is system generated; 
+
+CREATE TYPE cuentaCorrienteUdt under cuentaUdt AS(
+   interes DECIMAL(5,2),
+)instanciable not final is system generated 
+
+CREATE TYPE cuentaAhorroUdt under cuentaUdt AS(
+   refOficina_Adscrito ref(oficinaUdt) scope Oficiona 
+      references are checked on delete set null
+)instanciable not final is system generated ;
+
+CREATE TYPE oficinaUdt AS(
+   codigoOficina DECIMAL(4,0),
+   direccion VARCHAR(100),
+   telefono TELEFONO,
+   descripcion VARCHAR(200),
+   -- ASOCIACION CON CUENTA UNIDIRECCIONAL, AQUÍ  NO HAY REFERENCIAS
+)instanciable not final is system generated; 
+
+CREATE TYPE operacionUdt AS (
+   fechaYHora TIMESTAMP,
+   cuantia DECIMAL(15,2),
+   refCuenta_Emisora ref(cuentaUdt) scope Cuenta 
+      references are checked on delete cascade
+)instanciable not final is system generated; 
+
+CREATE TYPE operacionEfectivaUdt under operacionUdt AS(
+   tipoOperacion VARCHAR(20),
+   refSucursal ref(oficinaUdt) scope Oficina 
+      references are checked on delete cascade
+)instanciable not final is system generated; 
+
+CREATE TYPE  transferenciaUdt under operacionUdt AS (
+   refCuenta_Receptora ref(cuentaUdt) scope Cuenta 
+      references are checked on delete cascade
+)instanciable not final is system generated; 
+
+--CREACIÓN DE TABLAS
+
+CREATE TABLE Cliente of ClienteUdt ()
+
+CREATE TABLE Cuenta of CuentaUdt ()
+
+CREATE TABLE cuentaCorriente of cuentaCorrienteUdt under Cuenta ()
+
+CREATE TABLE cuentaAhorro of cuentaAhorroUdt under Cuenta ()
+
+CREATE TABLE Oficina of oficinaUdt ()
+
+CREATE TABLE Operacion of operacionUdt ()
+
+CREATE TABLE OperacionEfectiva of operacionEfectivaUdt under Operacion ()
+
+CREATE TABLE Transferencia of transferenciaUdt under operacion ()
+
+
+-- RESTRICCIONES ADICIONALES
+
+1. Para toda ocurrencia de (prefijoIBAN, numeroCuenta) en la tabla cuenta,
+   debe existir una ocurrencia de (prefijoIBAN, numeroCuenta) en la tabla Titular.
+

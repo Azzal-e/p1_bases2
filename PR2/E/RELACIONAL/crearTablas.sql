@@ -17,13 +17,15 @@ GRANT SELECT, INSERT, UPDATE ON Banco TO escritor;
 GRANT SELECT, INSERT, UPDATE, DELETE ON Banco TO admin;
 */
 
--- Eliminar si existen las tablas y volverlas a crear
-DROP TABLE IF EXISTS Operacion CASCADE;
-DROP TABLE IF EXISTS Titular CASCADE;
-DROP TABLE IF EXISTS Cuenta CASCADE;
-DROP TABLE IF EXISTS Oficina CASCADE;
-DROP TABLE IF EXISTS Cliente CASCADE;
-
+/* -- Eliminar tablas si existen */
+DECLARE
+    v_count NUMBER;
+BEGIN
+    FOR table_rec IN (SELECT table_name FROM user_tables WHERE table_name IN ('OPERACION', 'TITULAR', 'CUENTA', 'OFICINA', 'CLIENTE')) LOOP
+        EXECUTE IMMEDIATE 'DROP TABLE ' || table_rec.table_name || ' CASCADE CONSTRAINTS';
+    END LOOP;
+END;
+/
 /*-- Crear dominios
 DECLARE
     v_count NUMBER;
@@ -394,6 +396,8 @@ BEGIN
     );
 END;
 /
+
+EXIT;
 
 
 
