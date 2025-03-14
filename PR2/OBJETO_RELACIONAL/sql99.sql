@@ -11,7 +11,7 @@ CREATE TYPE TELEFONO AS VARCHAR(16)
 
 
 
--- CREACIÓN DE TIPOS
+--------------------------------CREACIÓN DE TIPOS--------------------------------
 
 CREATE TYPE ClienteUdt AS (
    dni DNI,
@@ -29,7 +29,7 @@ CREATE TYPE ClienteUdt AS (
 CREATE TYPE CuentaUdt AS (
    iban IBAN,
    fechaDeCreacion DATE,
-   saldo DECIMAL(15,2),
+   saldo DECIMAL(15,2) DEFAULT 0,
    refTitular ref(ClienteUdt) array[6] scope Cliente 
       references are checked on delete set null
 )instanciable not final is system generated; 
@@ -38,11 +38,11 @@ CREATE TYPE cuentaCorrienteUdt under cuentaUdt AS(
    refOficina_Adscrito ref(oficinaUdt) scope Oficiona 
       references are checked on delete set null
    
-)instanciable not final is system generated 
+)instanciable not final; 
 
 CREATE TYPE cuentaAhorroUdt under cuentaUdt AS(
    interes DECIMAL(5,2),
-)instanciable not final is system generated ;
+)instanciable not final;
 
 CREATE TYPE oficinaUdt AS(
    codigoOficina DECIMAL(4,0),
@@ -65,14 +65,14 @@ CREATE TYPE operacionEfectivaUdt under operacionUdt AS(
    tipoOperacion VARCHAR(20),
    refSucursal ref(oficinaUdt) scope Oficina 
       references are checked on delete cascade
-)instanciable not final is system generated; 
+)instanciable not final; 
 
 CREATE TYPE  transferenciaUdt under operacionUdt AS (
    refCuenta_Receptora ref(cuentaUdt) scope Cuenta 
       references are checked on delete cascade
-)instanciable not final is system generated; 
+)instanciable not final; 
 
---CREACIÓN DE TABLAS
+--------------------------------CREACIÓN DE TABLAS--------------------------------
 
 CREATE TABLE Cliente of ClienteUdt (
    PRIMARY KEY (dni),
@@ -81,8 +81,8 @@ CREATE TABLE Cliente of ClienteUdt (
    CONSTRAINT fechaDeNacimiento_obligatorio CHECK (fechaDeNacimiento IS NOT NULL),
    CONSTRAINT telefono_obligatorio CHECK (telefono IS NOT NULL),
    CONSTRAINT direccion_obligatorio CHECK (direccion IS NOT NULL),
-   CONSTRAINT telefono_valido CHECK (telefono SIMILAR TO '\+\d+'),
-   CONSTRAINT email_valido CHECK (email SIMILAR TO '%@%.%')
+   CONSTRAINT telefono_valido CHECK (telefono LIKE '\+\d+'),
+   CONSTRAINT email_valido CHECK (email LIKE '%@%.%')
    ref is clientID system generated
 )
 CREATE TABLE Cuenta of CuentaUdt (
@@ -90,8 +90,7 @@ CREATE TABLE Cuenta of CuentaUdt (
    CONSTRAINT fechaCreacion_obligatoria CHECK (fechaCreacion IS NOT NULL),
    CONSTRAINT saldo_obligatorio CHECK (saldo IS NOT NULL),
    CONSTRAINT saldo_positivo CHECK (saldo >= 0),
-   CONSTRAINT saldo_defecto DEFAULT 0,
-   -- NO ESTOY SEGURO DE QUE SE PUEDA CONSTRAINT  OSEA QUE NO, VAMOS chk_ref_no_repetido CHECK (CARDINALITY(refTitular) = CARDINALITY(UNIQUE(refTitular))),
+
 
 )
 
@@ -102,14 +101,13 @@ CREATE TABLE cuentaCorriente of cuentaCorrienteUdt under Cuenta (
 CREATE TABLE cuentaAhorro of cuentaAhorroUdt under Cuenta (
    CONSTRAINT interes_obligatorio CHECK (interes IS NOT NULL),
    CONSTRAINT interes_positivo CHECK (interes >= 0),
-   CONSTRAINT interes_defecto DEFAULT 0
 )
 
 CREATE TABLE Oficina of oficinaUdt (
    PRIMARY KEY (codigoOficina),
    CONSTRAINT direccion_obligatoria CHECK (direccion IS NOT NULL),
    CONSTRAINT telefono_obligatorio CHECK (telefono IS NOT NULL),
-   CONSTRAINT telefono_valido CHECK (telefono SIMILAR TO '\+\d+'),
+   CONSTRAINT telefono_valido CHECK (telefono LIKE '\+\d+'),
    ref is oficinaID system generated
 )
 
@@ -118,8 +116,8 @@ CREATE TABLE Operacion of operacionUdt (
    CONSTRAINT fechaYHora_obligatoria CHECK (fechaYHora IS NOT NULL),
    CONSTRAINT cuantia_obligatoria CHECK (cuantia IS NOT NULL),
    CONSTRAINT refCuenta_Emisora_obligatorio CHECK (refCuenta_Emisora IS NOT NULL),
-   CONSTRAINT chk_consistencia CHECK (DEREF(refCuenta_Emisora).IBAN = IBAN_cuentaEmisora),
    CONSTRAINT descripcion_obligatoria CHECK (descripcion IS NOT NULL),
+   FOREIGN KEY (IBAN_cuentaEmisora) REFERENCES Cuenta(IBAN) ON DELETE CASCADE,
    ref is operacionID system generated
 )
 
@@ -136,27 +134,46 @@ CREATE TABLE Transferencia of transferenciaUdt under Operacion (
 
 -- RESTRICCIONES ADICIONALES
 
-1. Para toda ocurrencia de (prefijoIBAN, numeroCuenta) en la tabla cuenta,
-   debe existir una ocurrencia de (prefijoIBAN, numeroCuenta) en la tabla Titular.
+1. Para toda ocurrencia de IBAN en la tabla cuenta,
+   debe existir al menos una ocurrencia de un refCuenta en la tabla Cliente
+   tal que DEREF(refCuenta).IBAN = IBAN.
 
-2. Fechas anteriores a la fecha actual.
+2. Sea <<cliente>> una ocurrencia de la tabla Cliente con DNI = dni, para toda ocurrencia de refCuenta en <<cliente>>,
+   debe existir al menos una ocurrencia de refTitular en la tabla cuenta tal que DEREF(refTitular).dni = dni.
 
-3. Fecha de una operación posterior a la de cuenta y emisora (y receptora para transferencias).
+3.La fecha de nacimiento de un cliente, de creacion de una cuenta y la fecha y hora de una operacion, 
+   deben ser anteriores a la fecha actual.
 
-4. Asegurar especialización obligatoria de cuentas y operaciones.
+4. La fecha de una operacion deber ser posterior a la fecha de creacion de una cuenta emisora.
+
+5. La fecha de una transferencia debe ser posterior a la fecha de creacion de la cuenta receptora.
+
+6. Asegurar especialización obligatoria de cuentas y operaciones.
  -> Se hará con assertions o triggers.
 
-5. Asegurar exclusividad en clases especializadas de cuentas y operaciones.
+7. Asegurar exclusividad en clases especializadas de cuentas y operaciones.
  -> Se hará con assertions (si lompermite el gestor) o con triggers.
 
-??. Constraints para arrays de referencias con elementos no repetidos.??
+8. Los arrays de referencias de las tablas cliente y cuenta no pueden tener elementos repetidos.
 
-6. Mantener coherencia entre la referencia y clave foránea de  tabla Operacion.
+9. Para toda ocurrencia de refCuenta_Emisora y de IBAN_cuentaEmisora en la tabla operacion, se debe
+   verificar que DEREF(refCuenta_Emisora).IBAN = IBAN_cuentaEmisora.
 -> Check o trigger.
 
-7. Verificar que cuenta emisora no puede actuar además como receptora en una operación.
+10. Para toda ocurrencia de refCuenta_Emisora y de refCuenta_Receptora en la tabla transferencia, se debe
+    verificar que DEREF(refCuenta_Emisora).IBAN != DEREF(refCuenta_Receptora).IBAN.
 -> Check o trigger. POR QUÉ? PORQUE NO SE PUEDE AÑADIR RESTRICCIONES SOBRE ATRIBUTOS HEREDADOS.
 
+11 (No se si es restriccion o algo que se debe hacer) El saldo de las cuentas de ahorro se debe actualizar cada noche
+   con el interes que tiene asignado.
+-> Trigger/OPERACION CON SCHEDULER.
+
+
+12. El saldo de las cuentas debe ser la suma de las operaciones que se han realizado en la cuenta (y para 
+    cuentas de ahorro, con el interes aplicado temporalmente). 
+-> Trigger.
+
+-------------------------A PARTIR DE AQUI NO HACER CASO----------------------------------------
 ?? Asegurar cardinalidad de arrays de referencias.??
 
 #TODO: 
@@ -165,3 +182,5 @@ CREO QUE LOS SIMILAR TO Y DEREF DENTRO DE CHECK NO SON VALIDOS EN SQL:99. REVISA
 TB LO DEL DEFAULT ME DICE CHAT QUE LO MIRA, PORQUE NO PUEDE ESTAR DENTRO DE CHECK
 
 CAMBIAR SIMILAR TO POR LIKE!!!!!!!!!!!
+
+   -- NO ESTOY SEGURO DE QUE SE PUEDA CONSTRAINT  OSEA QUE NO, VAMOS chk_ref_no_repetido CHECK (CARDINALITY(refTitular) = CARDINALITY(UNIQUE(refTitular))),
