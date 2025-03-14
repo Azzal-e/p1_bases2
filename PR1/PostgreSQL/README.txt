@@ -18,4 +18,4 @@
     # EJECUTANDO DESDE DENTRO DEL CONTENEDOR NO ES
     # NECESARIO AUTENTICAR
     docker cp <script.sql> postgres-db:/tmp/<script.sql>
-    docker exec -it postgres-db psql -U <usuario> -d practicas_bd -f 
+    docker exec -it postgres-db psql -U <usuario> -d practicas_bd -f /tmp/<script.sql>
