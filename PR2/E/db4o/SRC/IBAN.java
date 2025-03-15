@@ -3,6 +3,15 @@ public class IBAN {
     private String numeroCuenta;
 
     public IBAN(String prefijo, String numeroCuenta){
+        if (prefijo == null || numeroCuenta == null){
+            throw new IllegalArgumentException("Los parametros no pueden ser nulos");
+        }
+        else if (prefijo.length() != 4){
+            throw new IllegalArgumentException("El prefijo debe tener 4 caracteres");
+        }
+        else if (numeroCuenta.length() > 30){
+            throw new IllegalArgumentException("El numero de cuenta debe tener menos de 30 caracteres");
+        }
         this.prefijo = prefijo;
         this.numeroCuenta = numeroCuenta;
     }
@@ -12,6 +21,12 @@ public class IBAN {
     }
 
     public void setPrefijo(String prefijo){
+        if (prefijo == null){
+            throw new IllegalArgumentException("El prefijo no puede ser nulo");
+        }
+        else if (prefijo.length() != 4){
+            throw new IllegalArgumentException("El prefijo debe tener 4 caracteres");
+        }
         this.prefijo = prefijo;
     }
 
@@ -20,10 +35,34 @@ public class IBAN {
     }
 
     public void setNumeroCuenta(String numeroCuenta){
+        if (numeroCuenta == null){
+            throw new IllegalArgumentException("El numero de cuenta no puede ser nulo");
+        }
+        else if (numeroCuenta.length() > 30){
+            throw new IllegalArgumentException("El numero de cuenta debe tener menos de 30 caracteres");
+        }
         this.numeroCuenta = numeroCuenta;
     }
 
-    public String toIBAN(){
+    public String getIBAN(){
+        return this.toString();
+    }
+
+    public void setIBAN(String prefijo, String numeroCuenta){
+        if (prefijo == null || numeroCuenta == null){
+            throw new IllegalArgumentException("Los parametros no pueden ser nulos");
+        }
+        else if (prefijo.length() != 4){
+            throw new IllegalArgumentException("El prefijo debe tener 4 caracteres");
+        }
+        else if (numeroCuenta.length() > 30){
+            throw new IllegalArgumentException("El numero de cuenta debe tener menos de 30 caracteres");
+        }
+        this.prefijo = prefijo;
+        this.numeroCuenta = numeroCuenta;
+    }
+
+    public String toString(){
         return this.prefijo + this.numeroCuenta;
     }
 

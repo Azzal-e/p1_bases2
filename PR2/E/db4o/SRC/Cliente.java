@@ -16,6 +16,28 @@ public class Cliente {
     }
 
     public Cliente(String nombre, String direccion, String telefono, String email, String dni, Date fechaNacimiento){
+        if (nombre == null || direccion == null || telefono == null || dni == null || fechaNacimiento == null){
+            throw new IllegalArgumentException("Los parametros no pueden ser nulos");
+        }
+        else if (nombre.length() > 50){
+            throw new IllegalArgumentException("El nombre no puede tener mas de 50 caracteres");
+        }
+        else if (direccion.length() > 200){
+            throw new IllegalArgumentException("La direccion no puede tener mas de 200 caracteres");
+        }
+        else if (telefono.length() > 16){
+            throw new IllegalArgumentException("El telefono no puede tener mas de 16 caracteres");
+        }
+        else if (email != null && email.length() > 250){
+            throw new IllegalArgumentException("El email no puede tener mas de 250 caracteres");
+        }
+        else if (dni.length() > 20){
+            throw new IllegalArgumentException("El DNI no puede tener mas de 20 caracteres");
+        }
+        else if (fechaNacimiento.after(new Date())){
+            throw new IllegalArgumentException("La fecha de nacimiento no puede ser en el futuro");
+        }
+
         this.nombre = nombre;
         this.direccion = direccion;
         this.telefono = telefono;
@@ -30,6 +52,12 @@ public class Cliente {
     }
 
     public void setNombre(String nombre){
+        if (nombre == null){
+            throw new IllegalArgumentException("El nombre no puede ser nulo");
+        }
+        else if (nombre.length() > 50){
+            throw new IllegalArgumentException("El nombre no puede tener mas de 50 caracteres");
+        }
         this.nombre = nombre;
     }
 
@@ -38,6 +66,12 @@ public class Cliente {
     }
 
     public void setDireccion(String direccion){
+        if (direccion == null){
+            throw new IllegalArgumentException("La direccion no puede ser nula");
+        }
+        else if (direccion.length() > 200){
+            throw new IllegalArgumentException("La direccion no puede tener mas de 200 caracteres");
+        }
         this.direccion = direccion;
     }
 
@@ -46,6 +80,12 @@ public class Cliente {
     }
 
     public void setTelefono(String telefono){
+        if (telefono == null){
+            throw new IllegalArgumentException("El telefono no puede ser nulo");
+        }
+        else if (telefono.length() > 16){
+            throw new IllegalArgumentException("El telefono no puede tener mas de 16 caracteres");
+        }
         this.telefono = telefono;
     }
 
@@ -54,6 +94,9 @@ public class Cliente {
     }
 
     public void setEmail(String email){
+        if (email.length() > 250){
+            throw new IllegalArgumentException("El email no puede tener mas de 250 caracteres");
+        }
         this.email = email;
     }
 
@@ -62,6 +105,12 @@ public class Cliente {
     }
 
     public void setDni(String dni){
+        if (dni == null){
+            throw new IllegalArgumentException("El DNI no puede ser nulo");
+        }
+        else if (dni.length() > 20){
+            throw new IllegalArgumentException("El DNI no puede tener mas de 20 caracteres");
+        }
         this.dni = dni;
     }
 
@@ -70,6 +119,12 @@ public class Cliente {
     }
 
     public void setFechaNacimiento(Date fechaNacimiento){
+        if (fechaNacimiento == null){
+            throw new IllegalArgumentException("La fecha de nacimiento no puede ser nula");
+        }
+        else if (fechaNacimiento.after(new Date())){
+            throw new IllegalArgumentException("La fecha de nacimiento no puede ser en el futuro");
+        }
         this.fechaNacimiento = fechaNacimiento;
     }
     
@@ -85,7 +140,10 @@ public class Cliente {
     }
 
     public void removeCuenta(Cuenta cuenta){
-        this.cuentas.remove(cuenta);
+        if(cuenta != null && this.cuentas.contains(cuenta)){
+            this.cuentas.remove(cuenta);
+            cuenta.removeTitular(this);
+        }
     }
 
     public String toString(){
