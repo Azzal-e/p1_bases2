@@ -1,5 +1,6 @@
 import java.util.List;
 import java.util.Date;
+import java.util.ArrayList;
 
 public class Cliente {
     private String nombre;
@@ -77,7 +78,10 @@ public class Cliente {
     }
 
     public void addCuenta(Cuenta cuenta){
-        this.cuentas.add(cuenta);
+        if(cuenta != null && !this.cuentas.contains(cuenta)){
+            this.cuentas.add(cuenta);
+            cuenta.addTitular(this);
+        }
     }
 
     public void removeCuenta(Cuenta cuenta){
