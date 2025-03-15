@@ -8,7 +8,9 @@ public abstract class Cuenta {
     private Date fechaCreacion;
     private List<Cliente> titulares;
     private int sigCodigoOperacion;
-    
+    private List<Operacion> operaciones;
+    private List<Operacion> operacionesReceptora;
+
     public Cuenta(IBAN IBAN, Date fechaCreacion, Cliente titular){
         if (IBAN == null || fechaCreacion == null){
             throw new IllegalArgumentException("Los parametros no pueden ser nulos");
@@ -28,6 +30,8 @@ public abstract class Cuenta {
         this.titulares = new ArrayList<>();
         this.titulares.add(titular);
         this.sigCodigoOperacion = 0;
+        this.operaciones = new ArrayList<>();
+        this.operacionesReceptora = new ArrayList<>();
     }
 
     public String getIBAN(){
@@ -78,6 +82,26 @@ public abstract class Cuenta {
 
     public void actualizarSaldo(double cantidad){
         this.saldo += cantidad;
+    }
+
+    public List<Operacion> getOperaciones(){
+        return this.operaciones;
+    }
+
+    public void addOperacion(Operacion operacion){
+        if(operacion != null && !this.operaciones.contains(operacion)){
+            this.operaciones.add(operacion);
+        }
+    }
+
+    public List<Operacion> getOperacionesReceptora(){
+        return this.operacionesReceptora;
+    }
+
+    public void addOperacionReceptora(Operacion operacion){
+        if(operacion != null && !this.operacionesReceptora.contains(operacion)){
+            this.operacionesReceptora.add(operacion);
+        }
     }
 
     public int asignarCodigoOperacion(){

@@ -29,6 +29,7 @@ public abstract class Operacion {
         this.cuantia = cuantia;
         this.descripcion = descripcion;
         this.cuentaEmisora = cuentaEmisora;
+        cuentaEmisora.addOperacion(this);
     }
 
     public int getCodigoOperacion(){
