@@ -34,8 +34,8 @@ public abstract class Cuenta {
         this.operacionesReceptora = new ArrayList<>();
     }
 
-    public String getIBAN(){
-        return this.IBAN.getIBAN();
+    public IBAN getIBAN(){
+        return this.IBAN;
     }
 
     public void setIBAN(IBAN IBAN){
