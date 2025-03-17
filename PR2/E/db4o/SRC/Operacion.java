@@ -23,7 +23,7 @@ public abstract class Operacion {
         else if (fechaYHora.before(cuentaEmisora.getFechaCreacion())){
             throw new IllegalArgumentException("La fecha y hora no puede ser anterior a la fecha de creacion de la cuenta");
         }
-        else if (IBAN_cuentaEmisora != cuentaEmisora.getIBAN()){
+        else if (!IBAN_cuentaEmisora.equals(cuentaEmisora.getIBAN())){
             throw new IllegalArgumentException("El IBAN de la cuenta emisora no es consistente.");
         }
         this.codigoOperacion = cuentaEmisora.asignarCodigoOperacion();
@@ -32,7 +32,6 @@ public abstract class Operacion {
         this.cuantia = cuantia;
         this.descripcion = descripcion;
         this.cuentaEmisora = cuentaEmisora;
-        cuentaEmisora.addOperacion(this);
     }
 
     public int getCodigoOperacion(){
@@ -49,7 +48,7 @@ public abstract class Operacion {
     public IBAN getIBAN_cuentaEmisora(){
         return this.IBAN_cuentaEmisora;
     }
-
+    
     public void setIBAN_cuentaEmisora(IBAN IBAN_cuentaEmisora){
         if (IBAN_cuentaEmisora == null){
             throw new IllegalArgumentException("El IBAN de la cuenta emisora no puede ser nulo");
@@ -91,6 +90,14 @@ public abstract class Operacion {
 
     public Cuenta getCuentaEmisora(){
         return this.cuentaEmisora;
+    }
+
+    public abstract void destruirOperacion();
+
+    @Override
+    public String toString(){
+        return "Operacion: " + this.codigoOperacion + " - " + this.fechaYHora + " - " + this.cuantia + " - " + this.descripcion
+               + " cuenta: " + this.cuentaEmisora;
     }
 
 }

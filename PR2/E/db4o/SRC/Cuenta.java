@@ -8,7 +8,6 @@ public abstract class Cuenta {
     private Date fechaCreacion;
     private List<Cliente> titulares;
     private int sigCodigoOperacion;
-    private List<Operacion> operaciones;
 
     public Cuenta(IBAN IBAN, Date fechaCreacion, Cliente titular){
         if (IBAN == null || fechaCreacion == null){
@@ -27,9 +26,9 @@ public abstract class Cuenta {
         this.saldo = 0;
         this.fechaCreacion = fechaCreacion;
         this.titulares = new ArrayList<>();
-        this.titulares.add(titular);
+        this.addTitular(titular);
         this.sigCodigoOperacion = 0;
-        this.operaciones = new ArrayList<>();
+        
     }
 
     public IBAN getIBAN(){
@@ -82,22 +81,15 @@ public abstract class Cuenta {
         this.saldo += cantidad;
     }
 
-    public List<Operacion> getOperaciones(){
-        return this.operaciones;
-    }
-
-    public void addOperacion(Operacion operacion){
-        if(operacion != null && !this.operaciones.contains(operacion)){
-            this.operaciones.add(operacion);
-        }
-    }
-
     public int asignarCodigoOperacion(){
         this.sigCodigoOperacion++;
         return this.sigCodigoOperacion - 1;
     }
 
+    @Override
     public String toString(){
-        return this.IBAN + " " + this.saldo + " " + this.fechaCreacion + " " + this.titulares;
+        // Evitar imprimir la lista de titulares de manera recursiva
+        String titularesString = titulares != null ? titulares.size() + " titulares" : "Sin titulares";
+        return "Cuenta [IBAN=" + IBAN + ", Saldo=" + saldo + ", Titulares=" + titularesString + "]";
     }
 }

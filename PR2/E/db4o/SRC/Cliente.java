@@ -1,7 +1,4 @@
-import java.util.List;
-import java.util.Date;
-import java.util.ArrayList;
-
+import java.util.*;
 public class Cliente {
     private String nombre;
     private String direccion;
@@ -134,6 +131,7 @@ public class Cliente {
 
     public void addCuenta(Cuenta cuenta){
         if(cuenta != null && !this.cuentas.contains(cuenta)){
+            System.out.println("Añadiendo cuenta");
             this.cuentas.add(cuenta);
             cuenta.addTitular(this);
         }
@@ -147,15 +145,25 @@ public class Cliente {
     }
 
     public void destruirCliente(){
-        for(Cuenta cuenta : this.cuentas){
-            cuenta.removeTitular(this);
+        // Verifica si la lista de cuentas no está vacía
+        if (cuentas.isEmpty()) {
+            return; // Si la lista está vacía, no hacer nada
         }
-        this.cuentas.clear();
+
+        // Hacemos una copia de la lista de cuentas para evitar ConcurrentModificationException
+        List<Cuenta> cuentasCopy = new ArrayList<>(cuentas);
+
+        for (Cuenta cuenta : cuentasCopy) {
+            cuenta.removeTitular(this);  // Elimina al titular de la cuenta
+            cuentas.remove(cuenta);  // Elimina la cuenta de la lista original
+        }
     }
 
+    @Override
     public String toString(){
-        return "Cliente: " + this.nombre + " " + this.dni 
-        + " " + this.fechaNacimiento + " " + this.direccion + " " + this.telefono + " " + this.email + " " + this.cuentas;
+        // Evitar imprimir la lista de cuentas de manera recursiva
+        String cuentasString = cuentas != null ? cuentas.size() + " cuentas" : "Sin cuentas";
+        return "Cliente [Nombre=" + nombre + ", DNI=" + dni + ", Cuentas=" + cuentasString + "]";
     }
 
 }

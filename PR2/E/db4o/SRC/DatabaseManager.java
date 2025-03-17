@@ -2,6 +2,8 @@ import com.db4o.*;
 import java.util.List;
 import java.util.Date;
 import java.util.ArrayList;
+import com.db4o.query.Constraint;
+import com.db4o.query.Query;
 
 
 public class DatabaseManager {
@@ -11,33 +13,40 @@ public class DatabaseManager {
         db = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), filename);
     }
 
+    // Guardar un cliente
     public void guardarCliente(String nombre, String dni, String telefono, String email, String direccion, Date fechaNacimiento) {
-        if(!db.query(c -> c.getDNI().equals(dni)).isEmpty()){
+        Query query = db.query();
+        query.constrain(Cliente.class);
+        query.descend("dni").constrain(dni);
+        ObjectSet<Cliente> clientesExistentes = query.execute();
+        if (!clientesExistentes.isEmpty()) {
             throw new IllegalArgumentException("Error: ya existe un cliente con ese DNI");
-        }
-        else{
+        } else {
             Cliente cliente = new Cliente(nombre, direccion, telefono, email, dni, fechaNacimiento);
             db.store(cliente);
             db.commit();
         }
     }
 
-    public void guardarCuentaCorriente(IBAN IBAN, Date fechaCreacion, String DNI_titular, int codigoOficina){
-        // Verificar si ya existe una cuenta con ese IBAN
-        ObjectSet<Cuenta> cuentasExistentes = db.query(c -> c instanceof Cuenta && c.getIBAN().equals(IBAN));
+    
+    // Guardar una cuenta corriente
+    public void guardarCuentaCorriente(IBAN IBAN, Date fechaCreacion, String DNI_titular, int codigoOficina) {
+        Query query = db.query();
+        query.constrain(Cuenta.class);
+        query.descend("IBAN").constrain(IBAN);
+        ObjectSet<Cuenta> cuentasExistentes = query.execute();
         if (!cuentasExistentes.isEmpty()) {
             throw new IllegalArgumentException("Error: ya existe una cuenta con ese IBAN");
         }
-        
-        //Obtener cliente
+
+        // Obtener cliente
         Cliente titular = obtenerCliente(DNI_titular);
-    
+
         // Buscar la oficina correspondiente
         Oficina oficina = obtenerOficina(codigoOficina);
 
         // Crear y almacenar la cuenta corriente
         CuentaCorriente cuentaCorriente = new CuentaCorriente(IBAN, fechaCreacion, titular, oficina);
-
         // El cliente ve modificada su lista de cuentas, por lo que se debe actualizar en la base de datos su instancia
         db.store(titular);
 
@@ -45,14 +54,19 @@ public class DatabaseManager {
         db.commit();
     }
     
-    public void guardarCuentaAhorro(IBAN IBAN, Date fechaCreacion, String DNI_titular, double interes){
-        if(!db.query(c -> c.getIBAN().equals(IBAN)).isEmpty()){
+    // Guardar una cuenta de ahorro
+    public void guardarCuentaAhorro(IBAN IBAN, Date fechaCreacion, String DNI_titular, double interes) {
+        Query query = db.query();
+        query.constrain(Cuenta.class);
+        query.descend("IBAN").constrain(IBAN);
+        ObjectSet<Cuenta> cuentasExistentes = query.execute();
+        if (!cuentasExistentes.isEmpty()) {
             throw new IllegalArgumentException("Error: ya existe una cuenta con ese IBAN");
-        }
-        else{
-            //Obtener cliente
+        } else {
+            // Obtener cliente
             Cliente titular = obtenerCliente(DNI_titular);
-            
+
+            // Crear cuenta de ahorro
             CuentaAhorro cuentaAhorro = new CuentaAhorro(IBAN, fechaCreacion, titular, interes);
 
             // El cliente ve modificada su lista de cuentas, por lo que se debe actualizar en la base de datos su instancia
@@ -63,27 +77,32 @@ public class DatabaseManager {
         }
     }
 
-    public void guardarOficina(int codigoOficina, String direccion, String telefono){
-        if(!db.query(c -> c.getCodigoOficina().equals(codigoOficina)).isEmpty()){
+    // Guardar una oficina
+    public void guardarOficina(int codigoOficina, String direccion, String telefono) {
+        Query query = db.query();
+        query.constrain(Oficina.class);
+        query.descend("codigoOficina").constrain(codigoOficina);
+        ObjectSet<Oficina> oficinasExistentes = query.execute();
+        if (!oficinasExistentes.isEmpty()) {
             throw new IllegalArgumentException("Error: ya existe una oficina con ese código");
-        }
-        else{
+        } else {
             Oficina oficina = new Oficina(codigoOficina, direccion, telefono);
             db.store(oficina);
             db.commit();
         }
     }
 
-    public void guardarOperacion_efectiva(IBAN IBAN_cuentaEmisora, Date fechaYHora, double cuantia, String descripcion, int codigoOficina, TipoOperacion tipoOperacion){
-        //Obtener cuenta emisora
+    // Guardar operación efectiva
+    public void guardarOperacion_efectiva(IBAN IBAN_cuentaEmisora, Date fechaYHora, double cuantia, String descripcion, int codigoOficina, TipoOperacion tipoOperacion) {
+        // Obtener cuenta emisora
         Cuenta cuentaEmisora = obtenerCuenta(IBAN_cuentaEmisora);
 
-        //Obtener oficina
+        // Obtener oficina
         Oficina oficina = obtenerOficina(codigoOficina);
 
         OperacionEfectiva operacionEfectiva = new OperacionEfectiva(IBAN_cuentaEmisora, fechaYHora, cuantia, descripcion, cuentaEmisora, oficina, tipoOperacion);
 
-        // Operacion efectiva actuliza el saldo de la cuenta emisora, por lo que se debe actualizar en la base de datos su instancia
+        // Operacion efectiva actualiza el saldo de la cuenta emisora, por lo que se debe actualizar en la base de datos su instancia
         db.store(cuentaEmisora);
 
         db.store(operacionEfectiva);
@@ -110,36 +129,61 @@ public class DatabaseManager {
    
         
 
-    public Oficina obtenerOficina(int codigoOficina){
-        ObjectSet<Oficina> oficinas = db.query(o -> o instanceof Oficina && o.getCodigoOficina() == codigoOficina);
+    // Obtener oficina por código
+    public Oficina obtenerOficina(int codigoOficina) {
+        Query query = db.query();
+        query.constrain(Oficina.class);
+        query.descend("codigoOficina").constrain(codigoOficina);
+        ObjectSet<Oficina> oficinas = query.execute();
         if (oficinas.isEmpty()) {
             throw new IllegalArgumentException("Error: no existe una oficina con ese código");
         }
-        return oficinas.next();
+        return oficinas.get(0);
     }
 
-    public Cuenta obtenerCuenta(IBAN IBAN){
-        ObjectSet<Cuenta> cuentas = db.query(c -> c instanceof Cuenta && c.getIBAN().equals(IBAN));
+    // Obtener cuenta por IBAN
+    public Cuenta obtenerCuenta(IBAN IBAN) {
+        Query query = db.query();
+        query.constrain(Cuenta.class);
+        query.descend("IBAN").constrain(IBAN);
+        ObjectSet<Cuenta> cuentas = query.execute();
         if (cuentas.isEmpty()) {
             throw new IllegalArgumentException("Error: no existe una cuenta con ese IBAN");
         }
-        return cuentas.next();
+        return cuentas.get(0);
     }
 
-    public Cliente obtenerCliente(String dni){
-        ObjectSet<Cliente> clientes = db.query(c -> c instanceof Cliente && c.getDNI().equals(dni));
+    // Obtener cliente por DNI
+    public Cliente obtenerCliente(String dni) {
+        Query query = db.query();
+        query.constrain(Cliente.class);
+        query.descend("dni").constrain(dni);
+        ObjectSet<Cliente> clientes = query.execute();
         if (clientes.isEmpty()) {
             throw new IllegalArgumentException("Error: no existe un cliente con ese DNI");
         }
-        return clientes.next();
+        return clientes.get(0);
     }
 
-    public Operacion obtenerOperacion(int codigoOperacion, IBAN IBAN_cuentaEmisora){
-        ObjectSet<Operacion> operaciones = db.query(c -> c instanceof Operacion && c.getCodigoOperacion().equals(codigoOperacion) && c.getCuentaEmisora().getIBAN().equals(IBAN_cuentaEmisora));
+    public Operacion obtenerOperacion(int codigoOperacion, IBAN IBAN_cuentaEmisora) {
+        // Crear una consulta para obtener operaciones
+        Query query = db.query();
+        query.constrain(Operacion.class);
+        
+        // Condición para obtener operaciones con el código y el IBAN de la cuenta emisora
+        query.descend("codigoOperacion").constrain(codigoOperacion);
+        query.descend("cuentaEmisora").descend("IBAN").constrain(IBAN_cuentaEmisora);
+        
+        // Ejecutar la consulta
+        ObjectSet<Operacion> operaciones = query.execute();
+        
+        // Verificar si se encontró la operación
         if (operaciones.isEmpty()) {
             throw new IllegalArgumentException("Error: no existe una operación con ese código");
         }
-        return operaciones.next();
+        
+        // Retornar la primera operación encontrada
+        return operaciones.get(0);
     }
 
     public void actualizarCliente(String dni, String nombre, String direccion, String telefono, String email){
@@ -297,60 +341,307 @@ public class DatabaseManager {
     }
 
 
-    public void eliminarCliente(String dni){
-        if(db.query(c -> c.getDNI().equals(dni)).isEmpty()){
+    public void eliminarCliente(String dni) {
+        // Crear una consulta para obtener el cliente por su DNI
+        Query query = db.query();
+        query.constrain(Cliente.class);
+        query.descend("dni").constrain(dni);
+        ObjectSet<Cliente> clientes = query.execute();
+        
+        if (clientes.isEmpty()) {
             throw new IllegalArgumentException("Error: no existe un cliente con ese DNI");
-        }
-        else{
-            // Eliminar todas las cuentas del cliente
-            Cliente cliente = obtenerCliente(dni);
+        } else {
+            // Obtener el cliente para eliminar
+            Cliente cliente = clientes.get(0);
+    
             // Obtener las cuentas del cliente para actualizarlas posteriormente
-            ArrayList
-
+            ArrayList<Cuenta> cuentasCliente = new ArrayList<>(cliente.getCuentas());
+    
+            // Llamar al método destruirCliente si es necesario
             cliente.destruirCliente();
-
-            db.commit();
-        }
-    }
-
-    public void eliminarCuenta(Cuenta cuenta){
-        if(db.query(c -> c.getIBAN().equals(cuenta.getIBAN())).isEmpty()){
-            throw new IllegalArgumentException("Error: no existe una cuenta con ese IBAN");
-        }
-        else{
-            // Eliminar todas las operaciones de la cuenta
-            List<Operacion> operaciones = db.query(c -> c.getCuentaEmisora().equals(cuenta));
-            for(Operacion operacion : operaciones){
-                eliminarOperacion(operacion);
+    
+            for (Cuenta cuenta : cuentasCliente) {
+                // Si alguna cuenta no tiene titulares, se lanza excepción
+                if (cuenta.getTitulares().isEmpty()) {
+                    throw new IllegalArgumentException("Error: la cuenta " + cuenta.getIBAN() + " no tiene titulares");
+                }
+    
+                // Actualizamos las cuentas, porque ha cambiado su lista de titulares.
+                db.store(cuenta);
             }
-            // Eliminar cuenta
-            db.delete(cuenta);
+    
+            // Eliminar el cliente de la base de datos
+            db.delete(cliente);
+    
+            // Hacer commit para confirmar los cambios
             db.commit();
         }
     }
+    
 
-    public void eliminarOperacion(Operacion operacion){
-        if(db.query(c -> c.getCodigoOperacion().equals(operacion.getCodigoOperacion())).isEmpty()){
+    public void eliminarCuenta(IBAN IBAN) {
+        // Crear una consulta para verificar si la cuenta existe por su IBAN
+        Query query = db.query();
+        query.constrain(Cuenta.class);
+        query.descend("IBAN").constrain(IBAN);
+        ObjectSet<Cuenta> cuentasExistentes = query.execute();
+        
+        if (cuentasExistentes.isEmpty()) {
+            throw new IllegalArgumentException("Error: no existe una cuenta con ese IBAN");
+        } else {
+            // Obtener todas las operaciones de la cuenta
+            List<Operacion> operaciones =  obtenerOperacionesCuenta(IBAN);
+            
+            // Eliminar las operaciones de la cuenta
+            for (Operacion operacion : operaciones) {
+                operacion.destruirOperacion();
+                
+                // Si la operación es una transferencia, actualizamos la cuenta receptora
+                if (operacion instanceof Transferencia) {
+                    Transferencia transferencia = (Transferencia) operacion;
+                    db.store(transferencia.getCuentaReceptora());
+                }
+    
+                // Eliminar la operación
+                db.delete(operacion);
+            }
+            //Volver a almacenar a todos los titulares de esa cuenta
+            // Verificar si la lista de cuentas no está vacía
+            if (cuentasExistentes.isEmpty()) {
+                return; // Si no hay cuentas, no hacer nada
+            }
+
+            // Hacemos una copia de la lista de titulares para evitar ConcurrentModificationException
+            List<Cliente> titularesCopy = new ArrayList<>(cuentasExistentes.get(0).getTitulares());
+
+            for (Cliente titular : titularesCopy) {
+                cuentasExistentes.get(0).removeTitular(titular);  // Elimina el titular de la cuenta
+                db.store(titular);  // Vuelve a almacenar al titular
+            }
+            // Eliminar la cuenta
+            db.delete(cuentasExistentes.get(0));
+            
+            // Confirmar los cambios realizados en la base de datos
+            db.commit();
+        }
+    }
+    
+
+    public void eliminarOperacion(Operacion operacion) {
+        // Crear una consulta para verificar si la operación existe por su código
+        Query query = db.query();
+        query.constrain(Operacion.class);
+        query.descend("codigoOperacion").constrain(operacion.getCodigoOperacion());
+        ObjectSet<Operacion> operacionesExistentes = query.execute();
+        
+        if (operacionesExistentes.isEmpty()) {
             throw new IllegalArgumentException("Error: no existe una operación con ese código");
-        }
-        else{
+        } else {
+            // Destruir la operación antes de eliminarla
+            operacion.destruirOperacion();
+    
+            // Actualizamos la cuenta emisora por si se ha actualizado su saldo
+            db.store(operacion.getCuentaEmisora());
+    
+            // Si la operación es una transferencia, actualizamos la cuenta receptora
+            if (operacion instanceof Transferencia) {
+                Transferencia transferencia = (Transferencia) operacion;
+                db.store(transferencia.getCuentaReceptora());
+            }
+    
+            // Eliminar la operación
             db.delete(operacion);
+            
+            // Confirmar los cambios en la base de datos
             db.commit();
         }
     }
+    
 
-    public void eliminarOficina(Oficina oficina){
-        if(db.query(c -> c.getCodigoOficina().equals(oficina.getCodigoOficina())).isEmpty()){
+    public void eliminarOficina(Oficina oficina) {
+        // Crear una consulta para verificar si la oficina existe por su código
+        Query query = db.query();
+        query.constrain(Oficina.class);
+        query.descend("codigoOficina").constrain(oficina.getCodigoOficina());
+        ObjectSet<Oficina> oficinasExistentes = query.execute();
+        
+        if (oficinasExistentes.isEmpty()) {
             throw new IllegalArgumentException("Error: no existe una oficina con ese código");
-        }
-        else{
+        } else {
+            // Eliminar la oficina
             db.delete(oficina);
+            
+            // Confirmar los cambios en la base de datos
             db.commit();
         }
     }
-
+    
     //algunas Operaciones de consulta
-    public Lias
+    public List<Cuenta> obtenerCuentasCliente(String dni){
+        return obtenerCliente(dni).getCuentas();
+    }
+
+    public List<Operacion> obtenerOperacionesCuenta(IBAN IBAN){
+        // Hacer query en operaciones
+        Query query = db.query();
+        query.constrain(Operacion.class); 
+        query.descend("cuentaEmisora").descend("IBAN").constrain(IBAN);
+        ObjectSet<Operacion> operaciones = query.execute();
+        return new ArrayList<>(operaciones);
+    }
+
+    public List<Operacion> obtenerOperacionesCliente(String dni) {
+        // Obtener el cliente por su DNI
+        Cliente cliente = obtenerCliente(dni);
+    
+        // Crear una consulta para obtener las operaciones
+        Query query = db.query();
+        query.constrain(Operacion.class);
+        
+        // Buscar operaciones cuya cuenta emisora tenga al cliente como titular
+        query.descend("cuentaEmisora").descend("titulares").constrain(cliente);
+        
+        // Ejecutar la consulta
+        ObjectSet<Operacion> operaciones = query.execute();
+        
+        // Convertir el resultado en una lista y devolverlo
+        return new ArrayList<>(operaciones);
+    }
+    
+
+    public List<Cliente> obtenerClientesConAlMenosNCuentas(int numCuentas) {
+        // Crear una consulta para obtener todos los clientes
+        Query query = db.query();
+        query.constrain(Cliente.class);
+        
+        // Ejecutar la consulta para obtener todos los clientes
+        ObjectSet<Cliente> clientes = query.execute();
+    
+        // Filtrar los clientes que tienen al menos 'numCuentas' cuentas
+        List<Cliente> clientesConAlMenosNCuentas = new ArrayList<>();
+        for (Cliente cliente : clientes) {
+            if (cliente.getCuentas().size() >= numCuentas) {
+                clientesConAlMenosNCuentas.add(cliente);
+            }
+        }
+    
+        // Devolver la lista de clientes filtrados
+        return clientesConAlMenosNCuentas;
+    }
+    
+
+    public List<CuentaAhorro> obtenerCuentasAhorro() {
+        // Crear una consulta para obtener todas las cuentas de tipo CuentaAhorro
+        Query query = db.query();
+        query.constrain(CuentaAhorro.class);
+        
+        // Ejecutar la consulta
+        ObjectSet<CuentaAhorro> cuentasAhorro = query.execute();
+        
+        // Convertir el resultado en una lista y devolverlo
+        return new ArrayList<>(cuentasAhorro);
+    }
+    
+
+    public List<CuentaCorriente> obtenerCuentasCorrientes() {
+        // Crear una consulta para obtener todas las cuentas de tipo CuentaCorriente
+        Query query = db.query();
+        query.constrain(CuentaCorriente.class);
+        
+        // Ejecutar la consulta
+        ObjectSet<CuentaCorriente> cuentasCorrientes = query.execute();
+        
+        // Convertir el resultado en una lista y devolverlo
+        return new ArrayList<>(cuentasCorrientes);
+    }
+    
+
+    public List<OperacionEfectiva> obtenerOperacionesEfectivas() {
+        // Crear una consulta para obtener todas las operaciones de tipo OperacionEfectiva
+        Query query = db.query();
+        query.constrain(OperacionEfectiva.class);
+        
+        // Ejecutar la consulta
+        ObjectSet<OperacionEfectiva> operacionesEfectivas = query.execute();
+        
+        // Convertir el resultado en una lista y devolverlo
+        return new ArrayList<>(operacionesEfectivas);
+    }
+
+
+    public List<Transferencia> obtenerOperacionesTransferencia() {
+        // Crear una consulta para obtener todas las operaciones de tipo Transferencia
+        Query query = db.query();
+        query.constrain(Transferencia.class);
+        
+        // Ejecutar la consulta
+        ObjectSet<Transferencia> transferencias = query.execute();
+        
+        // Convertir el resultado en una lista y devolverlo
+        return new ArrayList<>(transferencias);
+    }
+    
+
+    public List<Operacion> obtenerOperacionesCuentaEntreFechas(IBAN IBAN, Date fechaInicio, Date fechaFin) {
+        // Crear una consulta para obtener las operaciones de una cuenta entre fechas
+        Query query = db.query();
+        query.constrain(Operacion.class);
+        query.descend("cuentaEmisora").descend("IBAN").constrain(IBAN);
+        query.descend("fechaYHora").constrain(fechaInicio).greater();
+        query.descend("fechaYHora").constrain(fechaFin).smaller();
+    
+        // Ejecutar la consulta
+        ObjectSet<Operacion> operaciones = query.execute();
+    
+        // Convertir el resultado en una lista y devolverlo
+        return new ArrayList<>(operaciones);
+    }
+    
+
+    public List<Operacion> obtenerOperacionesClienteEntreFechas(String dni, Date fechaInicio, Date fechaFin) {
+        // Obtener el cliente por su DNI
+        Cliente cliente = obtenerCliente(dni);
+    
+        // Crear una consulta para obtener las operaciones de un cliente entre fechas
+        Query query = db.query();
+        query.constrain(Operacion.class);
+        query.descend("cuentaEmisora").descend("titulares").constrain(cliente);
+        query.descend("fechaYHora").constrain(fechaInicio).greater();
+        query.descend("fechaYHora").constrain(fechaFin).smaller();
+    
+        // Ejecutar la consulta
+        ObjectSet<Operacion> operaciones = query.execute();
+    
+        // Convertir el resultado en una lista y devolverlo
+        return new ArrayList<>(operaciones);
+    }
+    
+    
+    public List<Cuenta> obtenerCuentasConSaldoMinimo(double saldoMinimo) {
+        // Crear una consulta para obtener las cuentas con un saldo mínimo
+        Query query = db.query();
+        query.constrain(Cuenta.class);
+        query.descend("saldo").constrain(saldoMinimo).greater();
+    
+        // Ejecutar la consulta
+        ObjectSet<Cuenta> cuentas = query.execute();
+    
+        // Convertir el resultado en una lista y devolverlo
+        return new ArrayList<>(cuentas);
+    }
+    
+    
+    public double obtenerSaldoTotalCliente(String dni) {
+        Cliente cliente = obtenerCliente(dni);
+        double saldoTotal = 0.0;
+        
+        for (Cuenta cuenta : cliente.getCuentas()) {
+            saldoTotal += cuenta.getSaldo();
+        }
+        return saldoTotal;
+    }
+    
+    
 
     public void cerrar() {
         db.close();
