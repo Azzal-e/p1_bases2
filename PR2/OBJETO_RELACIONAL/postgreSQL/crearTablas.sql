@@ -1,7 +1,6 @@
-
 -- IMPLEMENTACION DE OBJETO/RELACIONAL EN GESTOR POSTGRESQL --
 
--- Eliminar tablas existentes
+-- Eliminar tablas y tipos existentes
 
 
 DROP TABLE IF EXISTS Titular CASCADE;
@@ -19,7 +18,7 @@ DROP DOMAIN IF EXISTS TELEFONO CASCADE;
 DROP TYPE IF EXISTS IBAN CASCADE;
 
 
--- CREACION DE DOMINIOS --
+-- CREACION DE DOMINIOS y tipos estructurados --
 
 CREATE DOMAIN DNI AS VARCHAR(20);
 CREATE DOMAIN TELEFONO AS VARCHAR(16);
@@ -106,6 +105,17 @@ CREATE TABLE Titular (
     CONSTRAINT fk_cuenta FOREIGN KEY (iban_cuenta) REFERENCES Cuenta(iban) ON DELETE CASCADE
 );
 
+-- Método para oobtener la edad de un cliente
+CREATE FUNCTION get_edad(dni_cliente DNI) RETURNS INTEGER AS $$
+DECLARE
+    edad INTEGER;
+BEGIN
+    SELECT EXTRACT(YEAR FROM AGE(CURRENT_DATE, fechaDeNacimiento)) INTO edad
+    FROM Cliente WHERE dni = dni_cliente;
+    
+    RETURN edad;
+END;
+$$ LANGUAGE plpgsql;
 -- IMPLEMENTACION DE RESTRICCIONES ADICIONALES --
 
 -- 1. Trigger para asegurar que para toda ocurrencia de IBAN en la tabla cuenta,
@@ -251,11 +261,8 @@ FOR EACH ROW EXECUTE FUNCTION validar_fecha_transferencia();
 
 CREATE OR REPLACE FUNCTION bloquear_insercion_cuenta() RETURNS TRIGGER AS $$
 BEGIN
-    -- Permitir insercion en CuentaCorriente o CuentaAhorro
-    IF TG_TABLE_NAME NOT IN ('CuentaCorriente', 'CuentaAhorro') THEN
-        RAISE EXCEPTION 'Error: No se puede insertar directamente en Cuenta. Use CuentaCorriente o CuentaAhorro.';
-    END IF;
-    RETURN NEW;
+    RAISE EXCEPTION 'Error: No se puede insertar directamente en Cuenta. Use CuentaCorriente o CuentaAhorro.';
+    RETURN NULL;
 END;
 $$ LANGUAGE plpgsql;
 
@@ -265,10 +272,8 @@ FOR EACH ROW EXECUTE FUNCTION bloquear_insercion_cuenta();
 
 CREATE OR REPLACE FUNCTION bloquear_insercion_operacion() RETURNS TRIGGER AS $$
 BEGIN
-    -- Permitir insercion en OperacionEfectiva o Transferencia
-    IF TG_TABLE_NAME NOT IN ('OperacionEfectiva', 'Transferencia') THEN
-        RAISE EXCEPTION 'Error: No se puede insertar directamente en Operacion. Use OperacionEfectiva o Transferencia.';
-    END IF;
+    RAISE EXCEPTION 'Error: No se puede insertar directamente en Operacion. Use OperacionEfectiva o Transferencia.';
+    RETURN NULL;
     RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
@@ -388,8 +393,9 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE EXTENSION IF NOT EXISTS pg_cron;
-SELECT cron.schedule('actualizar_saldo_ahorro', '0 0 * * *', 'SELECT actualizar_saldo_cuenta_ahorro();');
+-- Descomentar para activar el cron job, si se está seguro de soportar la extension pg_cron.
+--CREATE EXTENSION IF NOT EXISTS pg_cron;
+--SELECT cron.schedule('actualizar_saldo_ahorro', '0 0 * * *', 'SELECT actualizar_saldo_cuenta_ahorro();');
 
 --9. Actualizar saldo, que es atributo derivado, con las operaciones realizadas en la cuenta.
 
@@ -462,6 +468,18 @@ BEGIN
     RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trigger_gestionar_saldo_operaciones
+AFTER INSERT OR UPDATE OR DELETE ON Operacion
+FOR EACH ROW EXECUTE FUNCTION gestionar_saldo_operaciones();
+
+CREATE TRIGGER trigger_gestionar_saldo_operaciones_efectiva
+AFTER INSERT OR UPDATE OR DELETE ON OperacionEfectiva
+FOR EACH ROW EXECUTE FUNCTION gestionar_saldo_operaciones();
+
+CREATE TRIGGER trigger_gestionar_saldo_operaciones_transferencia
+AFTER INSERT OR UPDATE OR DELETE ON Transferencia
+FOR EACH ROW EXECUTE FUNCTION gestionar_saldo_operaciones();
 
 
 
