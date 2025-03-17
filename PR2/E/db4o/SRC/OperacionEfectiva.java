@@ -33,7 +33,23 @@ public class OperacionEfectiva extends Operacion {
     public TipoOperacion getTipoOperacion(){
         return this.tipoOperacion;
     }
-
+    public void setCuantia(double cuantia){
+        if (cuantia < 0){
+            throw new IllegalArgumentException("La cuantia no puede ser negativa");
+        }
+        this.cuantia = cuantia;
+        double difCuantia = cuantia - this.getCuantia();
+        if (tipoOperacion == TipoOperacion.INGRESO){
+            this.getCuentaEmisora().actualizarSaldo(difCuantia);
+        }
+        else if (tipoOperacion == TipoOperacion.RETIRADA){
+            if (this.getCuentaEmisora().getSaldo() < difCuantia){
+                throw new IllegalArgumentException("No hay suficiente saldo en la cuenta");
+            }
+            this.getCuentaEmisora().actualizarSaldo(-difCuantia);
+        }
+        
+    }
     public void setOficina(Oficina oficina){
         if (oficina == null){
             throw new IllegalArgumentException("La oficina no puede ser nula");

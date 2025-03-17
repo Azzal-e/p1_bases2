@@ -9,7 +9,6 @@ public abstract class Cuenta {
     private List<Cliente> titulares;
     private int sigCodigoOperacion;
     private List<Operacion> operaciones;
-    private List<Operacion> operacionesReceptora;
 
     public Cuenta(IBAN IBAN, Date fechaCreacion, Cliente titular){
         if (IBAN == null || fechaCreacion == null){
@@ -31,7 +30,6 @@ public abstract class Cuenta {
         this.titulares.add(titular);
         this.sigCodigoOperacion = 0;
         this.operaciones = new ArrayList<>();
-        this.operacionesReceptora = new ArrayList<>();
     }
 
     public IBAN getIBAN(){
@@ -91,16 +89,6 @@ public abstract class Cuenta {
     public void addOperacion(Operacion operacion){
         if(operacion != null && !this.operaciones.contains(operacion)){
             this.operaciones.add(operacion);
-        }
-    }
-
-    public List<Operacion> getOperacionesReceptora(){
-        return this.operacionesReceptora;
-    }
-
-    public void addOperacionReceptora(Operacion operacion){
-        if(operacion != null && !this.operacionesReceptora.contains(operacion)){
-            this.operacionesReceptora.add(operacion);
         }
     }
 

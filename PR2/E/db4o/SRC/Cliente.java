@@ -146,6 +146,13 @@ public class Cliente {
         }
     }
 
+    public void destruirCliente(){
+        for(Cuenta cuenta : this.cuentas){
+            cuenta.removeTitular(this);
+        }
+        this.cuentas.clear();
+    }
+
     public String toString(){
         return "Cliente: " + this.nombre + " " + this.dni 
         + " " + this.fechaNacimiento + " " + this.direccion + " " + this.telefono + " " + this.email + " " + this.cuentas;

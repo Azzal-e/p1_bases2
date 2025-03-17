@@ -3,7 +3,7 @@ public abstract class Operacion {
     private int codigoOperacion;
     private IBAN IBAN_cuentaEmisora;
     private Date fechaYHora;
-    private double cuantia;
+    protected double cuantia;
     private String descripcion;
     private Cuenta cuentaEmisora;
 
@@ -22,6 +22,9 @@ public abstract class Operacion {
         }
         else if (fechaYHora.before(cuentaEmisora.getFechaCreacion())){
             throw new IllegalArgumentException("La fecha y hora no puede ser anterior a la fecha de creacion de la cuenta");
+        }
+        else if (IBAN_cuentaEmisora != cuentaEmisora.getIBAN()){
+            throw new IllegalArgumentException("El IBAN de la cuenta emisora no es consistente.");
         }
         this.codigoOperacion = cuentaEmisora.asignarCodigoOperacion();
         this.IBAN_cuentaEmisora = IBAN_cuentaEmisora;
