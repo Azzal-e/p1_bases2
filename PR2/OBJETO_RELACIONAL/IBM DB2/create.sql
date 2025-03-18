@@ -24,22 +24,13 @@ DROP TYPE BANCO.OficinaUdt;
 DROP TYPE BANCO.CuentaUdt;
 DROP TYPE BANCO.ClienteUdt;
 
--- Eliminar tipo IBAN (estructurado)
-DROP TYPE BANCO.IBAN;
-
 -- Eliminar tipos DISTINCT
 DROP TYPE BANCO.TELEFONO;
 DROP TYPE BANCO.DNI;
 
 --Tipos DISTINCT: DNI y TELEFONO
 CREATE DISTINCT TYPE BANCO.DNI AS VARCHAR(20);
-CREATE DISTINCT TYPE BANCO.TELEFONO AS VARCHAR(16);
-
---Tipo IBAN
-CREATE TYPE BANCO.IBAN AS (
-	prefijoIBAN VARCHAR(4), 
-	numeroCuenta VARCHAR(30)
-) INSTANTIABLE NOT FINAL REF USING INTEGER MODE DB2SQL;
+CREATE DISTINCT TYPE BANCO.TELEFONO AS VARCHAR(24);
 
 -- Tipo Cliente
 CREATE TYPE BANCO.ClienteUdt AS (
@@ -54,7 +45,7 @@ CREATE TYPE BANCO.ClienteUdt AS (
 
 -- Tipo Cuenta
 CREATE TYPE BANCO.CuentaUdt AS (
-    iban BANCO.IBAN,
+    iban VARCHAR(24),
     fechaDeCreacion DATE,
     saldo DECIMAL(15,2), 
     refTitular REF(BANCO.ClienteUdt)
@@ -70,7 +61,7 @@ CREATE TYPE BANCO.OficinaUdt AS (
 -- Tipo Operación
 CREATE TYPE BANCO.OperacionUdt AS (
     codigo DECIMAL(10,0),
-    IBAN_cuentaEmisora BANCO.IBAN,
+    IBAN_cuentaEmisora VARCHAR(24),
     fechaYHora TIMESTAMP,
     cuantia DECIMAL(15,2),
     descripcion VARCHAR(200),
@@ -96,34 +87,38 @@ CREATE TYPE BANCO.TransferenciaUdt UNDER BANCO.OperacionUdt AS (
 	refCuenta_Receptora REF(BANCO.CuentaUdt)
 ) INSTANTIABLE NOT FINAL MODE DB2SQL;
 
+-- Crear tabla de Clientes
 CREATE TABLE BANCO.Cliente OF BANCO.ClienteUdt (
     REF IS oid USER GENERATED,
     PRIMARY KEY(dni),
-    dni WITH OPTIONS NOT NULL CHECK (LENGTH(CAST(dni AS VARCHAR(20))) = 9),
+    dni WITH OPTIONS NOT NULL,
     nombre WITH OPTIONS NOT NULL,
     apellidos WITH OPTIONS NOT NULL,
     fechaDeNacimiento WITH OPTIONS NOT NULL, 
-    telefono WITH OPTIONS NOT NULL CHECK ((CAST(telefono AS VARCHAR(16))) LIKE '\+\d+'),
+    telefono WITH OPTIONS NOT NULL, -- CHECK ((CAST(telefono AS VARCHAR(16))) LIKE '\+\d+'),
     direccion WITH OPTIONS NOT NULL,
-    email WITH OPTIONS NOT NULL CHECK (email LIKE '%@%.%')
+    email WITH OPTIONS NOT NULL-- CHECK (email LIKE '%@%.%')
 );
 
+-- Crear tabla de Cuentas
 CREATE TABLE BANCO.Cuenta OF BANCO.CuentaUdt (
 	REF IS oid USER GENERATED,
 	iban WITH OPTIONS NOT NULL,
 	fechaDeCreacion WITH OPTIONS NOT NULL,
-	saldo WITH OPTIONS NOT NULL CHECK (saldo >= 0),
+	saldo WITH OPTIONS NOT NULL, -- CHECK (saldo >= 0),
 	refTitular WITH OPTIONS SCOPE BANCO.Cliente
 );
 
+-- Crear tabla de Oficinas
 CREATE TABLE BANCO.Oficina OF BANCO.OficinaUdt (
 	REF IS oid USER GENERATED,
 	PRIMARY KEY (codigoOficina),
 	codigoOficina WITH OPTIONS NOT NULL,
 	direccion WITH OPTIONS NOT NULL, 
-    telefono WITH OPTIONS NOT NULL CHECK ((CAST(telefono AS VARCHAR(16))) LIKE '\+\d+')
+    telefono WITH OPTIONS NOT NULL -- CHECK ((CAST(telefono AS VARCHAR(16))) LIKE '\+\d+')
 );
 
+-- Crear tabla de Operaciones
 CREATE TABLE BANCO.Operacion OF BANCO.OperacionUdt (
 	REF IS oid USER GENERATED,
 	PRIMARY KEY (codigo),
@@ -135,20 +130,23 @@ CREATE TABLE BANCO.Operacion OF BANCO.OperacionUdt (
 	refCuenta_Emisora WITH OPTIONS SCOPE BANCO.Cuenta
 );
 
+-- Crear tabla de Cuentas Corrientes
 CREATE TABLE BANCO.CuentaCorriente OF BANCO.CuentaCorrienteUdt UNDER BANCO.Cuenta INHERIT SELECT PRIVILEGES (
 	refOficina_Adscrito WITH OPTIONS SCOPE BANCO.Oficina
 );
 
+-- Crear tabla de Cuentas de Ahorro
 CREATE TABLE BANCO.CuentaAhorro OF BANCO.CuentaAhorroUdt UNDER BANCO.Cuenta INHERIT SELECT PRIVILEGES (
-	interes WITH OPTIONS NOT NULL CHECK (interes >= 0)
+	interes WITH OPTIONS NOT NULL -- CHECK (interes >= 0)
 );
 
+-- Crear tabla de Operaciones Efectivas
 CREATE TABLE BANCO.OperacionEfectiva OF BANCO.OperacionEfectivaUdt UNDER BANCO.Operacion INHERIT SELECT PRIVILEGES (
 	tipoOperacion WITH OPTIONS NOT NULL CHECK (tipoOperacion IN ('INGRESO', 'RETIRADA')),
 	refSucursal WITH OPTIONS SCOPE BANCO.Oficina
 );
 
+-- Crear tabla de Transferencias
 CREATE TABLE BANCO.Transferencia OF BANCO.TransferenciaUdt UNDER BANCO.Operacion INHERIT SELECT PRIVILEGES (
 	refCuenta_Receptora WITH OPTIONS SCOPE BANCO.Cuenta
 );
-
