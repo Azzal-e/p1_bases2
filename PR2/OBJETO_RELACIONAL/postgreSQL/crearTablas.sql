@@ -466,26 +466,24 @@ $$ LANGUAGE plpgsql;
 
 CREATE OR REPLACE FUNCTION gestionar_saldo_operaciones() RETURNS TRIGGER AS $$
 BEGIN
-    -- Caso 1: DELETE (Revertir la operación eliminada)
+    -- Caso DELETE (Revertir operación)
     IF TG_OP = 'DELETE' THEN
-        -- Si era un INGRESO, restar saldo de la cuenta emisora
         IF OLD.tipoOperacion = 'INGRESO' THEN
-            UPDATE Cuenta SET saldo = saldo - OLD.cuantia WHERE iban = OLD.IBAN_cuentaEmisora;
-            UPDATE CuentaCorriente SET saldo = saldo - OLD.cuantia WHERE iban = OLD.IBAN_cuentaEmisora;
-            UPDATE CuentaAhorro SET saldo = saldo - OLD.cuantia WHERE iban = OLD.IBAN_cuentaEmisora;
+            UPDATE Cuenta 
+            SET saldo = GREATEST(saldo - OLD.cuantia, 0) -- Asegurar saldo >= 0
+            WHERE iban = OLD.IBAN_cuentaEmisora;
         ELSIF OLD.tipoOperacion = 'RETIRADA' OR OLD.tipoOperacion = 'TRANSFERENCIA' THEN
-            UPDATE Cuenta SET saldo = saldo + OLD.cuantia WHERE iban = OLD.IBAN_cuentaEmisora;
-            UPDATE CuentaCorriente SET saldo = saldo + OLD.cuantia WHERE iban = OLD.IBAN_cuentaEmisora;
-            UPDATE CuentaAhorro SET saldo = saldo + OLD.cuantia WHERE iban = OLD.IBAN_cuentaEmisora;
+            UPDATE Cuenta 
+            SET saldo = saldo + OLD.cuantia 
+            WHERE iban = OLD.IBAN_cuentaEmisora;
         END IF;
         
-        -- Si era una TRANSFERENCIA, también revertir en la cuenta receptora
+        -- Revertir transferencias en cuenta receptora
         IF OLD.tipoOperacion = 'TRANSFERENCIA' THEN
-            UPDATE Cuenta SET saldo = saldo - OLD.cuantia WHERE iban = OLD.IBAN_cuentaReceptora;
-            UPDATE CuentaCorriente SET saldo = saldo - OLD.cuantia WHERE iban = OLD.IBAN_cuentaReceptora;
-            UPDATE CuentaAhorro SET saldo = saldo - OLD.cuantia WHERE iban = OLD.IBAN_cuentaReceptora;
+            UPDATE Cuenta 
+            SET saldo = GREATEST(saldo - OLD.cuantia, 0) -- Asegurar saldo >= 0
+            WHERE iban = OLD.IBAN_cuentaReceptora;
         END IF;
-
         RETURN OLD;
     END IF;
 
