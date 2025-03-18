@@ -1,0 +1,2 @@
+ALTER TABLE Operacion DISABLE TRIGGER trigger_bloquear_insercion_operacion;
+ALTER TABLE Operacion ENABLE TRIGGER trigger_bloquear_insercion_operacion;

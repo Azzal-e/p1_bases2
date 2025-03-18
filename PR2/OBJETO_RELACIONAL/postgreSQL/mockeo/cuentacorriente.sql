@@ -1,0 +1,30 @@
+-- Desactivar los triggers antes de las inserciones
+ALTER TABLE cuenta DISABLE TRIGGER trigger_bloquear_insercion_cuenta;
+ALTER TABLE Cuenta DISABLE TRIGGER trigger_cuenta_con_titular;
+ALTER TABLE CuentaCorriente DISABLE TRIGGER trigger_cuenta_corriente_con_titular;
+ALTER TABLE CuentaAhorro DISABLE TRIGGER trigger_cuenta_ahorro_con_titular;
+INSERT INTO cuentacorriente (iban, fechaDeCreacion, codigoOficina) VALUES (ROW('ES12', '63386391639509154692'), DATE '2024-09-03', (SELECT CASE WHEN EXISTS (SELECT 1 FROM oficina WHERE codigo = 6155) THEN 6155 ELSE 8999 END));
+INSERT INTO cuentacorriente (iban, fechaDeCreacion, codigoOficina) VALUES (ROW('ES12', '19066975309618186907'), DATE '2024-10-19', (SELECT CASE WHEN EXISTS (SELECT 1 FROM oficina WHERE codigo = 4432) THEN 4432 ELSE 8999 END));
+INSERT INTO cuentacorriente (iban, fechaDeCreacion, codigoOficina) VALUES (ROW('ES34', '31369550843662602947'), DATE '2024-10-02', (SELECT CASE WHEN EXISTS (SELECT 1 FROM oficina WHERE codigo = 7866) THEN 7866 ELSE 8999 END));
+INSERT INTO cuentacorriente (iban, fechaDeCreacion, codigoOficina) VALUES (ROW('ES34', '95823418951133805386'), DATE '2024-05-12', (SELECT CASE WHEN EXISTS (SELECT 1 FROM oficina WHERE codigo = 8960) THEN 8960 ELSE 8999 END));
+INSERT INTO cuentacorriente (iban, fechaDeCreacion, codigoOficina) VALUES (ROW('ES34', '41599621800670573931'), DATE '2024-10-03', (SELECT CASE WHEN EXISTS (SELECT 1 FROM oficina WHERE codigo = 7155) THEN 7155 ELSE 8999 END));
+INSERT INTO cuentacorriente (iban, fechaDeCreacion, codigoOficina) VALUES (ROW('ES34', '31525405907703374532'), DATE '2025-03-04', (SELECT CASE WHEN EXISTS (SELECT 1 FROM oficina WHERE codigo = 1799) THEN 1799 ELSE 8999 END));
+INSERT INTO cuentacorriente (iban, fechaDeCreacion, codigoOficina) VALUES (ROW('ES56', '95721866181692902389'), DATE '2024-05-28', (SELECT CASE WHEN EXISTS (SELECT 1 FROM oficina WHERE codigo = 8234) THEN 8234 ELSE 8999 END));
+INSERT INTO cuentacorriente (iban, fechaDeCreacion, codigoOficina) VALUES (ROW('ES56', '39737108933891563722'), DATE '2024-10-27', (SELECT CASE WHEN EXISTS (SELECT 1 FROM oficina WHERE codigo = 5907) THEN 5907 ELSE 8999 END));
+INSERT INTO cuentacorriente (iban, fechaDeCreacion, codigoOficina) VALUES (ROW('ES12', '20556946225442951404'), DATE '2025-01-10', (SELECT CASE WHEN EXISTS (SELECT 1 FROM oficina WHERE codigo = 9411) THEN 9411 ELSE 8999 END));
+INSERT INTO cuentacorriente (iban, fechaDeCreacion, codigoOficina) VALUES (ROW('ES34', '24388154781140011050'), DATE '2024-11-07', (SELECT CASE WHEN EXISTS (SELECT 1 FROM oficina WHERE codigo = 1943) THEN 1943 ELSE 8999 END));
+INSERT INTO cuentacorriente (iban, fechaDeCreacion, codigoOficina) VALUES (ROW('ES12', '28259001570344567796'), DATE '2024-07-11', (SELECT CASE WHEN EXISTS (SELECT 1 FROM oficina WHERE codigo = 7386) THEN 7386 ELSE 8999 END));
+INSERT INTO cuentacorriente (iban, fechaDeCreacion, codigoOficina) VALUES (ROW('ES56', '87755248292858336056'), DATE '2024-09-07', (SELECT CASE WHEN EXISTS (SELECT 1 FROM oficina WHERE codigo = 7056) THEN 7056 ELSE 8999 END));
+INSERT INTO cuentacorriente (iban, fechaDeCreacion, codigoOficina) VALUES (ROW('ES56', '75944321162844038572'), DATE '2024-07-31', (SELECT CASE WHEN EXISTS (SELECT 1 FROM oficina WHERE codigo = 3235) THEN 3235 ELSE 8999 END));
+INSERT INTO cuentacorriente (iban, fechaDeCreacion, codigoOficina) VALUES (ROW('ES56', '31939040909526775383'), DATE '2024-10-23', (SELECT CASE WHEN EXISTS (SELECT 1 FROM oficina WHERE codigo = 7939) THEN 7939 ELSE 8999 END));
+INSERT INTO cuentacorriente (iban, fechaDeCreacion, codigoOficina) VALUES (ROW('ES34', '23099416274385634819'), DATE '2024-05-12', (SELECT CASE WHEN EXISTS (SELECT 1 FROM oficina WHERE codigo = 2808) THEN 2808 ELSE 8999 END));
+INSERT INTO cuentacorriente (iban, fechaDeCreacion, codigoOficina) VALUES (ROW('ES34', '17187876983952761222'), DATE '2025-02-12', (SELECT CASE WHEN EXISTS (SELECT 1 FROM oficina WHERE codigo = 3421) THEN 3421 ELSE 8999 END));
+INSERT INTO cuentacorriente (iban, fechaDeCreacion, codigoOficina) VALUES (ROW('ES34', '63636612566700038791'), DATE '2024-07-21', (SELECT CASE WHEN EXISTS (SELECT 1 FROM oficina WHERE codigo = 4287) THEN 4287 ELSE 8999 END));
+INSERT INTO cuentacorriente (iban, fechaDeCreacion, codigoOficina) VALUES (ROW('ES12', '30455232435145075363'), DATE '2025-01-08', (SELECT CASE WHEN EXISTS (SELECT 1 FROM oficina WHERE codigo = 9978) THEN 9978 ELSE 8999 END));
+INSERT INTO cuentacorriente (iban, fechaDeCreacion, codigoOficina) VALUES (ROW('ES56', '25900081263026151382'), DATE '2025-02-05', (SELECT CASE WHEN EXISTS (SELECT 1 FROM oficina WHERE codigo = 1857) THEN 1857 ELSE 8999 END));
+INSERT INTO cuentacorriente (iban, fechaDeCreacion, codigoOficina) VALUES (ROW('ES34', '52442712565312760550'), DATE '2025-02-15', (SELECT CASE WHEN EXISTS (SELECT 1 FROM oficina WHERE codigo = 5272) THEN 5272 ELSE 8999 END));
+-- Reactivar los triggers después de las inserciones
+ALTER TABLE cuenta ENABLE TRIGGER trigger_bloquear_insercion_cuenta;
+ALTER TABLE Cuenta ENABLE TRIGGER trigger_cuenta_con_titular;
+ALTER TABLE CuentaCorriente ENABLE TRIGGER trigger_cuenta_corriente_con_titular;
+ALTER TABLE CuentaAhorro ENABLE TRIGGER trigger_cuenta_ahorro_con_titular;

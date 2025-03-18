@@ -1,0 +1,23 @@
+codigo,fechaYHora,cuantia,tipoOperacion,descripcion,ref_cuentaemisora.cuenta_iban.PREFIJOIBAN,ref_cuentaemisora.cuenta_iban.NUMEROCUENTA,ref_cuentareceptora.cuenta_iban.PREFIJOIBAN,ref_cuentareceptora.cuenta_iban.NUMEROCUENTA,ref_sucursal.codigoOficina;
+4,2024-07-13,218464836.96,NULL,Sed ante.,ES12,30455232435145075363,ES12,78579706658008173005,NULL;
+7,2024-12-01,702761725.77,NULL,Integer a nibh. In quis justo. Maecenas rhoncus aliquam lacus. Morbi quis tortor id nulla ultrices aliquet.,ES56,28585662977724343797,ES12,78579706658008173005,NULL;
+26,2024-05-11,795375614.29,Ingreso,In hac habitasse platea dictumst. Etiam faucibus cursus urna. Ut tellus. Nulla ut erat id mauris vulputate elementum. Nullam varius. Nulla facilisi. Cras non velit nec nisi vulputate nonummy. Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque.,ES12,39593283634492562374,NULL,NULL,4660;
+34,2024-12-01,829761618.32,Ingreso,Cras non velit nec nisi vulputate nonummy.,ES12,96714089811638967258,NULL,NULL,4125;
+39,2024-11-21,393964629.32,Retirada,Phasellus in felis. Donec semper sapien a libero.,ES12,78579706658008173005,NULL,NULL,3332;
+43,2025-02-07,77646300.5,Ingreso,Aliquam sit amet diam in magna bibendum imperdiet.,ES56,66821468873531280560,NULL,NULL,7804;
+60,2024-09-14,87276994.05,Retirada,Vestibulum sed magna at nunc commodo placerat. Praesent blandit.,ES56,39737108933891563722,NULL,NULL,1407;
+63,2024-12-02,399009657.36,Retirada,Nulla ut erat id mauris vulputate elementum.,ES34,11044307893755950863,ES56,54856322742811821733,NULL;
+64,2024-12-13,772701005.03,NULL,Vivamus vel nulla eget eros elementum pellentesque. Quisque porta volutpat erat.,ES12,19066975309618186907,ES56,39737108933891563722,NULL;
+66,2025-02-24,616241137.19,NULL,Morbi a ipsum. Integer a nibh.,ES34,98977805973753243086,ES56,31939040909526775383,NULL;
+67,2025-02-19,23150446.02,Ingreso,Suspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst. Maecenas ut massa quis augue luctus tincidunt.,ES34,29897138019421781393,NULL,NULL,7089;
+68,2024-04-16,829765261.68,Ingreso,Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum. Curabitur in libero ut massa volutpat convallis.,ES12,39593283634492562374,NULL,NULL,843;
+70,2024-07-18,485492446.71,NULL,Nulla tellus. In sagittis dui vel nisl.,ES34,48441738462668426426,ES12,22783323320297873720,NULL;
+74,2024-07-08,744003120.42,Ingreso,Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum. Curabitur in libero ut massa volutpat convallis.,ES56,54856322742811821733,NULL,NULL,6937;
+79,2025-01-25,733668686.16,Ingreso,Aliquam erat volutpat. In congue. Etiam justo. Etiam pretium iaculis justo. In hac habitasse platea dictumst. Etiam faucibus cursus urna. Ut tellus.,ES34,63636612566700038791,NULL,NULL,8951;
+83,2024-11-19,974906701.04,NULL,Suspendisse accumsan tortor quis turpis. Sed ante. Vivamus tortor. Duis mattis egestas metus. Aenean fermentum. Donec ut mauris eget massa tempor convallis.,ES34,63636612566700038791,ES12,28259001570344567796,NULL;
+85,2024-06-30,418832502.06,NULL,Nulla justo. Aliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros.,ES56,45655246066221445082,ES34,31369550843662602947,NULL;
+86,2024-12-20,518419679.02,NULL,Mauris sit amet eros. Suspendisse accumsan tortor quis turpis. Sed ante. Vivamus tortor. Duis mattis egestas metus.,ES34,48441738462668426426,ES34,81427160483942628213,NULL;
+89,2024-08-09,278936883.73,NULL,Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti. Nullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris. Morbi non lectus.,ES56,75944321162844038572,ES56,87755248292858336056,NULL
+93,2024-11-20,423560731.87,Ingreso,Maecenas tincidunt lacus at velit.,ES56,28585662977724343797,NULL,NULL,3173;
+96,2024-07-10,191195910.91,Retirada,Vestibulum sed magna at nunc commodo placerat. Praesent blandit.,ES12,20556946225442951404,NULL,NULL,2284;
+53,2024-08-21,713009156.77,NULL,Sed vel enim sit amet nunc viverra dapibus.,ES12,22783323320297873720,ES12,20556946225442951404,NULL;
