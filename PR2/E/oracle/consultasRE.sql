@@ -13,7 +13,7 @@ VALUES (1001, 'Plaza Mayor 1', '+34911222333');
 INSERT INTO Oficinas (codigoOficina, direccion, telefono)
 VALUES (1002, 'Calle Gran Vía 2', '+34944555666');
 
-ALTER TRIGGER trg_verificar_titular DISABLE;
+ALTER TRIGGER trigger_verificar_titular DISABLE;
 
 INSERT INTO Cuentas (prefijoIBAN, numeroCuenta, esCuentaCorriente, codigoOficina_Adscrita)
 VALUES ('ES', '1234567890123456789012', 1, 1001);
@@ -27,7 +27,7 @@ VALUES ('12345678A', 'ES', '1234567890123456789012');
 INSERT INTO Titular (DNI_Titular, prefijoIBAN, numeroCuenta)
 VALUES ('87654321B', 'ES', '9876543210987654321098');
 
-ALTER TRIGGER trg_verificar_titular ENABLE;
+ALTER TRIGGER trigger_verificar_titular ENABLE;
 
 INSERT INTO Operacion (prefijoIBAN_cuentaEmisora, numeroCuenta_cuentaEmisora, descripcion, cuantia, tipoOperacion, codigo_Sucursal)
 VALUES ('ES', '1234567890123456789012', 'Ingreso inicial', 1000.00, 'INGRESO', 1001);
