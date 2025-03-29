@@ -193,137 +193,104 @@ void generarCuentasEspecializadas() {
 
 
 
-
+#include <iostream>
 #include <fstream>
-#include <vector>
 #include <sstream>
+#include <vector>
+#include <string>
+#include <filesystem>
 #include <map>
 #include <algorithm>
+
 using namespace std;
+namespace fs = std::filesystem;
 
-// Función para parsear CSV
-vector<string> parseCSV(const string& linea) {
-    vector<string> datos;
-    string campo;
-    bool dentroComillas = false;
 
-    for (char c : linea) {
-        if (c == '"') {
-            dentroComillas = !dentroComillas;
-        } else if (c == ',' && !dentroComillas) {
-            datos.push_back(campo);
-            campo.clear();
-        } else {
-            campo += c;
-        }
-    }
-    datos.push_back(campo);
-    return datos;
-}
-
-// Cargar IBANs y fechas de creación desde CUENTA.csv
-map<string, pair<string, string>> cargarDatosCuentas() { // IBAN -> (fechaCreacion, tipoCuenta)
-    ifstream csv("CUENTA.csv");
-    map<string, pair<string, string>> datosCuentas;
-    string linea;
-
-    getline(csv, linea); // Saltar cabecera
-
-    while (getline(csv, linea)) {
-        vector<string> datos = parseCSV(linea);
-        if (datos.size() >= 5) { // Asumiendo formato: prefijoIBAN, numeroCuenta, fechaCreacion, tipoCuenta, ...
-            string iban = "ROW('" + datos[0] + "','" + datos[1] + "')::IBAN";
-            datosCuentas[iban] = make_pair(datos[2], datos[3]); // fechaCreacion y tipoCuenta
-        }
-    }
-    return datosCuentas;
-}
 
 void generarOperacion() {
-    auto datosCuentas = cargarDatosCuentas();
-    map<string, bool> codigosInsertados;
-
     ifstream csv("OPERACION.csv");
+    ofstream sqlOp("operacion.sql");
     ofstream sqlTrans("transferencia.sql");
     ofstream sqlEf("operacionefectiva.sql");
-    ofstream log("errores.log");
-
-    // Desactivar TODOS los triggers temporalmente
-    sqlTrans << "ALTER TABLE Operacion DISABLE TRIGGER ALL;\n";
-    sqlEf << "ALTER TABLE Operacion DISABLE TRIGGER ALL;\n";
-
     string linea;
-    getline(csv, linea); // Saltar cabecera
+    getline(csv, linea);
+
+    // Desactivar triggers
+    sqlOp << "ALTER TABLE operacion DISABLE TRIGGER ALL;\n";
+    sqlTrans << "ALTER TABLE transferencia DISABLE TRIGGER ALL;\n";
+    sqlEf << "ALTER TABLE operacionefectiva DISABLE TRIGGER ALL;\n";
 
     while (getline(csv, linea)) {
-        vector<string> datos = parseCSV(linea);
-        if (datos.size() < 10) {
-            log << "ERROR: Fila inválida - " << linea << endl;
-            continue;
+        vector<string> datos;
+        stringstream ss(linea);
+        string token;
+        bool dentroComillas = false;
+        string campo;
+
+        // Parsear CSV
+        for (char c : linea) {
+            if (c == '"') dentroComillas = !dentroComillas;
+            if (c == ',' && !dentroComillas) {
+                datos.push_back(campo);
+                campo.clear();
+            } else {
+                campo += c;
+            }
         }
+        datos.push_back(campo);
 
-        string codigo = datos[0];
-        string ibanEmisor = "ROW('" + datos[5] + "','" + datos[6] + "')::IBAN";
+        if (datos.size() < 10) continue;
 
-        // Verificar IBAN existente
-        if (datosCuentas.find(ibanEmisor) == datosCuentas.end()) {
-            log << "ERROR: IBAN " << ibanEmisor << " no existe (Operación: " << codigo << ")\n";
-            continue;
-        }
-
-        // Controlar duplicados
-        if (codigosInsertados.count(codigo)) {
-            log << "ERROR: Código duplicado - " << codigo << endl;
-            continue;
-        }
-        codigosInsertados[codigo] = true;
-
-        // Procesar campos
-        string descripcion = datos[4].substr(0, 200);
+        // 1. Ajustar descripción (200 caracteres máximo)
+        string descripcion = datos[4];
+        descripcion = descripcion.substr(0, 200); // Truncar a 200 caracteres
         replace(descripcion.begin(), descripcion.end(), '\'', ' ');
         descripcion = "'" + descripcion + "'";
 
+        // 2. Validar código de oficina
+        string codigoOficina = "8999";
+        if (!datos[9].empty() && datos[9].find(';') != string::npos) {
+            size_t pos = datos[9].find(';');
+            codigoOficina = datos[9].substr(0, pos);
+        }
+
+        // 3. Convertir tipoOperacion a MAYÚSCULAS
         string tipoOperacion = datos[3];
         transform(tipoOperacion.begin(), tipoOperacion.end(), tipoOperacion.begin(), ::toupper);
-        tipoOperacion = (tipoOperacion == "INGRESO" || tipoOperacion == "RETIRADA") 
-                      ? "'" + tipoOperacion + "'" : "'INGRESO'";
+        if (tipoOperacion != "INGRESO" && tipoOperacion != "RETIRADA") {
+            tipoOperacion = "INGRESO"; // Valor por defecto si no es válido
+        }
+        tipoOperacion = "'" + tipoOperacion + "'";
 
-        // Obtener fecha de creación de la cuenta y ajustar fecha de operación
-        string fechaCreacion = datosCuentas[ibanEmisor].first;
-        string fechaOperacionAjustada = 
-            "GREATEST(TO_TIMESTAMP('" + datos[1] + "','YYYY-MM-DD'), " 
-            "TO_TIMESTAMP('" + fechaCreacion + "','YYYY-MM-DD') + INTERVAL '1 second')";
-
-        // Generar INSERTs directos en tablas hijas
-        if (datos[7] != "NULL" && datos[8] != "NULL") { // Transferencia
-            sqlTrans << "INSERT INTO Transferencia (codigo, IBAN_cuentaEmisora, IBAN_cuentaReceptora, fechaYHora, cuantia, descripcion)\n"
-                     << "VALUES (\n"
-                     << "  " << codigo << ",\n"
-                     << "  " << ibanEmisor << ",\n"
-                     << "  ROW('" << datos[7] << "','" << datos[8] << "')::IBAN,\n"
-                     << "  " << fechaOperacionAjustada << ",\n"
+        // Insertar en Transferencia u OperacionEfectiva
+        if (datos[7] != "NULL" && datos[8] != "NULL") {
+            sqlTrans << "INSERT INTO transferencia (codigo, IBAN_cuentaEmisora, IBAN_cuentaReceptora, fechaYHora, cuantia, descripcion) VALUES (\n"
+                     << "  " << datos[0] << ",\n"
+                     << "  ROW('" << datos[5] << "', '" << datos[6] << "')::IBAN,\n"
+                     << "  ROW('" << datos[7] << "', '" << datos[8] << "')::IBAN,\n"
+                     << "  TO_TIMESTAMP('" << datos[1] << "', 'YYYY-MM-DD HH24:MI:SS'),\n"
                      << "  " << datos[2] << ",\n"
-                     << "  " << descripcion << "\n);\n\n";
-        } else { // OperacionEfectiva
-            string codigoOficina = datos[9].substr(0, datos[9].find(';'));
-            if (codigoOficina.empty() || codigoOficina == "NULL") codigoOficina = "8999";
-
-            sqlEf << "INSERT INTO OperacionEfectiva (codigo, IBAN_cuentaEmisora, fechaYHora, cuantia, descripcion, tipoOperacion, codigo_Sucursal)\n"
-                  << "VALUES (\n"
-                  << "  " << codigo << ",\n"
-                  << "  " << ibanEmisor << ",\n"
-                  << "  " << fechaOperacionAjustada << ",\n"
+                     << "  " << descripcion << "\n"
+                     << ");\n";
+        } else {
+            sqlEf << "INSERT INTO operacionefectiva (codigo, IBAN_cuentaEmisora, fechaYHora, cuantia, descripcion, tipoOperacion, codigo_Sucursal) VALUES (\n"
+                  << "  " << datos[0] << ",\n"
+                  << "  ROW('" << datos[5] << "', '" << datos[6] << "')::IBAN,\n"
+                  << "  TO_TIMESTAMP('" << datos[1] << "', 'YYYY-MM-DD HH24:MI:SS'),\n"
                   << "  " << datos[2] << ",\n"
                   << "  " << descripcion << ",\n"
                   << "  " << tipoOperacion << ",\n"
-                  << "  " << codigoOficina << "\n);\n\n";
+                  << "  " << codigoOficina << "\n"
+                  << ");\n";
         }
     }
 
     // Reactivar triggers
-    sqlTrans << "ALTER TABLE Operacion ENABLE TRIGGER ALL;\n";
-    sqlEf << "ALTER TABLE Operacion ENABLE TRIGGER ALL;\n";
-}  
+    sqlOp << "ALTER TABLE operacion ENABLE TRIGGER ALL;\n";
+    sqlTrans << "ALTER TABLE transferencia ENABLE TRIGGER ALL;\n";
+    sqlEf << "ALTER TABLE operacionefectiva ENABLE TRIGGER ALL;\n";
+}
+
 // trigger_bloquear_insercion_operacion
 int main() {
 

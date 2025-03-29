@@ -3,7 +3,7 @@
     empleando el estándar SQL:1999.
  */
 
--- Creacion de DISTINCT TYPES
+-- Creacion de DISTINCT TYPES / ROWS
 
 CREATE TYPE DNI AS VARCHAR(20)
 CREATE TYPE IBAN AS (prefijoIBAN VARCHAR(4), numeroCuenta VARCHAR(30))
@@ -25,6 +25,8 @@ CREATE TYPE ClienteUdt AS (
       references are checked on delete set null
 
 ) instanciable not final is system generated; 
+
+CREATE METHOD getEdad RETURNS INTEGER FOR ClienteUdt;
 
 CREATE TYPE CuentaUdt AS (
    iban IBAN,
@@ -149,38 +151,25 @@ CREATE TABLE Transferencia of transferenciaUdt under Operacion (
 5. La fecha de una transferencia debe ser posterior a la fecha de creacion de la cuenta receptora.
 
 6. Asegurar especialización obligatoria de cuentas y operaciones.
- -> Se hará con assertions o triggers.
+
 
 7. Asegurar exclusividad en clases especializadas de cuentas y operaciones.
- -> Se hará con assertions (si lompermite el gestor) o con triggers.
+
 
 8. Los arrays de referencias de las tablas cliente y cuenta no pueden tener elementos repetidos.
 
 9. Para toda ocurrencia de refCuenta_Emisora y de IBAN_cuentaEmisora en la tabla operacion, se debe
    verificar que DEREF(refCuenta_Emisora).IBAN = IBAN_cuentaEmisora.
--> Check o trigger.
+
 
 10. Para toda ocurrencia de refCuenta_Emisora y de refCuenta_Receptora en la tabla transferencia, se debe
     verificar que DEREF(refCuenta_Emisora).IBAN != DEREF(refCuenta_Receptora).IBAN.
--> Check o trigger. POR QUÉ? PORQUE NO SE PUEDE AÑADIR RESTRICCIONES SOBRE ATRIBUTOS HEREDADOS.
 
-11 (No se si es restriccion o algo que se debe hacer) El saldo de las cuentas de ahorro se debe actualizar cada noche
+
+11 El saldo de las cuentas de ahorro se debe actualizar cada noche
    con el interes que tiene asignado.
--> Trigger/OPERACION CON SCHEDULER.
+
 
 
 12. El saldo de las cuentas debe ser la suma de las operaciones que se han realizado en la cuenta (y para 
     cuentas de ahorro, con el interes aplicado temporalmente). 
--> Trigger.
-
--------------------------A PARTIR DE AQUI NO HACER CASO----------------------------------------
-?? Asegurar cardinalidad de arrays de referencias.??
-
-#TODO: 
-
-CREO QUE LOS SIMILAR TO Y DEREF DENTRO DE CHECK NO SON VALIDOS EN SQL:99. REVISAR.
-TB LO DEL DEFAULT ME DICE CHAT QUE LO MIRA, PORQUE NO PUEDE ESTAR DENTRO DE CHECK
-
-CAMBIAR SIMILAR TO POR LIKE!!!!!!!!!!!
-
-   -- NO ESTOY SEGURO DE QUE SE PUEDA CONSTRAINT  OSEA QUE NO, VAMOS chk_ref_no_repetido CHECK (CARDINALITY(refTitular) = CARDINALITY(UNIQUE(refTitular))),
