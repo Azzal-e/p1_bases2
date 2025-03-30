@@ -1,5 +1,12 @@
 -- Script para crear las tablas del segundo esquema conceptual
 -- en PostgreSQL
+
+
+-- Crear Schema
+CREATE SCHEMA IF NOT EXISTS esquema1;
+SET search_path TO esquema1;
+
+
 -- Eliminar tablas si ya existían
 DROP TABLE IF EXISTS STORE CASCADE;
 DROP TABLE IF EXISTS PRODUCT CASCADE;
