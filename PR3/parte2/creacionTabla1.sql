@@ -1,7 +1,3 @@
-CREATE SCHEMA IF NOT EXISTS esquema1;
-SET search_path TO esquema1;
-
-
 -- BORRAR LAS TABLAS SI EXISTEN -- 
 DROP TABLE IF EXISTS Cliente CASCADE;
 DROP TABLE IF EXISTS Empleado CASCADE;
@@ -31,7 +27,6 @@ CREATE TABLE Producto (
     FOREIGN KEY (CIF_tienda) REFERENCES Tienda(CIF) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-
 CREATE TABLE Cliente (
     dni VARCHAR(9) PRIMARY KEY,
     nombre VARCHAR(20) NOT NULL,
@@ -42,11 +37,10 @@ CREATE TABLE Cliente (
     genero VARCHAR(6) CHECK (genero IN ('HOMBRE', 'MUJER', 'OTRO')),
     telefono VARCHAR(15) CHECK (telefono SIMILAR TO '^[0-9]{9}$'),
 
-    es_socio_especial BOOLEAN  IS NOT NULL DEFAULT FALSE,
+    es_socio_especial BOOLEAN NOT NULL DEFAULT FALSE,
 
     CONSTRAINT CHECK_dni_length CHECK (LENGTH(dni) = 9),
     CONSTRAINT CHECK_edad CHECK (edad >= 0)
-
 );
 
 CREATE TABLE Empleado (
