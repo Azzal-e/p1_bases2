@@ -35,7 +35,7 @@ CREATE TABLE Cliente (
     edad INTEGER NOT NULL,
     email VARCHAR(250) CHECK (email SIMILAR TO '%@%.%'),
     genero VARCHAR(6) CHECK (genero IN ('HOMBRE', 'MUJER', 'OTRO')),
-    telefono VARCHAR(15) CHECK (telefono SIMILAR TO '^[0-9]{9}$'),
+    telefono VARCHAR(15),
 
     es_socio_especial BOOLEAN NOT NULL DEFAULT FALSE,
 
@@ -51,7 +51,7 @@ CREATE TABLE Empleado (
     edad INTEGER NOT NULL,
     email VARCHAR(250) CHECK (email SIMILAR TO '%@%.%'),
     genero VARCHAR(10) NOT NULL CHECK (genero IN ('HOMBRE', 'MUJER', 'OTRO')),
-    telefono VARCHAR(15) NOT NULL CHECK (telefono SIMILAR TO '^[0-9]{9}$'),
+    telefono VARCHAR(15) NOT NULL,
 
     codigo_empleado INTEGER PRIMARY KEY,
     CIF_tienda VARCHAR(9),
@@ -59,7 +59,7 @@ CREATE TABLE Empleado (
     CONSTRAINT CHECK_dni_length CHECK (LENGTH(dni) = 9),
     CONSTRAINT CHECK_edad CHECK (edad >= 0),
     CONSTRAINT CHECK_codigo_empleado CHECK (codigo_empleado >= 0),
-    CONSTRAINT CHECK_CIF_tienda_length CHECK (LENGTH(CIF_tienda) = 9),
+    CONSTRAINT CHECK_CIF_tienda_length CHECK (LENGTH(TRIM(CIF_tienda)) = 9),
 
     FOREIGN KEY (CIF_tienda) REFERENCES Tienda(CIF) ON DELETE CASCADE
 );

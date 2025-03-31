@@ -17,7 +17,7 @@ CREATE TABLE PERSON (
     DNI VARCHAR(9) PRIMARY KEY,
     FULL_NAME VARCHAR(50) NOT NULL,
     FECHA_DE_NACIMIENTO DATE NOT NULL,
-    PHONE VARCHAR(15) NOT NULL CHECK (PHONE SIMILAR TO '^[0-9]{9}$'),
+    PHONE VARCHAR(15) NOT NULL,
     EMAIL VARCHAR(100) UNIQUE CHECK (EMAIL SIMILAR TO '%@%.%') ,
     GENDER VARCHAR(10) CHECK (GENDER IN ('HOMBRE', 'MUJER', 'OTRO')),
     IS_EMPLOYEE BOOLEAN NOT NULL,
@@ -28,14 +28,14 @@ CREATE TABLE PERSON (
    
     CONSTRAINT CHECK_DNI_LENGTH CHECK (LENGTH(DNI) = 9),
     CONSTRAINT CHECK_NUMBER_OF_SALES CHECK (NUMBER_OF_SALES IS NULL OR NUMBER_OF_SALES >= 0),
-    CONSTRAINT CHECK_ESPECIALTY_EMPLOYEE CHECK (IS_EMPLOYEE = TRUE AND 
+    CONSTRAINT CHECK_ESPECIALTY CHECK ((IS_EMPLOYEE = TRUE AND 
                                                 HAS_MEMBER_CARD IS NULL AND
                                                 NUMBER_OF_SALES IS NOT NULL AND
-                                                EMPLOYEE_NUMBER IS NOT NULL),
-    CONSTRAINT CHECK_ESPECIALTY_CLIENT CHECK (IS_CLIENT = TRUE AND 
+                                                EMPLOYEE_NUMBER IS NOT NULL) OR 
+                                                (IS_CLIENT = TRUE AND 
                                                 HAS_MEMBER_CARD IS NOT NULL AND
                                                 NUMBER_OF_SALES IS NULL AND
-                                                EMPLOYEE_NUMBER IS NULL)
+                                                EMPLOYEE_NUMBER IS NULL))
 );
 
 CREATE TABLE PRODUCT (
