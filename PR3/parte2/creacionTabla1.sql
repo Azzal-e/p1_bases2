@@ -34,8 +34,8 @@ CREATE TABLE Cliente (
     fecha_nacimiento DATE NOT NULL,
     edad INTEGER NOT NULL,
     email VARCHAR(250) CHECK (email SIMILAR TO '%@%.%'),
-    genero VARCHAR(6) CHECK (genero IN ('HOMBRE', 'MUJER', 'OTRO')),
-    telefono VARCHAR(15),
+    genero VARCHAR(6) NOT NULL CHECK (genero IN ('HOMBRE', 'MUJER', 'OTRO')),
+    telefono VARCHAR(15) NOT NULL,
 
     es_socio_especial BOOLEAN NOT NULL DEFAULT FALSE,
 
@@ -66,7 +66,7 @@ CREATE TABLE Empleado (
 
 CREATE TABLE Ventas (
     id_producto INTEGER,
-    CIF_tienda_producto VARCHAR(9) NOT NULL,
+    CIF_tienda_producto VARCHAR(9),
     codigo_empleado INTEGER,
     UNIQUE(id_producto, CIF_tienda_producto),
     PRIMARY KEY (id_producto, CIF_tienda_producto, codigo_empleado),
