@@ -33,11 +33,11 @@ CREATE OR REPLACE VIEW Cliente_global AS
 CREATE OR REPLACE VIEW Empleado_global AS
     SELECT * 
     FROM dblink('conexion_bbdd2_pr3_1', 'SELECT e.dni, (e.nombre || e.apellidos) as full_name, e.fecha_nacimiento as fecha_de_nacimiento, e.edad as age, e.email, e.genero as gender, e.telefono as phone, e.codigo_empleado as employee_number, e.CIF_tienda as cif_store, ve.num_ventas as NUMBER_OF_SALES FROM Empleado e JOIN Ventas_por_empleado ve ON e.codigo_empleado = ve.codigo_empleado')
-    AS p1(dni VARCHAR(9), full_name VARCHAR(100), fecha_de_nacimiento DATE, age INTEGER, email VARCHAR(250), gender VARCHAR(10), phone VARCHAR(15), employee_number INTEGER, cif_store VARCHAR(9), NUMBER_OF_SALES INTEGER)
+    AS p1(dni VARCHAR(9), full_name VARCHAR(100), fecha_de_nacimiento DATE, age INTEGER, email VARCHAR(250), gender VARCHAR(10), phone VARCHAR(15), employee_number VARCHAR(9), cif_store VARCHAR(9), NUMBER_OF_SALES INTEGER)
     UNION
     SELECT *
     FROM dblink('conexion_bbdd2_pr3_2', 'SELECT p.DNI, p.FULL_NAME, p.FECHA_DE_NACIMIENTO, pa.AGE, p.EMAIL, p.GENDER, p.PHONE, p.EMPLOYEE_NUMBER, w.CIF_STORE, p.NUMBER_OF_SALES FROM PERSON p JOIN PERSON_AGE pa ON pa.DNI = p.DNI JOIN WORKS w ON w.DNI = p.DNI WHERE p.IS_EMPLOYEE = TRUE')
-    AS p2(dni VARCHAR(9), full_name VARCHAR(100), fecha_de_nacimiento DATE, age INTEGER, email VARCHAR(250), gender VARCHAR(10), phone VARCHAR(15), employee_number INTEGER, cif_store VARCHAR(9), NUMBER_OF_SALES INTEGER);
+    AS p2(dni VARCHAR(9), full_name VARCHAR(100), fecha_de_nacimiento DATE, age INTEGER, email VARCHAR(250), gender VARCHAR(10), phone VARCHAR(15), employee_number VARCHAR(9), cif_store VARCHAR(9), NUMBER_OF_SALES INTEGER);
 
 CREATE OR REPLACE VIEW Producto_global AS
     SELECT * 
@@ -65,3 +65,41 @@ CREATE OR REPLACE VIEW Compras_global AS
     SELECT *
     FROM dblink('conexion_bbdd2_pr3_2', 'SELECT ID, CIF_STORE, DNI_BUYER FROM PRODUCT')
     AS p2(ID_PRODUCTO INTEGER, CIF_TIENDA VARCHAR(9), DNI_CLIENTE VARCHAR(9));
+
+-- Consultas --
+-- 1. Obtener el número total de productos vendidos, en orden descendiente, por cada empleado en ambas bases de datos.
+SELECT e.full_name, COUNT(v.ID_PRODUCTO) AS total_products_sold 
+FROM Empleado_global e
+JOIN Ventas_global v ON e.employee_number = v.EMPLOYEE_NUMBER
+GROUP BY e.full_name
+ORDER BY total_products_sold DESC;
+
+-- 2. Obtener el número total de productos comprados, en orden descendiente, por cada cliente en ambas bases de datos.
+SELECT c.full_name, COUNT(p.ID_PRODUCTO) AS total_products_purchased
+FROM Cliente_global c
+JOIN Compras_global p ON c.DNI = p.DNI_CLIENTE
+GROUP BY c.full_name
+ORDER BY total_products_purchased DESC;
+
+-- 3. Obtener el número total de productos vendidos por cada tienda en ambas bases de datos.
+SELECT t.CIF, COUNT(v.ID_PRODUCTO) AS total_products_sold
+FROM Tienda_global t
+JOIN Ventas_global v ON t.CIF = v.CIF_TIENDA
+GROUP BY t.CIF;
+
+-- 4. Obtener el número total de productos comprados por cada tienda en ambas bases de datos.
+SELECT t.CIF, COUNT(p.ID_PRODUCTO) AS total_products_purchased
+FROM Tienda_global t
+JOIN Compras_global p ON t.CIF = p.CIF_TIENDA
+GROUP BY t.CIF;
+
+-- 5. Obtener el producto más caro de cada tienda en ambas bases de datos, ordenando el precio descendientemente.
+SELECT t.CIF, p.NAME, p.PRICE AS highest_price
+FROM Tienda_global t
+JOIN Producto_global p ON t.CIF = p.CIF_STORE
+WHERE p.PRICE = (
+	SELECT MAX(p2.PRICE)
+	FROM Producto_global p2
+	WHERE p2.CIF_STORE = t.CIF
+)
+ORDER BY highest_price DESC;
