@@ -1,0 +1,63 @@
+ejecutar:
+    javac -cp "lib/" -d bin src/uni/.java
+
+    Copy-Item -Recurse -Force src\META-INF\ -Destination bin\
+
+    java -cp "bin;lib/*" uni.Test
+
+
+comprobar conexión: 
+    tnc localhost -port 1521       
+
+PR4_PARTE2/
+├── .vscode/
+│   └── settings.json
+├── bin/                          <-- Donde se generan los .class
+│   ├── META-INF/
+│   │   └── persistence.xml       <-- ¡IMPORTANTE! Este debe ir aquí
+│   └── uni/
+│       ├── Cliente.class
+│       ├── Cuenta.class
+│       ├── IBAN.class
+│       ├── Oficina.class
+│       ├── Operacion.class
+│       └── Test.class
+├── lib/                          <-- Librerías JAR necesarias
+│   └── *.jar                     <-- (hibernate, openjpa, etc.)
+├── src/                          <-- Código fuente
+│   ├── META-INF/
+│   │   └── persistence.xml       <-- El original (se copia al bin)
+│   └── uni/
+│       ├── Cliente.java
+│       ├── Cuenta.java
+│       ├── IBAN.java
+│       ├── Oficina.java
+│       ├── Operacion.java
+│       └── Test.java
+└── Readme
+
+
+ALTER TRIGGER TRIGGER_VERIFICAR_TITULAR DISABLE;
+
+
+
+
+SQL> delete from operacion where codigo='1';
+
+1 row deleted.
+
+SQL> DELETE FROM TITULAR WHERE dni_titular = '12345678A';
+
+1 row deleted.
+
+SQL> DELETE FROM CLIENTES WHERE dni = '12345678A';
+
+1 row deleted.
+
+SQL> DELETE FROM CUENTAS WHERE prefijoiban = 'ES76' AND numerocuenta = '1234567890123456789012';
+
+1 row deleted.
+
+SQL> DELETE FROM OFICINAS WHERE direccion = 'Av. Universidad 123';
+
+1 row deleted.
