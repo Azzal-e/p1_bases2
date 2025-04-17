@@ -11,10 +11,11 @@ comprobar conexión:
 
 PR4_PARTE2/
 ├── .vscode/
-│   └── settings.json
-├── bin/                          <-- Donde se generan los .class
+│   └── launch.json
+│   └── tasks.json
+├── bin/                      
 │   ├── META-INF/
-│   │   └── persistence.xml       <-- ¡IMPORTANTE! Este debe ir aquí
+│   │   └── persistence.xml       
 │   └── uni/
 │       ├── Cliente.class
 │       ├── Cuenta.class
@@ -22,11 +23,11 @@ PR4_PARTE2/
 │       ├── Oficina.class
 │       ├── Operacion.class
 │       └── Test.class
-├── lib/                          <-- Librerías JAR necesarias
-│   └── *.jar                     <-- (hibernate, openjpa, etc.)
-├── src/                          <-- Código fuente
+├── lib/                      
+│   └── *.jar                    
+├── src/                     
 │   ├── META-INF/
-│   │   └── persistence.xml       <-- El original (se copia al bin)
+│   │   └── persistence.xml      
 │   └── uni/
 │       ├── Cliente.java
 │       ├── Cuenta.java
