@@ -332,7 +332,7 @@ public class Test {
         System.out.println("¡Oficina, Cuenta, Cliente, Operacion y Titular insertadas correctamente!");
 
         /* CONSULTAS JPQL*/
-        //querysJPQL(em);
+        querysJPQL(em);
         /* CONSULTAS CRITERIA API */
         querysCriteriaAPI(em);
 
