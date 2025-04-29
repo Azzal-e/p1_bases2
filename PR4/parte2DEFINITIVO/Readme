@@ -1,0 +1,66 @@
+
+; --------------------------------------------------------------------------------- ;
+
+COMANDOS PARA COMPILAR:
+    & "C:\Program Files\Eclipse Adoptium\jdk-8.0.452.9-hotspot\bin\javac.exe" -cp "lib/*" -d bin src/uni/*.java
+    Copy-Item -Recurse -Force src\META-INF\ -Destination bin\
+
+COMANDO PARA EJECUTAR:
+    & "C:\Program Files\Eclipse Adoptium\jdk-8.0.452.9-hotspot\bin\java.exe" -cp "bin;lib/*" uni.Test
+
+; --------------------------------------------------------------------------------- ;
+
+
+
+; --------------------------------------------------------------------------------- ;
+
+COMANDO PARA COMPROBAR CONEXIÓN CON BASE DE DATOS:
+    tnc localhost -port 1521       
+
+; --------------------------------------------------------------------------------- ;
+
+
+; --------------------------------------------------------------------------------- ;
+
+PR4_PARTE2/
+├── .vscode/
+│   └── settings.json
+├── bin/                         
+│   ├── META-INF/
+│   │   └── persistence.xml     
+│   └── uni/
+│       ├── Cliente.class
+│       ├── Cuenta.class
+│       ├── IBAN.class
+│       ├── CuentaAhorro.class
+│       ├── CuentaCorriente.class
+│       ├── Oficina.class
+│       ├── Operacion.class
+│       ├── OperacionId.class
+│       ├── OperacionIdGenerator.class
+│       ├── Efectivo.class
+│       ├── Retirada.class
+│       ├── Transferencia.class
+│       └── Test.class
+├── lib/                        
+│   └── *.jar                    
+├── src/                        
+│   ├── META-INF/
+│   │   └── persistence.xml      
+│   └── uni/
+│       ├── Cliente.java
+│       ├── Cuenta.java
+│       ├── IBAN.java
+│       ├── CuentaAhorro.java
+│       ├── CuentaCorriente.java
+│       ├── Oficina.java
+│       ├── Operacion.java
+│       ├── OperacionId.java
+│       ├── OperacionIdGenerator.java
+│       ├── Efectivo.java
+│       ├── Retirada.java
+│       ├── Transferencia.java
+│       └── Test.java
+└── Readme.me
+
+; --------------------------------------------------------------------------------- ;
