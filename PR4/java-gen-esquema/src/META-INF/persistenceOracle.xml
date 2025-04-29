@@ -1,0 +1,39 @@
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd" version="2.0">
+	<persistence-unit name="UnidadPersistenciaHablamos" transaction-type="RESOURCE_LOCAL">
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<properties>
+		   
+		   <property name="hibernate.show_sql" value="true"/>		
+		   <property name="hibernate.hbm2ddl.auto" value="create"/>
+		   
+		   <!-- <property name="hibernate.default_schema" value="public"/> -->
+		   
+		   <!-- ORACLE -->
+		   <!-- ++++++ -->
+		   
+		   <!-- En lugar de "usuario" poned vuestro nombre de usuario, y en lugar de "password" vuestra contraseña. !-->
+		   
+		   <property name="javax.persistence.jdbc.driver" value="oracle.jdbc.driver.OracleDriver"/>
+		   <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@127.0.0.1:1521:XE"/>
+		   <property name="javax.persistence.jdbc.user" value="bob"/>
+		   <property name="javax.persistence.jdbc.password" value="bobp"/>
+		   
+		   
+		   <!-- MYSQL -->
+		   <!-- +++++ -->
+		   
+		   <!-- En lugar de "usuario" poned vuestro nombre de usuario, y en lugar de "password" vuestra contrase�a. !-->
+		   <!-- Adem�s, en lugar de "puerto" ten�is que poner el n�mero de puerto donde est� escuchando vuestro servidor MySQL. -->
+		   <!-- Por �ltimo, reemplazad "bd" con el nombre de BD deseado. -->
+		   <!--
+		   <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+		   <property name="javax.persistence.jdbc.url" value="jdbc:mysql://127.0.01:3306/hablamospBD"/>
+		   <property name="javax.persistence.jdbc.user" value="hablamos"/>
+		   <property name="javax.persistence.jdbc.password" value="nubica"/>		   
+		   -->
+
+		</properties>
+	</persistence-unit>
+</persistence>
