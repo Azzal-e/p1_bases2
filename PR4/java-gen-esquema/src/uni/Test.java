@@ -34,7 +34,7 @@ public class Test {
         
         try {
         	
-            // Creación de direcciones
+         
             Direccion d1 = crearDireccion("Teruel", 50001, "calle a");
             Direccion d2 = crearDireccion("Huesca", 50002, "calle b");
             Direccion d3 = crearDireccion("Zaragoza", 50003, "calle c");
@@ -42,7 +42,6 @@ public class Test {
 
 
         	
-            // Persistir direcciones primero
             entityManager.persist(d1);
             entityManager.persist(d2);
             entityManager.persist(d3);
@@ -50,7 +49,7 @@ public class Test {
 	        Direccion d5 = crearDireccion("Zaragoza", 50006, "Avenida Principal 10");
 	        entityManager.persist(d5);
 
-            // Creación y persistencia de clientes
+  
             Cliente cliente1 = crearCliente("25796324X", "Juan", "Perez Lopez", 
                                           "lopez123@gmail.com", LocalDate.of(1990, 5, 20), 
                                           "654321987", d1);
@@ -60,13 +59,13 @@ public class Test {
             entityManager.persist(cliente1);
             entityManager.persist(cliente2);
 
-            // Creación y persistencia de oficinas
+           
             Oficina oficina1 = crearOficina(1234, d3, "87654321");
             Oficina oficina2 = crearOficina(5678, d4, "12345678");
             entityManager.persist(oficina1);
             entityManager.persist(oficina2);
 
-            // Creación de cuentas (asignando oficinas antes de persistir)
+      
             CuentaAhorro cuentaAhorro1 = crearCuentaAhorro("ES", "1234567891357801234", 
                                                          LocalDate.of(2023, 10, 1), 0.05f);
           
@@ -79,7 +78,7 @@ public class Test {
             cuentaCorriente1.addCliente(cliente2);
             entityManager.persist(cuentaCorriente1);
 
-            // Creación y persistencia de operaciones
+           
             LocalDateTime fechaOperacion = LocalDateTime.of(2023, 10, 1, 12, 30, 50);
             
             Ingreso ingreso1 = new Ingreso(1, cuentaCorriente1, Timestamp.valueOf(fechaOperacion), 
@@ -99,7 +98,7 @@ public class Test {
             entityManager.persist(transferencia1);
          
 	
-	         // Clientes adicionales con diferentes características
+	      
 	         Cliente cliente3 = crearCliente("98765432Z", "Ana", "Martinez Sol", 
 	                                       "ana.martinez@example.com", LocalDate.of(2000, 12, 5), 
 	                                       "600112233", d3);
@@ -113,11 +112,11 @@ public class Test {
 	         entityManager.persist(cliente4);
 	         entityManager.persist(cliente5);
 	
-	         // Oficina adicional en misma ciudad pero distinto código postal
+	       
 	         Oficina oficina3 = crearOficina(9100, d5, "87654321");
 	         entityManager.persist(oficina3);
 	
-	         // Cuentas adicionales con diferentes características
+	        
 	         CuentaAhorro cuentaAhorro2 = crearCuentaAhorro("ES", "9876543210987654321", 
 	                                                      LocalDate.of(2024, 1, 15), 0.03f);
 	         cuentaAhorro2.addCliente(cliente2);
@@ -138,10 +137,11 @@ public class Test {
 	         //}catch(PersistenceException e) {
 	        	// System.out.println("Problema de cuenta sin cliente");
 	         //}
-	         // Operaciones adicionales con diferentes patrones
+	     
+
 	         LocalDateTime fechaHoy = LocalDateTime.now();
 	
-	         // 1. Operaciones en diferentes fechas
+	      
 	         Ingreso ingreso2 = new Ingreso(4, cuentaAhorro2, 
 	                                      Timestamp.valueOf(fechaHoy.minusDays(2)), 
 	                                      "Nómina", 1500.50);
@@ -154,14 +154,13 @@ public class Test {
 	         retirada2.setSucursalDeOperacion(oficina3);
 	         entityManager.persist(retirada2);
 	
-	         // 2. Transferencia entre cuentas de diferentes tipos
+	  
 	         Transferencia transferencia2 = new Transferencia(6, cuentaCorriente1, 
 	                                                        Timestamp.valueOf(fechaHoy), 
 	                                                        "Pago compartido", 75.30);
 	         transferencia2.setCuentaReceptora(cuentaAhorro2);
 	         entityManager.persist(transferencia2);
 	
-	         // 3. Operaciones con importes extremos
 	         Ingreso ingreso3 = new Ingreso(7, cuentaAhorro1, 
 	                                      Timestamp.valueOf(fechaHoy.minusYears(1)), 
 	                                      "Lotería", 1000000);
@@ -174,15 +173,15 @@ public class Test {
 	         retirada3.setSucursalDeOperacion(oficina3);
 	         entityManager.persist(retirada3);
 	
-	         // 4. Operaciones sin sucursal asociada
+	
 	         Retirada retirada4 = new Retirada(9, cuentaAhorro2, 
 	                                         Timestamp.valueOf(fechaHoy), 
 	                                         "Compra online", 89.90);
 	         retirada4.setSucursalDeOperacion(oficina3);
 	         entityManager.persist(retirada4);
 	
-	         // 5. Operaciones recurrentes en misma cuenta
-	    
+	 
+            // Operación recurrente
 	         for(int i = 10; i <= 15; i++) {
 	             Ingreso ingresoRecurrente = new Ingreso(i, cuentaCorriente1, 
 	                                                   Timestamp.valueOf(fechaHoy.minusDays(i)), 
@@ -191,8 +190,6 @@ public class Test {
 	             entityManager.persist(ingresoRecurrente);
 	         }
 	
-	
-	         // 7. Operación con descripción larga
 	         String descripcionLarga = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. " +
 	                                 "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
 	         Ingreso ingreso4 = new Ingreso(17, cuentaAhorro1, 
@@ -206,9 +203,9 @@ public class Test {
             trans.commit();
             System.out.println("TODAS LAS OPERACIONES SE COMPLETARON CORRECTAMENTE\n\n");
             
+            // Consulta 1. Obtener la cuenta con más operaciones en una oficina específica
             try {
-                // 1. Consulta original sin cambios
-                Query q1 = entityManager.createQuery(
+                                Query q1 = entityManager.createQuery(
                     "SELECT ce.iban.prefijo, ce.iban.numeroDeCuenta, COUNT(oe) as cuentaOp " +
                     "FROM OFICINA o " +
                     "JOIN o.operacionesEfectivas oe " +
@@ -220,17 +217,15 @@ public class Test {
                 q1.setParameter("codigo", 9100);
                 q1.setMaxResults(1);
                 
-                // 2. Obtener clave primaria
+             
                 Object[] resultado = (Object[]) q1.getSingleResult();
                 String prefijo = (String) resultado[0];
                 String numeroCuenta = (String) resultado[1];
                 Long operaciones = (Long) resultado[2];
-                
-                // 3. Obtener entidad COMPLETA con find()
+            
                 IBAN iban = new IBAN(prefijo, numeroCuenta); // Clave compuesta
                 Cuenta cuenta = entityManager.find(Cuenta.class, iban);
-                
-                // 4. Mostrar usando toString() y detalles específicos
+       
                 System.out.println("=== CUENTA COMPLETA (usando toString()) ===");
                 System.out.println(cuenta); // Implícitamente llama a cuenta.toString()
                 
@@ -280,7 +275,7 @@ public class Test {
         }
     }
 
-    // Métodos auxiliares (igual que en la versión anterior)
+   
     private Direccion crearDireccion(String ciudad, int codPostal, String direccion) {
         Direccion d = new Direccion();
         d.setCiudad(ciudad);
