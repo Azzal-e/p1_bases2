@@ -37,7 +37,7 @@ public class Cliente {
     @Transient
     private int edad;
 
-    @OneToMany
+    @ManyToMany
     @JoinTable(
         name = "TITULAR",
         joinColumns = @JoinColumn(name = "DNI_TITULAR"),

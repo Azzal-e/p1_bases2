@@ -25,13 +25,13 @@
 
     <properties>
       <property name="hibernate.dialect" value="org.hibernate.dialect.Oracle10gDialect"/>
-      <property name="hibernate.show_sql" value="false"/>
-      <property name="hibernate.hbm2ddl.auto" value="validate"/> 
+      <property name="hibernate.show_sql" value="true"/>
+      <property name="hibernate.hbm2ddl.auto" value="create"/> 
       
       <property name="javax.persistence.jdbc.driver" value="oracle.jdbc.OracleDriver"/>
-      <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@localhost:1521/XEPDB1"/>
-      <property name="javax.persistence.jdbc.user" value="irene"/>
-      <property name="javax.persistence.jdbc.password" value="123"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@localhost:1521"/>
+      <property name="javax.persistence.jdbc.user" value="system"/>
+      <property name="javax.persistence.jdbc.password" value="oracle123"/>
     </properties>
   </persistence-unit>
 </persistence>
